@@ -1,0 +1,38 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "build-quantity-base-condition": "cd nova-components/QuantityBaseCondition && npm run dev",
+        "build-quantity-base-condition-prod": "cd nova-components/QuantityBaseCondition && npm run prod",
+        "build-model": "cd nova-components/Model && npm run dev",
+        "build-model-prod": "cd nova-components/Model && npm run prod",
+        "build-item-qty-base-condition": "cd nova-components/ItemQtyBaseCondition && npm run dev",
+        "build-item-qty-base-condition-prod": "cd nova-components/ItemQtyBaseCondition && npm run prod",
+        "build-relation-dependance-field": "cd nova-components/RelationDependanceField && npm run dev",
+        "build-relation-dependance-field-prod": "cd nova-components/RelationDependanceField && npm run prod",
+        "build-checkout-item-resource-tool": "cd nova-components/CheckoutItemResourceTool && npm run dev",
+        "build-checkout-item-resource-tool-prod": "cd nova-components/CheckoutItemResourceTool && npm run prod",
+        "build-creatable-hasmany-relation-field": "cd nova-components/CreatableHasmanyRelationField && npm run dev",
+        "build-creatable-hasmany-relation-field-prod": "cd nova-components/CreatableHasmanyRelationField && npm run prod",
+        "build-sale-order-models-field": "cd nova-components/SaleOrderModelsField && npm run dev",
+        "build-sale-order-models-field-prod": "cd nova-components/SaleOrderModelsField && npm run prod",
+        "build-create-packages-shipping": "cd nova-components/CreatePackagesShipping && npm run dev",
+        "build-create-packages-shipping-prod": "cd nova-components/CreatePackagesShipping && npm run prod"
+    },
+    "devDependencies": {
+        "axios": "^0.19",
+        "cross-env": "^7.0",
+        "laravel-mix": "^5.0.1",
+        "lodash": "^4.17.13",
+        "resolve-url-loader": "^3.1.0",
+        "sass": "^1.15.2",
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.6.11"
+    }
+}
