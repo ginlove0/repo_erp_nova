@@ -10,10 +10,7 @@
     "require": {
         "php": "^7.2",
         "alexbowers/nova-prepopulate-searchable": "^1.0",
-        "ali-awwad/create-relation-on-resource": "^0.0.1",
-        "beyondcode/nova-custom-dashboard-card": "^0.0.1",
         "bissolli/nova-phone-field": "^0.0.4",
-        "digitalcloud/nova-custom-views": "^1.7",
         "eminiarts/nova-tabs": "^1.2",
         "epartment/nova-dependency-container": "^1.2",
         "erp-ipsupply/model": "*",
@@ -29,6 +26,7 @@
         "ipsupply/create-packages-shipping": "*",
         "ipsupply/item-qty-base-condition": "*",
         "ipsupply/relation-dependance-field": "*",
+        "ipsupply/stock-location": "*",
         "kabbouchi/nova-logs-tool": "^0.1.4",
         "khalin/nova-link-field": "^1.2",
         "kirschbaum-development/nova-inline-relationship": "^0.2.0",
@@ -41,8 +39,7 @@
         "manmohanjit/nova-belongs-to-dependency": "^1.1",
         "orlyapps/nova-belongsto-depend": "^2.0",
         "titasgailius/search-relations": "^1.0",
-        "whitecube/nova-flexible-content": "^0.1.15",
-        "yassi/nova-nested-form": "^3.0"
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
@@ -125,6 +122,10 @@
         {
             "type": "path",
             "url": "./nova-components/CreatePackagesShipping"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/StockLocation"
         }
     ]
 }

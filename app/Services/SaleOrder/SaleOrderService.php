@@ -7,6 +7,7 @@ namespace App\Services\SaleOrder;
 use App\Models\SaleModelItem;
 use App\Models\SaleOrder;
 use App\Models\SaleOrderModels;
+use App\Models\SaleOrderModelType;
 
 class SaleOrderService implements SaleOrderServiceInterface
 {
@@ -17,10 +18,10 @@ class SaleOrderService implements SaleOrderServiceInterface
         return SaleOrder::create($request);
     }
 
-    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderModels
+    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderModelType
     {
 
-        return SaleOrderModels::create(
+        return SaleOrderModelType::create(
             array_merge($model, [
                 "sale_order_id" => $saleOrderId
             ])
@@ -79,7 +80,7 @@ class SaleOrderService implements SaleOrderServiceInterface
 
     public function findSaleOrderModels(int $saleOrderId)
     {
-        $saleOrder = SaleOrderModels::where(['sale_order_id' => $saleOrderId])->with('models', 'condition')->get();
+        $saleOrder = SaleOrderModelType::where(['sale_order_id' => $saleOrderId])->with('sale_model', 'condition')->get();
 
         return $saleOrder;
         // TODO: Implement findSaleOrderModels() method.

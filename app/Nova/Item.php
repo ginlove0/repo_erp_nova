@@ -3,13 +3,17 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Item extends Resource
 {
+
 
     public static $searchRelations = [
         'models' => ['name'],
@@ -48,24 +52,36 @@ class Item extends Resource
      */
     public function fields(Request $request)
     {
-        return [
-            Text::make("Serial Number", "serialNumber"),
 
-            BelongsTo::make("Supplier", "suppliers")
-                ->searchable()
-,
+        return [
+
 
             BelongsTo::make("Model", 'models')
-                ->searchable()
+                ->searchable(),
 
-                ->prepopulate(),
+            Text::make("SN", "serialNumber")
+            ->hideWhenUpdating()
+            ->hideWhenCreating(),
+
+            BelongsTo::make("Supplier", "suppliers")
+                ->searchable(),
+
+            Text::make('Stock status', 'stockStatus', function($status){
+
+                if ($status === 0){
+                    return 'Not in stock';
+                }else{
+                    return 'In stock';
+                }
+            })
+            -> hideWhenCreating(),
+
+            Number::make("Quantity", "quantity"),
 
 
             BelongsTo::make("Condition", 'conditions')
                 ->searchable()
-                ->prepopulate()
-,
-
+                ->prepopulate(),
 
             BelongsTo::make("WHLocation", 'whlocations')
                 ->searchable()

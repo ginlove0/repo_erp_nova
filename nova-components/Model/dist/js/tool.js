@@ -654,7 +654,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             style: {
-                height: window.screen.height - 400 + 'px',
+                height: window.screen.height - 100 + 'px',
                 width: '100%'
             }
         };
@@ -674,7 +674,7 @@ var render = function() {
       attrs: {
         height: "100%",
         width: "100%",
-        src: "https://erp.ipsupply.net/item",
+        src: "http://erp.ipsupply.net",
         frameborder: "0"
       }
     })

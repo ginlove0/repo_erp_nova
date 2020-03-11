@@ -10,7 +10,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 class Category extends Resource
 {
 
-    public static $group = "Product";
+    public static $group = "Other";
     /**
      * The model the resource corresponds to.
      *

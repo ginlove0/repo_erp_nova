@@ -24,7 +24,7 @@ class Model extends DBModel
 
     public function otherModelNames(): HasMany
     {
-       return $this->hasMany(OtherModelName::class);
+       return $this->hasMany(OtherModelName::class, 'modelId', "OtherModelName");
     }
 
     public function manufactors(): BelongsTo
@@ -54,12 +54,18 @@ class Model extends DBModel
 
     /**
      * Get all the model included in the sale order.
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function saleordermodels(): HasMany
+//    public function saleordermodels(): HasMany
+//    {
+//        return $this->hasMany(SaleOrderModels::class, 'modelId');
+//    }
+
+    public function saleordermodeltype()
     {
-        return $this->hasMany(SaleOrderModels::class, 'modelId');
+        return $this->morphMany(SaleOrderModelType::class, 'sale_model');
     }
+
 
 
 

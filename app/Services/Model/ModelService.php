@@ -44,11 +44,12 @@ class ModelService implements ModelServiceInterface
 
 
         $data = DB::select("
-            select count(*) as QTY
+            select sum(quantity) as QTY
             from item
             where item.conditionId = (select id from `condition` where name = ? limit 1)
             and item.modelId = (select id from `model` WHERE id = ? limit 1)
             and item.whlocationId = (select id from `whlocation` WHERE id =? limit 1)
+            and item.stockStatus = true
         ", [
             $condition,
             $id,

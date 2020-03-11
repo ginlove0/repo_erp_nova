@@ -2,6 +2,7 @@
     <fragment>
         <td>
             <input placeholder="Serial Number" class="w-full form-control form-input form-input-bordered" v-model="item.serialNumber">
+
         </td>
 
         <td>
@@ -34,7 +35,7 @@
 
         watch: {
             serialNumber() {
-                this.outStockSN = this.serialNumber
+                this.outStockSN = this.serialNumber;
                 clearTimeout(timeout);
                 //get the current object scope
                 const self = this;
@@ -57,7 +58,7 @@
                 Nova.request().get(url)
                     .then((res) => {
                         if(res && res.data && res.data.length > 0) {
-                            const model = res.data[0].ITEM_NAME
+                            const model = res.data[0].ITEM_NAME;
                             this.fetchedModel = model
                         } else {
                             this.fetchedModel = ''

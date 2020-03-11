@@ -19,10 +19,13 @@ class SaleOrderModels extends Model
         "qty", "price", "note"];
 
 
+
+
     /**
      * Get all the model associated with the sale order.
      * @return BelongsTo
      */
+
     public function models(): BelongsTo
     {
        return $this->belongsTo(\App\Models\Model::class, 'modelId', 'id');

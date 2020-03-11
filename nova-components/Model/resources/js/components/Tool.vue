@@ -6,7 +6,7 @@
            <iframe
                height="100%"
                width="100%"
-               src="https://erp.ipsupply.net/item" frameborder="0"></iframe>
+               src="http://erp.ipsupply.net" frameborder="0"></iframe>
 
 
     </div>
@@ -20,7 +20,7 @@ export default {
     data() {
         return {
             style: {
-                height: `${window.screen.height - 400}px`,
+                height: `${window.screen.height - 100}px`,
                 width: '100%'
             }
         }

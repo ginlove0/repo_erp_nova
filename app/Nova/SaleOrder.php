@@ -3,12 +3,10 @@
 namespace App\Nova;
 
 
-use App\Nova\Actions\AddItemToSaleOrder;
+//use App\Nova\Actions\AddItemToSaleOrder;
 use App\Nova\Actions\PackedChange;
 use App\Nova\Actions\ShippingChange;
 use App\Nova\Actions\StatusChangeAction;
-use App\Nova\Flexible\Resolvers\SaleOrderModelResolver;
-use Fourstacks\NovaRepeatableFields\Repeater;
 use Illuminate\Http\Request;
 use Ipsupply\CheckoutItemResourceTool\CheckoutItemResourceTool;
 use Ipsupply\CreatableHasmanyRelationField\CreatableHasmanyRelationField;
@@ -22,14 +20,16 @@ use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 
 use Laravel\Nova\Fields\KeyValue;
+use Laravel\Nova\Fields\MorphMany;
+use Laravel\Nova\Fields\MorphTo;
+use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Inspheric\Fields\Indicator;
-use Whitecube\NovaFlexibleContent\Flexible;
-use Yassi\NestedForm\NestedForm;
+use function foo\func;
 
 class SaleOrder extends Resource
 {
@@ -75,10 +75,16 @@ class SaleOrder extends Resource
 
             BelongsTo::make('Sender', 'senders'),
 
-            NovaBelongsToDepend::make('Supplier', 'supplier')
-                ->options(\App\Models\Supplier::take(10)->get(["id", "name"]))
-            ->hideWhenUpdating()
-            ,
+//            NovaBelongsToDepend::make('Supplier')
+//                ->options(\App\Models\Supplier::take(10)->get(["id", "name"]))
+//
+//            ->hideWhenUpdating()
+//            ,
+
+            NovaBelongsToDepend::make('Supplier')
+                ->options(\App\Models\Supplier::all())
+                ->searchable()
+                ->hideWhenUpdating(),
 
 
 
@@ -88,7 +94,7 @@ class SaleOrder extends Resource
                     return $supplier->representatives;
                 })
                 ->dependsOn('Supplier')
-            ->hideFromIndex()
+                ->hideFromIndex()
                 ->hideWhenUpdating(),
 
 
@@ -145,7 +151,7 @@ class SaleOrder extends Resource
             Indicator::make('Status')
                 ->labels([
                     'pending' => 'Pending',
-                    'partial' => 'Partial',
+                    'complete' => 'Complete',
                     'cancel' => 'Cancel',
                     'draft' => 'Draft',
                     'confirm' => 'Confirm',
@@ -156,8 +162,8 @@ class SaleOrder extends Resource
                     'draft' => 'grey',
                     'confirm' => 'blue',
                     'close' => 'green',
-                    'partial' => 'grey',
-                        'cancel' =>'red',
+                    'complete' => 'green',
+                    'cancel' =>'red',
                 ])
                 ->onlyOnIndex(),
 
@@ -197,11 +203,15 @@ class SaleOrder extends Resource
                 ])
                 ->onlyOnIndex(),
 
-            HasMany::make('SaleOrderModels')
+//            HasMany::make('SaleOrderModels'),
+
+//            MorphMany::make('saleordermodeltype')
+//
+        HasMany::make('saleordermodeltype')
 
 
 
-//            CheckoutItemResourceTool::make("SaleOrderModels")
+//            CheckoutItemResourceTool::make("SaleOrderModelType")
 
 
 

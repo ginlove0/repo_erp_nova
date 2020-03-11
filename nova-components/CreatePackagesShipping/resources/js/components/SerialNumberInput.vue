@@ -13,7 +13,8 @@
             <tbody>
                 <tr>
                     <td>
-                        <input placeholder="Serial Number" class="w-full form-control form-input form-input-bordered" v-model="input">
+                        <input placeholder="Serial Number"  class="w-full form-control form-input form-input-bordered" v-model="input">
+
                     </td>
                     <td>
                         <input placeholder="Serial Number" class="w-full form-control form-input form-input-bordered" :value="input" readonly>

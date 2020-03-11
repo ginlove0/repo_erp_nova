@@ -25,6 +25,7 @@ class Item extends Model
         "location", "smartnet", "version"];
 
 
+
     public function whlocations() : BelongsTo
     {
         return $this->belongsTo(WHLocation::class, "whlocationId", "id");

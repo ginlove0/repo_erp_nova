@@ -17,6 +17,6 @@ class SaleModelItem extends Model
 
     public function saleordermodels(): BelongsTo
     {
-        return $this->belongsTo(SaleOrderModels::class, 'sale_order_model_id');
+        return $this->belongsTo(SaleOrderModelType::class, 'sale_order_model_id');
     }
 }

@@ -15,7 +15,7 @@ class ResetPasswordController extends Controller
     use ValidatesRequests;
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Controllers
+    | Password Reset Controller
     |--------------------------------------------------------------------------
     |
     | This controller is responsible for handling password reset requests

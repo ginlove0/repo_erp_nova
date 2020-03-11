@@ -23,7 +23,17 @@
         "build-sale-order-models-field": "cd nova-components/SaleOrderModelsField && npm run dev",
         "build-sale-order-models-field-prod": "cd nova-components/SaleOrderModelsField && npm run prod",
         "build-create-packages-shipping": "cd nova-components/CreatePackagesShipping && npm run dev",
-        "build-create-packages-shipping-prod": "cd nova-components/CreatePackagesShipping && npm run prod"
+        "build-create-packages-shipping-prod": "cd nova-components/CreatePackagesShipping && npm run prod",
+        "build-StockCheckTool": "cd nova-components/StockCheckTool && npm run dev",
+        "build-StockCheckTool-prod": "cd nova-components/StockCheckTool && npm run prod",
+        "build-stock-check": "cd nova-components/StockCheck && npm run dev",
+        "build-stock-check-prod": "cd nova-components/StockCheck && npm run prod",
+        "build-stock-check-tool": "cd nova-components/StockCheckTool && npm run dev",
+        "build-stock-check-tool-prod": "cd nova-components/StockCheckTool && npm run prod",
+        "build-stockchecktool": "cd nova-components/Stockchecktool && npm run dev",
+        "build-stockchecktool-prod": "cd nova-components/Stockchecktool && npm run prod",
+        "build-stock-location": "cd nova-components/StockLocation && npm run dev",
+        "build-stock-location-prod": "cd nova-components/StockLocation && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

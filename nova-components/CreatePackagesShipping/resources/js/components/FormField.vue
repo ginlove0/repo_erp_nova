@@ -5,8 +5,6 @@
                :orders="orders"
        />
 
-
-
        <div v-else class="text-center text-20">
            Order is empty, consider create new order item
        </div>
@@ -56,27 +54,32 @@ export default {
     },
 
 
+
     methods: {
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.attribute, this.value || '')
+            console.log(JSON.stringify(this.orders))
+            formData.append(this.field.attribute, JSON.stringify(this.orders));
+
         },
 
     },
 
-
     /**
      * Update the field's internal value.
      */
+
     handleChange(value) {
         this.value = value
     },
 
+
+
     watch: {
         orders() {
-            console.log(this.orders)
+            // console.log('hello', typeof this.orders)
         }
     },
 
@@ -87,12 +90,15 @@ export default {
 
         const saleOrderModelUrl = `/api/ipsupply/findSaleOrderModels/${this.resourceId}`
 
+
         Nova.request().get(saleOrderModelUrl)
         .then((res) => {
+            console.log(res)
             if(res && res.data) {
 
                 //create order object
                 this.orders = res.data.map((value) => {
+
                     const quantity = value.qty;
                     let items = [];
                     for(let i = 0; i < quantity; i ++) {
@@ -104,11 +110,12 @@ export default {
                     }
                     return {
                         id: value.id,
-                        model: value.models.name,
+                        model: value.sale_model.name,
                         quantity,
                         items
                     }
                 });
+
 
             }
         })

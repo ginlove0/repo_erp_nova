@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import paxios from 'axios'
+    import axios from 'axios'
     import DeleteAction from "./DeleteAction";
 export default {
     components: {DeleteAction},
@@ -62,6 +62,7 @@ export default {
 
             axios.get('/nova-vendor/checkout-item-resource-tool/' + saleOrderId)
                 .then((res) => {
+                        // console.log("hellos")
                         this.orders = res.data
                 })
                 .catch(err => console.log(err))

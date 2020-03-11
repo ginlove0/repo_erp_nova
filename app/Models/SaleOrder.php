@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Nova\Fields\MorphMany;
 
 class SaleOrder extends Model
 {
@@ -34,7 +35,7 @@ class SaleOrder extends Model
      */
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class, 'supplierId');
+        return $this->belongsTo(Supplier::class, 'supplierId', 'id');
     }
 
     /**
@@ -100,12 +101,19 @@ class SaleOrder extends Model
 
     /**
      * Get all the model included in the sale order.
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function saleordermodels(): HasMany
-    {
-       return $this->hasMany(SaleOrderModels::class, "sale_order_id");
-    }
+//    public function saleordermodels(): HasMany
+//    {
+//       return $this->hasMany(SaleOrderModels::class, "sale_order_id");
+//    }
+
+public function saleordermodeltype(): HasMany
+{
+    return $this->hasMany(SaleOrderModelType::class);
+}
+
+
 
 
     /**

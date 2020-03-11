@@ -1130,7 +1130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 Nova.booting(function (Vue, router, store) {
-    console.log('router', router);
+    console.log('router11', router);
     Vue.component('checkout-item-resource-tool', __webpack_require__(38));
 });
 
@@ -1553,7 +1553,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(err);
             });
         }
-
     }
 });
 
@@ -2699,10 +2698,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2724,6 +2719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var saleOrderId = this.resourceId;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/nova-vendor/checkout-item-resource-tool/' + saleOrderId).then(function (res) {
+                // console.log("hellos")
                 _this.orders = res.data;
             }).catch(function (err) {
                 return console.log(err);
@@ -2793,20 +2789,7 @@ var render = function() {
                     resourceId: _vm.resourceId,
                     id: order.id
                   }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "inline-flex appearance-none cursor-pointer text-70 hover:text-primary mr-3 has-tooltip"
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Checkout\n                    "
-                    )
-                  ]
-                )
+                })
               ],
               1
             )
