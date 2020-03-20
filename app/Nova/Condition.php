@@ -3,13 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Condition extends Resource
 {
 
+    public static $displayInNavigation = false;
     public static $group = "Product";
     /**
      * The model the resource corresponds to.

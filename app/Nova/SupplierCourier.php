@@ -4,9 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierCourier extends Resource
 {
@@ -15,6 +13,7 @@ class SupplierCourier extends Resource
      *
      * @var string
      */
+    public static $displayInNavigation = false;
     public static $model = 'App\Models\SupplierCourier';
 
     /**

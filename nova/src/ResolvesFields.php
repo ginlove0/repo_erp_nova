@@ -425,7 +425,36 @@ trait ResolvesFields
      */
     public function availableFields(NovaRequest $request)
     {
-        return new FieldCollection(array_values($this->filter($this->fields($request))));
+        $method = $this->fieldsMethod($request);
+
+        return new FieldCollection(array_values($this->filter($this->{$method}($request))));
+    }
+
+    /**
+     * Compute the method to use to get the available fields.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return string
+     */
+    protected function fieldsMethod(NovaRequest $request)
+    {
+        if ($request->isResourceIndexRequest() && method_exists($this, 'fieldsForIndex')) {
+            return 'fieldsForIndex';
+        }
+
+        if ($request->isResourceDetailRequest() && method_exists($this, 'fieldsForDetail')) {
+            return 'fieldsForDetail';
+        }
+
+        if ($request->isCreateOrAttachRequest() && method_exists($this, 'fieldsForCreate')) {
+            return 'fieldsForCreate';
+        }
+
+        if ($request->isUpdateOrUpdateAttachedRequest() && method_exists($this, 'fieldsForUpdate')) {
+            return 'fieldsForUpdate';
+        }
+
+        return 'fields';
     }
 
     /**
@@ -559,8 +588,10 @@ trait ResolvesFields
      */
     protected function panelsWithDefaultLabel($label, NovaRequest $request)
     {
+        $method = $this->fieldsMethod($request);
+
         return with(
-            collect(array_values($this->fields($request)))->whereInstanceOf(Panel::class)->values(),
+            collect(array_values($this->{$method}($request)))->whereInstanceOf(Panel::class)->values(),
             function ($panels) use ($label) {
                 return $panels->when($panels->where('name', $label)->isEmpty(), function ($panels) use ($label) {
                     return $panels->prepend((new Panel($label))->withToolbar());

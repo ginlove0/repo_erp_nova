@@ -5,10 +5,8 @@ namespace App\Nova;
 use Bissolli\NovaPhoneField\PhoneNumber;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Representative extends Resource
 {
@@ -67,7 +65,6 @@ class Representative extends Resource
             Text::make('Position', 'position')->rules( 'max:255'),
 
             PhoneNumber::make("Phone Number", 'phoneNumber'),
-
 
 
 

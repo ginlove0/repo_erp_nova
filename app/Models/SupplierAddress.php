@@ -23,6 +23,8 @@ class SupplierAddress extends Model
         return $this->belongsTo(Supplier::class, "supplierId", "id");
     }
 //
+
+
     public function billingaddresses(): HasMany
     {
         return $this->hasMany(SaleOrder::class, "billingAddressId", 'id');

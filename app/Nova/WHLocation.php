@@ -3,9 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class WHLocation extends Resource
 {
@@ -14,6 +12,7 @@ class WHLocation extends Resource
      *
      * @var string
      */
+    public static $displayInNavigation = false;
     public static $model = 'App\Models\WHLocation';
 
     /**

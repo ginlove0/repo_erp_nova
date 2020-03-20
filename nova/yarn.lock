@@ -489,7 +489,7 @@ aws4@^1.8.0:
   dependencies:
     follow-redirects "1.5.10"
 
-axios@^0.18:
+axios@^0.18, axios@^0.18.0:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
   integrity sha512-0BfJq4NSfQXd+SkFdrvFbG7addhYSBA2mQwISr46pD6E5iqkWg02RAs8vyTT/j0RTnoYmeXauBuSv1qKwR179g==
@@ -5801,6 +5801,13 @@ laravel-nova@^1.2.0:
     babel-plugin-syntax-jsx "^6.18.0"
     form-backend-validation "^2.3.3"
     inflector-js "^1.0.1"
+
+laravel-vapor@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/laravel-vapor/-/laravel-vapor-0.4.0.tgz#1bd861d7acf029cbdde3d98fe894f12832b33b8c"
+  integrity sha512-0Hq4xt4Bm7FVyVIX+l7wizqWDqhU5fpAgwEKqE71DMrMH7gI/IeTonEYDpRsqy0iTs5d7mAQ1086oL4xxhfp9Q==
+  dependencies:
+    axios "^0.18.0"
 
 lazy-cache@^1.0.3:
   version "1.0.4"

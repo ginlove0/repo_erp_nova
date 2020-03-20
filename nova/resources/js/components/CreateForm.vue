@@ -11,6 +11,8 @@
       <form-panel
         class="mb-8"
         v-for="panel in panelsWithFields"
+        @file-upload-started="handleFileUploadStarted"
+        @file-upload-finished="handleFileUploadFinished"
         :shown-via-new-relation-modal="shownViaNewRelationModal"
         :panel="panel"
         :name="panel.name"
@@ -59,9 +61,10 @@ import {
   Minimum,
   InteractsWithResourceInformation,
 } from 'laravel-nova'
+import HandlesUploads from '@/mixins/HandlesUploads'
 
 export default {
-  mixins: [InteractsWithResourceInformation],
+  mixins: [InteractsWithResourceInformation, HandlesUploads],
 
   props: {
     mode: {
@@ -86,7 +89,6 @@ export default {
     fields: [],
     panels: [],
     validationErrors: new Errors(),
-    isWorking: false,
   }),
 
   async created() {
@@ -292,9 +294,7 @@ export default {
     },
 
     isHasOneRelationship() {
-      return (
-        this.relationResponse && this.relationResponse.hasOneRelationship != ''
-      )
+      return this.relationResponse && this.relationResponse.hasOneRelationship
     },
 
     shouldShowAddAnotherButton() {

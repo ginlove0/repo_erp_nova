@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Nova\Fields\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class SaleOrder extends Model
 {
@@ -25,7 +26,7 @@ class SaleOrder extends Model
         "shippingAddressId",	"shippingMethod",
         "discount", "shipping_charge",
         "shipping_method", "sender_id", "supplierInvoiceEmailId",
-        "supplierTrackingEmailId", "required_date", "whlocation_id", "linkEbay"];
+        "supplierTrackingEmailId", "required_date", "whlocation_id", "linkEbay", "itemPackedId"];
 
     use SoftDeletes;
 
@@ -37,6 +38,9 @@ class SaleOrder extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplierId', 'id');
     }
+
+
+
 
     /**
      * Get the representative associated with the sale order.
@@ -99,6 +103,10 @@ class SaleOrder extends Model
     }
 
 
+
+
+
+
     /**
      * Get all the model included in the sale order.
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -111,6 +119,11 @@ class SaleOrder extends Model
 public function saleordermodeltype(): HasMany
 {
     return $this->hasMany(SaleOrderModelType::class);
+}
+
+public function item():HasMany
+{
+    return $this->hasMany(Item::class);
 }
 
 

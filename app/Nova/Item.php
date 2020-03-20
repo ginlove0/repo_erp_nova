@@ -2,14 +2,12 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ItemLocation;
+use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Item extends Resource
 {
@@ -34,7 +32,6 @@ class Item extends Resource
      * @var string
      */
     public static $title = 'serialNumber';
-
     /**
      * The columns that should be searched.
      *
@@ -74,23 +71,30 @@ class Item extends Resource
                     return 'In stock';
                 }
             })
-            -> hideWhenCreating(),
+            -> hideWhenCreating()
+            -> hideWhenUpdating(),
+
+            BelongsTo::make("Sale Order", 'saleorder')
+            ->hideFromIndex()
+            ->hideFromDetail()
+            ->hideWhenCreating()
+            ->hideWhenUpdating(),
 
             Number::make("Quantity", "quantity"),
 
+            Text::make("Location", "location"),
+
 
             BelongsTo::make("Condition", 'conditions')
-                ->searchable()
-                ->prepopulate(),
+                ->searchable(),
 
             BelongsTo::make("WHLocation", 'whlocations')
-                ->searchable()
-                ->prepopulate(),
+                ->searchable(),
 
 
             Text::make('User', 'addedBy')
-
-            ->default($request->user()->email)
+            ->onlyOnDetail()
+            ->default($request->user()->email),
 
 
 
@@ -116,7 +120,10 @@ class Item extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ItemStockType,
+            new ItemLocation
+        ];
     }
 
     /**

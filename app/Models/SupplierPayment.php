@@ -13,7 +13,9 @@ class SupplierPayment extends Model
     protected $fillable = ["supplierId",	"currency",	"bankName",	"bankBranch",	"BSB",	"accountName",	"accountNumber",	"paypal"	];
 
     public function suppliers(): BelongsTo
-    {
-        return $this->belongsTo(Supplier::class, "supplierId", 'id');
-    }
+{
+    return $this->belongsTo(Supplier::class, "supplierId", 'id');
+
+}
+
 }

@@ -33,7 +33,11 @@
         "build-stockchecktool": "cd nova-components/Stockchecktool && npm run dev",
         "build-stockchecktool-prod": "cd nova-components/Stockchecktool && npm run prod",
         "build-stock-location": "cd nova-components/StockLocation && npm run dev",
-        "build-stock-location-prod": "cd nova-components/StockLocation && npm run prod"
+        "build-stock-location-prod": "cd nova-components/StockLocation && npm run prod",
+        "build-testing": "cd nova-components/Testing && npm run dev",
+        "build-testing-prod": "cd nova-components/Testing && npm run prod",
+        "build-create-invoice-shipping": "cd nova-components/CreateInvoiceShipping && npm run dev",
+        "build-create-invoice-shipping-prod": "cd nova-components/CreateInvoiceShipping && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

@@ -2,13 +2,10 @@
 
 namespace App\Nova;
 
-use Bissolli\NovaPhoneField\PhoneNumber;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Place;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Sender extends Resource
 {
@@ -19,6 +16,7 @@ class Sender extends Resource
      *
      * @var string
      */
+    public static $group = 'Sale';
     public static $model = 'App\Models\Sender';
 
     /**

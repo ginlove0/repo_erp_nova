@@ -47,7 +47,6 @@ class ShippingChange extends Action
 
         foreach($models as $model) {
 
-            Log::info($model -> id);
         foreach ($newArray as $getItem  ) {
             $itemArray = $getItem->items;
 
@@ -66,6 +65,8 @@ class ShippingChange extends Action
                 $newItem = Item::where('serialNumber', $item -> serialNumber)->first();
 
                 if($newItem && $newItem->stockStatus == true) {
+
+                    $newItem -> sale_order_id = $model -> id;
                     $newItem->stockStatus = false;
                     $newItem->save();
 

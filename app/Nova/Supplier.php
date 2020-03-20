@@ -3,16 +3,13 @@
 namespace App\Nova;
 
 use Eminiarts\Tabs\Tabs;
-use ErpIpsupply\QuantityBaseCondition\QuantityBaseCondition;
 use Illuminate\Http\Request;
 use Ipsupply\RelationDependanceField\RelationDependanceField;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Panel;
 
 class Supplier extends Resource
 {

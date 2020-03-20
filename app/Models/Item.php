@@ -22,9 +22,13 @@ class Item extends Model
     protected $fillable = ["addedBy", "whlocationId", "supplierId",
         "modelId", "serialNumber", "price",
         "note", "extra", "quantity", "conditionId", "stockStatus",
-        "location", "smartnet", "version"];
+        "location", "smartnet", "version", "sale_order_id"];
 
 
+    public function saleorder(): BelongsTo
+    {
+        return $this->belongsTo(SaleOrder::class, 'sale_order_id');
+    }
 
     public function whlocations() : BelongsTo
     {

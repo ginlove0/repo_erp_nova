@@ -179,4 +179,25 @@ class MetricTest extends IntegrationTest
         $this->assertEquals($averageWordCount, 5.37894);
         $this->assertEquals(5.38, (new AverageWordCount)->precision(2)->calculate(NovaRequest::create('/'))->value);
     }
+
+    public function test_value_metrics_can_provide_a_default_range()
+    {
+        $metric = new TotalUsers;
+
+        $metric->ranges = [
+            1 => 'January',
+            2 => 'February',
+        ];
+
+        $metric->defaultRange(1);
+
+        $this->assertEquals(1, $metric->jsonSerialize()['selectedRangeKey']);
+    }
+
+    public function test_value_metrics_default_range_defaults_to_null()
+    {
+        $metric = new TotalUsers;
+
+        $this->assertNull($metric->jsonSerialize()['selectedRangeKey']);
+    }
 }

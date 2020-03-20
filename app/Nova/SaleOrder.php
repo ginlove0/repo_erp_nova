@@ -4,29 +4,13 @@ namespace App\Nova;
 
 
 //use App\Nova\Actions\AddItemToSaleOrder;
-use App\Nova\Actions\PackedChange;
 use App\Nova\Actions\ShippingChange;
 use App\Nova\Actions\StatusChangeAction;
 use Illuminate\Http\Request;
-use Ipsupply\CheckoutItemResourceTool\CheckoutItemResourceTool;
-use Ipsupply\CreatableHasmanyRelationField\CreatableHasmanyRelationField;
-use Ipsupply\SaleOrderModelsField\SaleOrderModelsField;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasOne;
-use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 
-use Laravel\Nova\Fields\KeyValue;
-use Laravel\Nova\Fields\MorphMany;
-use Laravel\Nova\Fields\MorphTo;
-use Laravel\Nova\Fields\MorphToMany;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Panel;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Inspheric\Fields\Indicator;
 use function foo\func;
@@ -75,16 +59,13 @@ class SaleOrder extends Resource
 
             BelongsTo::make('Sender', 'senders'),
 
-//            NovaBelongsToDepend::make('Supplier')
-//                ->options(\App\Models\Supplier::take(10)->get(["id", "name"]))
-//
-//            ->hideWhenUpdating()
-//            ,
+
 
             NovaBelongsToDepend::make('Supplier')
                 ->options(\App\Models\Supplier::all())
                 ->searchable()
                 ->hideWhenUpdating(),
+
 
 
 
@@ -140,10 +121,10 @@ class SaleOrder extends Resource
                 ->hideFromIndex(),
 
 
-            Text::make('Link Ebay', 'link_ebay', function () {
-                $linkEbay = $this -> link_ebay;
-                return "<a href='{$linkEbay}'>{$linkEbay}</a>";
-            })->asHtml(),
+
+            \Inspheric\Fields\Url::make('Link Ebay')
+                ->clickableOnIndex((bool) $clickable = true)
+                ->domainLabel(),
 
 
 
@@ -207,7 +188,9 @@ class SaleOrder extends Resource
 
 //            MorphMany::make('saleordermodeltype')
 //
-        HasMany::make('saleordermodeltype')
+        HasMany::make('saleordermodeltype'),
+
+            HasMany::make('item')
 
 
 
@@ -263,7 +246,6 @@ class SaleOrder extends Resource
         return [
             new StatusChangeAction,
             new ShippingChange,
-            new PackedChange,
         ];
     }
 }

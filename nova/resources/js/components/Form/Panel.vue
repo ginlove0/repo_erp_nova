@@ -19,6 +19,8 @@
         :via-relationship="viaRelationship"
         :shown-via-new-relation-modal="shownViaNewRelationModal"
         @file-deleted="$emit('update-last-retrieved-at-timestamp')"
+        @file-upload-started="$emit('file-upload-started')"
+        @file-upload-finished="$emit('file-upload-finished')"
       />
     </card>
   </div>

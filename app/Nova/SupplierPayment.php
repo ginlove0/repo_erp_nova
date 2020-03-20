@@ -4,12 +4,9 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierPayment extends Resource
 {
@@ -18,6 +15,8 @@ class SupplierPayment extends Resource
      *
      * @var string
      */
+
+    public static $displayInNavigation = false;
     public static $model = 'App\Models\SupplierPayment';
 
     /**

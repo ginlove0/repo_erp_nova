@@ -4,13 +4,8 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierNote extends Resource
 {
@@ -19,6 +14,7 @@ class SupplierNote extends Resource
      *
      * @var string
      */
+    public static $displayInNavigation = false;
     public static $model = 'App\Models\SupplierNote';
 
 

@@ -3,27 +3,19 @@
 namespace App\Nova;
 
 use App\Services\Model\ModelService;
-use App\Services\Model\ModelServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
 use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
-use Khalin\Nova\Field\Link;
-use Klepak\NovaRouterLink\RouterLink;
-use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Heading;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Model extends Resource
 {
 
 
-    const USEDA = "USEDA";
+    const USEA = "USEA";
 
     private $modelService;
 
@@ -84,18 +76,23 @@ class Model extends Resource
 
             BelongsTo::make('Manufactor', 'manufactors')
                 ->searchable()
-                ->hideFromIndex()
-                ->prepopulate(),
+                ->hideFromIndex(),
 
             BelongsTo::make('Category', "categories")
                 ->searchable()
-                ->hideFromIndex()
-                ->prepopulate(),
+                ->hideFromIndex(),
 
 
             HasMany::make( 'OtherModelNames')
                 ->hideFromIndex(),
 
+
+            ItemQtyBaseCondition::make("AU:NIB", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond("NIB", $data, 1);
+//                if($qty[0]->QTY <= 0)
+//                    return $qty[0]->QTY = 0;
+                return $qty[0]->QTY;
+            })->onlyOnIndex(),
 
             ItemQtyBaseCondition::make("AU:NOB", "id", function ($data) use ($request) {
 //                $request->user();
@@ -106,26 +103,19 @@ class Model extends Resource
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
-            ItemQtyBaseCondition::make("AU:NIB", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("NIB", $data, 1);
-//                if($qty[0]->QTY <= 0)
-//                    return $qty[0]->QTY = 0;
+            ItemQtyBaseCondition::make("AU:USEA", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 1);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
-            ItemQtyBaseCondition::make("AU:USEDA", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond(self::USEDA, $data, 1);
-                return $qty[0]->QTY;
-            })->onlyOnIndex(),
-
-            ItemQtyBaseCondition::make("AU:USEDB", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("USEDB", $data, 1);
+            ItemQtyBaseCondition::make("AU:USEB", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond("USEB", $data, 1);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
 
-            ItemQtyBaseCondition::make("AU:USEDC", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("USEDC", $data, 1);
+            ItemQtyBaseCondition::make("AU:USEC", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond("USEC", $data, 1);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
@@ -142,6 +132,10 @@ class Model extends Resource
 
 
 
+            ItemQtyBaseCondition::make("US:NIB", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond("NIB", $data, 2);
+                return $qty[0]->QTY;
+            })->onlyOnIndex(),
 
             ItemQtyBaseCondition::make("US:NOB", "id", function ($data) use ($request) {
 //                $request->user();
@@ -151,24 +145,19 @@ class Model extends Resource
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
-            ItemQtyBaseCondition::make("US:NIB", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("NIB", $data, 2);
-                return $qty[0]->QTY;
-            })->onlyOnIndex(),
-
-            ItemQtyBaseCondition::make("US:USEDA", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond(self::USEDA, $data, 2);
+            ItemQtyBaseCondition::make("US:USEA", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 2);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
             ItemQtyBaseCondition::make("US:USEDB", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("USEDB", $data, 2);
+                $qty = $this->modelService->getQtyItemByCond("USEB", $data, 2);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 
 
-            ItemQtyBaseCondition::make("US:USEDC", "id", function ($data) {
-                $qty = $this->modelService->getQtyItemByCond("USEDC", $data, 2);
+            ItemQtyBaseCondition::make("US:USEC", "id", function ($data) {
+                $qty = $this->modelService->getQtyItemByCond("USEC", $data, 2);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
 

@@ -8,9 +8,7 @@ use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Place;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Sparkline;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierAddress extends Resource
 {

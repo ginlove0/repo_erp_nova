@@ -135,10 +135,24 @@ Vue.component('form-select-field', require('@/components/Form/SelectField'))
 Vue.component('detail-select-field', require('@/components/Detail/TextField'))
 Vue.component('index-select-field', require('@/components/Index/TextField'))
 
-// Upload Field
+// File Field
 Vue.component('index-file-field', require('./components/Index/FileField.vue'))
 Vue.component('detail-file-field', require('./components/Detail/FileField.vue'))
 Vue.component('form-file-field', require('./components/Form/FileField.vue'))
+
+// Vapor File Field
+Vue.component(
+  'index-vapor-file-field',
+  require('./components/Index/FileField.vue')
+)
+Vue.component(
+  'detail-vapor-file-field',
+  require('./components/Detail/FileField.vue')
+)
+Vue.component(
+  'form-vapor-file-field',
+  require('./components/Form/FileField.vue')
+)
 
 // Status Field...
 Vue.component(

@@ -27,6 +27,9 @@ class SupplierEmail extends Model
     }
 
 
+
+
+
     /**
      * Get the supplier email define as supplier email associated with the sale order.
      * @return HasMany
