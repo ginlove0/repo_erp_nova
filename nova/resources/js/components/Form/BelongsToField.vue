@@ -53,9 +53,7 @@
           :selected="selectedResourceId"
           label="display"
         >
-          <option value="" selected :disabled="!field.nullable">{{
-            placeholder
-          }}</option>
+          <option value="" selected :disabled="!field.nullable">&mdash;</option>
         </select-control>
 
         <create-relation-button
@@ -84,7 +82,7 @@
         <checkbox-with-label
           :dusk="`${field.resourceName}-with-trashed-checkbox`"
           :checked="withTrashed"
-          @input="toggleWithTrashed"
+          @change="toggleWithTrashed"
         >
           {{ __('With Trashed') }}
         </checkbox-with-label>
@@ -354,19 +352,11 @@ export default {
 
     canShowNewRelationModal() {
       return (
-        this.field.showCreateRelationButton &&
         !this.shownViaNewRelationModal &&
         !this.isLocked &&
         !this.isReadonly &&
         this.authorizedToCreate
       )
-    },
-
-    /**
-     * Return the placeholder text for the field.
-     */
-    placeholder() {
-      return this.field.placeholder || this.__('—')
     },
   },
 }

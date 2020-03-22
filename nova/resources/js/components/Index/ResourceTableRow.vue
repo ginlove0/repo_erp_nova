@@ -1,7 +1,12 @@
 <template>
   <tr :dusk="resource['id'].value + '-row'">
     <!-- Resource Selection Checkbox -->
-    <td class="w-16" v-if="shouldShowCheckboxes">
+    <td
+      :class="{
+        'w-16': shouldShowCheckboxes,
+        'w-8': !shouldShowCheckboxes,
+      }"
+    >
       <checkbox
         :data-testid="`${testId}-checkbox`"
         :dusk="`${resource['id'].value}-checkbox`"

@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use App\Services\Model\ModelService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
@@ -97,7 +96,7 @@ class Model extends Resource
             ItemQtyBaseCondition::make("AU:NOB", "id", function ($data) use ($request) {
 //                $request->user();
 
-                Log::info($request->user());
+
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 1);
 
                 return $qty[0]->QTY;
@@ -140,7 +139,6 @@ class Model extends Resource
             ItemQtyBaseCondition::make("US:NOB", "id", function ($data) use ($request) {
 //                $request->user();
 
-                Log::info($request->user());
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 2);
                 return $qty[0]->QTY;
             })->onlyOnIndex(),
@@ -170,58 +168,11 @@ class Model extends Resource
 
 
 //            ->readonly(),
-            HasMany::make('Item', 'items')
-            ->onlyOnDetail()
+            HasMany::make('Item', 'items'),
 
 
 
         ];
     }
 
-
-
-
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
-    }
 }

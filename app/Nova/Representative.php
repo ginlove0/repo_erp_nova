@@ -2,9 +2,9 @@
 
 namespace App\Nova;
 
-use Bissolli\NovaPhoneField\PhoneNumber;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 
@@ -55,8 +55,7 @@ class Representative extends Resource
                 'Ms' => 'Ms',
                 'Mrs' => 'Mrs',
                 'Other' => 'Other',
-            ])
-            ->default('Mr'),
+            ]),
 
 
             Text::make('Full Name', 'fullName')->rules('required', 'max:255'),
@@ -64,55 +63,7 @@ class Representative extends Resource
 
             Text::make('Position', 'position')->rules( 'max:255'),
 
-            PhoneNumber::make("Phone Number", 'phoneNumber'),
-
-
-
-
+            Number::make("Phone Number", 'phoneNumber'),
         ];
-    }
-
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
     }
 }

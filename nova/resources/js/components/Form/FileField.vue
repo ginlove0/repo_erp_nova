@@ -31,7 +31,9 @@
             v-if="shouldShowRemoveButton"
             @click="confirmRemoval"
           >
-            <span class="class ml-2 mt-1"> {{ __('Delete') }} </span>
+            <span class="class ml-2 mt-1">
+              {{ __('Delete') }}
+            </span>
           </DeleteButton>
         </p>
 
@@ -53,23 +55,22 @@
           :id="idAttr"
           name="name"
           @change="fileChange"
-          :disabled="isReadonly || uploading"
+          :disabled="isReadonly"
           :accept="field.acceptedTypes"
         />
         <label
           :for="labelFor"
           class="form-file-btn btn btn-default btn-primary select-none"
         >
-          <span v-if="uploading"
-            >{{ __('Uploading') }} ({{ uploadProgress }}%)</span
-          >
-          <span v-else>{{ __('Choose File') }}</span>
+          {{ __('Choose File') }}
         </label>
       </span>
 
       <span class="text-gray-50 select-none"> {{ currentLabel }} </span>
 
-      <p v-if="hasError" class="text-xs mt-2 text-danger">{{ firstError }}</p>
+      <p v-if="hasError" class="text-xs mt-2 text-danger">
+        {{ firstError }}
+      </p>
     </template>
   </default-field>
 </template>
@@ -78,7 +79,6 @@
 import ImageLoader from '@/components/ImageLoader'
 import DeleteButton from '@/components/DeleteButton'
 import { FormField, HandlesValidationErrors, Errors } from 'laravel-nova'
-import Vapor from 'laravel-vapor'
 
 export default {
   props: [
@@ -99,24 +99,12 @@ export default {
     missing: false,
     deleted: false,
     uploadErrors: new Errors(),
-    vaporFile: {
-      key: '',
-      uuid: '',
-    },
-    uploading: false,
-    uploadProgress: 0,
   }),
 
   mounted() {
     this.field.fill = formData => {
-      if (this.file && !this.isVaporField) {
+      if (this.file) {
         formData.append(this.field.attribute, this.file, this.fileName)
-      }
-
-      if (this.file && this.isVaporField) {
-        formData.append(this.field.attribute, this.fileName)
-        formData.append('vaporFile[key]', this.vaporFile.key)
-        formData.append('vaporFile[uuid]', this.vaporFile.uuid)
       }
     }
   },
@@ -130,23 +118,6 @@ export default {
       let fileName = path.match(/[^\\/]*$/)[0]
       this.fileName = fileName
       this.file = this.$refs.fileField.files[0]
-
-      if (this.isVaporField) {
-        this.uploading = true
-        this.$emit('file-upload-started')
-
-        Vapor.store(this.$refs.fileField.files[0], {
-          progress: progress => {
-            this.uploadProgress = Math.round(progress * 100)
-          },
-        }).then(response => {
-          this.vaporFile.key = response.key
-          this.vaporFile.uuid = response.uuid
-          this.uploading = false
-          this.uploadProgress = 0
-          this.$emit('file-upload-finished')
-        })
-      }
     },
 
     /**
@@ -187,7 +158,6 @@ export default {
         this.closeRemoveModal()
         this.deleted = true
         this.$emit('file-deleted')
-        Nova.success(this.__('The file was deleted!'))
       } catch (error) {
         this.closeRemoveModal()
 
@@ -273,13 +243,6 @@ export default {
      */
     maxWidth() {
       return this.field.maxWidth || 320
-    },
-
-    /**
-     * Determing if the field is a Vapor field.
-     */
-    isVaporField() {
-      return this.field.component == 'vapor-file-field'
     },
   },
 }

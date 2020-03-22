@@ -5,7 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
-use Inspheric\Fields\Email;
+use Laravel\Nova\Fields\Text;
 
 class SupplierEmail extends Resource
 {
@@ -44,7 +44,7 @@ class SupplierEmail extends Resource
         return [
             BelongsTo::make('Supplier', 'suppliers')
             ->searchable(),
-            Email::make('Email'),
+            Text::make('Email'),
 
             Select::make("Type of Email", 'typeemail')
             ->options([
@@ -54,47 +54,4 @@ class SupplierEmail extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
-    }
 }

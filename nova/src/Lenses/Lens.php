@@ -15,7 +15,6 @@ use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\LensRequest;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Makeable;
 use Laravel\Nova\Nova;
 use Laravel\Nova\ProxiesCanSeeToGate;
 use Laravel\Nova\ResolvesActions;
@@ -29,7 +28,6 @@ abstract class Lens implements ArrayAccess, JsonSerializable, UrlRoutable
         AuthorizedToSee,
         ConditionallyLoadsAttributes,
         DelegatesToResource,
-        Makeable,
         ProxiesCanSeeToGate,
         ResolvesActions,
         ResolvesCards,

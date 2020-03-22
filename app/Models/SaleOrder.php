@@ -67,7 +67,7 @@ class SaleOrder extends Model
      */
     public function billingaddresses(): BelongsTo
     {
-        return $this->belongsTo('App\Models\SupplierAddress', 'billingAddressId', 'id');
+        return $this->belongsTo(SupplierAddress::class, 'billingAddressId', 'id');
     }
 
 

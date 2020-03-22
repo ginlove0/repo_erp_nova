@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
     use ValidatesRequests;
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Controller
+    | Password Reset Controllers
     |--------------------------------------------------------------------------
     |
     | This controller is responsible for handling password reset emails and

@@ -118,7 +118,7 @@ class NovaServiceProvider extends ServiceProvider
         return [
             'namespace' => 'Laravel\Nova\Http\Controllers',
             'domain' => config('nova.domain', null),
-            // 'as' => 'nova.api.',
+            'as' => 'nova.api.',
             'prefix' => 'nova-api',
             'middleware' => 'nova',
         ];
@@ -169,7 +169,6 @@ class NovaServiceProvider extends ServiceProvider
                 'locale' => config('app.locale', 'en'),
                 'algoliaAppId' => config('services.algolia.appId'),
                 'algoliaApiKey' => config('services.algolia.apiKey'),
-                'version' => Nova::version(),
             ]);
         });
     }

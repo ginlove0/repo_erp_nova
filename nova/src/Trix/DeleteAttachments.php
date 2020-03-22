@@ -29,7 +29,7 @@ class DeleteAttachments
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  mixed  $model
-     * @return array
+     * @return void
      */
     public function __invoke(Request $request, $model)
     {

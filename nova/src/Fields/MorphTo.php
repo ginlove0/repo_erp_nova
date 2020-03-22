@@ -16,7 +16,7 @@ use Laravel\Nova\TrashedStatus;
 
 class MorphTo extends Field implements RelatableField
 {
-    use ResolvesReverseRelation, DeterminesIfCreateRelationCanBeShown;
+    use ResolvesReverseRelation;
 
     /**
      * The field's component.
@@ -494,7 +494,6 @@ class MorphTo extends Field implements RelatableField
             'resourceName' => $this->resourceName,
             'reverse' => $this->isReverseRelation(app(NovaRequest::class)),
             'searchable' => $this->searchable,
-            'showCreateRelationButton' => $this->createRelationShouldBeShown(app(NovaRequest::class)),
         ], parent::jsonSerialize());
     }
 }

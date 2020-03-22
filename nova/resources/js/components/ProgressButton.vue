@@ -2,7 +2,6 @@
   <button
     class="btn btn-default btn-primary inline-flex items-center relative"
     type="button"
-    ref="button"
   >
     <span :class="{ invisible: processing }"> <slot /> </span>
 
@@ -22,12 +21,6 @@ export default {
     processing: {
       type: Boolean,
       default: false,
-    },
-  },
-
-  methods: {
-    focus() {
-      this.$refs.button.focus()
     },
   },
 }

@@ -34,14 +34,4 @@ class DeleteResourceRequest extends DeletionRequest
                         ->authorizedToDelete($this)
                         ->map->model();
     }
-
-    /**
-     * Determine if the request is for a single resource only.
-     *
-     * @return bool
-     */
-    public function isForSingleResource()
-    {
-        return $this->resources !== 'all' && count($this->resources) == 1;
-    }
 }

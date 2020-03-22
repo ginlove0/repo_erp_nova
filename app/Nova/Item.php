@@ -12,12 +12,6 @@ use Laravel\Nova\Fields\Text;
 class Item extends Resource
 {
 
-
-    public static $searchRelations = [
-        'models' => ['name'],
-        'suppliers' => ['name'],
-        'conditions' => ['name'],
-    ];
     public static $group = "Product";
     /**
      * The model the resource corresponds to.
@@ -52,7 +46,6 @@ class Item extends Resource
 
         return [
 
-
             BelongsTo::make("Model", 'models')
                 ->searchable(),
 
@@ -85,16 +78,13 @@ class Item extends Resource
             Text::make("Location", "location"),
 
 
-            BelongsTo::make("Condition", 'conditions')
-                ->searchable(),
+            BelongsTo::make("Condition", 'conditions'),
 
-            BelongsTo::make("WHLocation", 'whlocations')
-                ->searchable(),
+            BelongsTo::make("WHLocation", 'whlocations'),
 
 
             Text::make('User', 'addedBy')
-            ->onlyOnDetail()
-            ->default($request->user()->email),
+            ->onlyOnDetail(),
 
 
 

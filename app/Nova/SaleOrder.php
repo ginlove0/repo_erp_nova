@@ -3,17 +3,17 @@
 namespace App\Nova;
 
 
-//use App\Nova\Actions\AddItemToSaleOrder;
 use App\Nova\Actions\ShippingChange;
 use App\Nova\Actions\StatusChangeAction;
 use Illuminate\Http\Request;
+use Inspheric\Fields\Indicator;
+use Inspheric\Fields\Url;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-
+use Manmohanjit\BelongsToDependency\BelongsToDependency;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
-use Inspheric\Fields\Indicator;
-use function foo\func;
+
 
 class SaleOrder extends Resource
 {
@@ -61,60 +61,64 @@ class SaleOrder extends Resource
 
 
 
-            NovaBelongsToDepend::make('Supplier')
-                ->options(\App\Models\Supplier::all())
-                ->searchable()
-                ->hideWhenUpdating(),
+            BelongsTo::make('Supplier', 'supplier'),
+
+
+            BelongsToDependency::make('Representative', 'representatives')
+                ->dependsOn('supplier', 'supplierId')
+                ->hideFromIndex(),
+
+            BelongsToDependency::make('Billing Address', 'billingaddresses', SupplierAddress::class)
+                ->dependsOn('supplier', 'supplierId')
+                ->hideFromIndex(),
+
+            BelongsToDependency::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
+                ->dependsOn('supplier', 'supplierId')
+                ->hideFromIndex(),
+
+            BelongsToDependency::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
+                ->dependsOn('supplier', 'supplierId')
+                ->hideFromIndex(),
+
+            BelongsToDependency::make('Tracking Email', 'suppliertrackingemails', SupplierEmail::class)
+                ->dependsOn('supplier', 'supplierId')
+                ->hideFromIndex(),
 
 
 
+//            NovaBelongsToDepend::make('Billing Address', 'billingaddresses', SupplierAddress::class)
+//                ->optionsResolve(function ($supplier) {
+//                    return $supplier->supplieraddresses;
+//                })
+//                ->dependsOn('Supplier')
+//                ->hideFromIndex()
+//                ->hideWhenUpdating(),
 
 
-            NovaBelongsToDepend::make('Representative', 'representatives')
-                ->optionsResolve(function ($supplier) {
-                    return $supplier->representatives;
-                })
-                ->dependsOn('Supplier')
-                ->hideFromIndex()
-                ->hideWhenUpdating(),
+//            NovaBelongsToDepend::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
+//                ->optionsResolve(function ($supplier) {
+//                    return $supplier->supplieraddresses;
+//                })
+//                ->dependsOn('Supplier')
+//                ->hideWhenUpdating(),
+//
+//
+//            NovaBelongsToDepend::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
+//                ->optionsResolve(function ($supplier) {
+//                    return $supplier->supplieremails;
+//                })
+//                ->dependsOn('Supplier')
+//                ->hideFromIndex()
+//                ->hideWhenUpdating(),
 
 
-
-
-
-            NovaBelongsToDepend::make('Billing Address', 'billingaddresses', SupplierAddress::class)
-                ->optionsResolve(function ($supplier) {
-                    return $supplier->supplieraddresses;
-                })
-                ->dependsOn('Supplier')
-                ->hideFromIndex()
-                ->hideWhenUpdating(),
-
-
-            NovaBelongsToDepend::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
-                ->optionsResolve(function ($supplier) {
-                    return $supplier->supplieraddresses;
-                })
-                ->dependsOn('Supplier')
-                ->hideWhenUpdating(),
-
-
-            NovaBelongsToDepend::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
-                ->optionsResolve(function ($supplier) {
-                    return $supplier->supplieremails;
-                })
-                ->dependsOn('Supplier')
-                ->hideFromIndex()
-                ->hideWhenUpdating(),
-
-
-            NovaBelongsToDepend::make('Tracking Email', 'suppliertrackingemails', SupplierEmail::class)
-                ->optionsResolve(function ($supplier) {
-                    return $supplier->supplieremails;
-                })
-                ->dependsOn('Supplier')
-            -> hideFromIndex()
-                ->hideWhenUpdating(),
+//            NovaBelongsToDepend::make('Tracking Email', 'suppliertrackingemails', SupplierEmail::class)
+//                ->optionsResolve(function ($supplier) {
+//                    return $supplier->supplieremails;
+//                })
+//                ->dependsOn('Supplier')
+//            -> hideFromIndex()
+//                ->hideWhenUpdating(),
 
 
             BelongsTo::make('Warehouse', 'whlocations', WHLocation::class)
@@ -122,13 +126,13 @@ class SaleOrder extends Resource
 
 
 
-            \Inspheric\Fields\Url::make('Link Ebay')
+            Url::make('Link Ebay')
                 ->clickableOnIndex((bool) $clickable = true)
                 ->domainLabel(),
 
 
 
-//
+
             Indicator::make('Status')
                 ->labels([
                     'pending' => 'Pending',
@@ -202,45 +206,6 @@ class SaleOrder extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function actions(Request $request)
     {
         return [

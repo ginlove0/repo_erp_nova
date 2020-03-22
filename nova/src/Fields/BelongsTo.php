@@ -13,7 +13,8 @@ use Laravel\Nova\TrashedStatus;
 
 class BelongsTo extends Field implements RelatableField
 {
-    use FormatsRelatableDisplayValues, ResolvesReverseRelation, DeterminesIfCreateRelationCanBeShown;
+    use FormatsRelatableDisplayValues;
+    use ResolvesReverseRelation;
 
     /**
      * The field's component.
@@ -118,7 +119,6 @@ class BelongsTo extends Field implements RelatableField
         $this->belongsToRelationship = $this->attribute;
         $this->singularLabel = $name;
     }
-
 
     /**
      * Determine if the field should be displayed for the given request.
@@ -229,7 +229,6 @@ class BelongsTo extends Field implements RelatableField
             call_user_func($this->filledCallback, $request, $model);
         }
     }
-
 
     /**
      * Hydrate the given attribute on the model based on the incoming request.
@@ -414,14 +413,13 @@ class BelongsTo extends Field implements RelatableField
         return array_merge([
             'belongsToId' => $this->belongsToId,
             'belongsToRelationship' => $this->belongsToRelationship,
-            'displaysWithTrashed' => $this->displaysWithTrashed,
             'label' => forward_static_call([$this->resourceClass, 'label']),
             'resourceName' => $this->resourceName,
             'reverse' => $this->isReverseRelation(app(NovaRequest::class)),
             'searchable' => $this->searchable,
-            'showCreateRelationButton' => $this->createRelationShouldBeShown(app(NovaRequest::class)),
             'singularLabel' => $this->singularLabel,
             'viewable' => $this->viewable,
+            'displaysWithTrashed' => $this->displaysWithTrashed,
         ], parent::jsonSerialize());
     }
 }

@@ -148,13 +148,6 @@ abstract class Field extends FieldElement implements JsonSerializable, Resolvabl
     public $requiredCallback;
 
     /**
-     * The resource associated with the field.
-     *
-     * @var \Laravel\Nova\Resource
-     */
-    public $resource;
-
-    /**
      * Create a new field.
      *
      * @param  string  $name
@@ -210,8 +203,6 @@ abstract class Field extends FieldElement implements JsonSerializable, Resolvabl
      */
     public function resolveForDisplay($resource, $attribute = null)
     {
-        $this->resource = $resource;
-
         $attribute = $attribute ?? $this->attribute;
 
         if ($attribute === 'ComputedField') {
@@ -236,8 +227,6 @@ abstract class Field extends FieldElement implements JsonSerializable, Resolvabl
      */
     public function resolve($resource, $attribute = null)
     {
-        $this->resource = $resource;
-
         $attribute = $attribute ?? $this->attribute;
 
         if ($attribute === 'ComputedField') {

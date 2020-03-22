@@ -21,12 +21,10 @@ class LensResourceRestoreController extends Controller
             $models->each(function ($model) use ($request) {
                 $model->restore();
 
-                tap(Nova::actionEvent(), function ($actionEvent) use ($model, $request) {
-                    DB::connection($actionEvent->getConnectionName())->table('action_events')->insert(
-                        $actionEvent->forResourceRestore($request->user(), collect([$model]))
-                            ->map->getAttributes()->all()
-                    );
-                });
+                DB::table('action_events')->insert(
+                    Nova::actionEvent()->forResourceRestore($request->user(), collect([$model]))
+                                ->map->getAttributes()->all()
+                );
             });
         });
     }

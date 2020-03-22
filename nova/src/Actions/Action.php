@@ -10,7 +10,6 @@ use Laravel\Nova\AuthorizedToSee;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\ActionRequest;
-use Laravel\Nova\Makeable;
 use Laravel\Nova\Metable;
 use Laravel\Nova\Nova;
 use Laravel\Nova\ProxiesCanSeeToGate;
@@ -18,7 +17,9 @@ use ReflectionClass;
 
 class Action implements JsonSerializable
 {
-    use Metable, AuthorizedToSee, ProxiesCanSeeToGate, Makeable;
+    use Metable;
+    use AuthorizedToSee;
+    use ProxiesCanSeeToGate;
 
     /**
      * The displayable name of the action.

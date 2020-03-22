@@ -63,8 +63,7 @@ class Supplier extends Resource
                 'Corp' => 'Corp',
                 'Broker' => 'Broker',
                 'Individual' => 'Individual'
-            ])
-            ->default('Gov'),
+            ]),
 
             Select::make('Pricing Level', 'pricingLevel')->options([
                 '1' => '1',
@@ -72,10 +71,8 @@ class Supplier extends Resource
                 '3' => '3',
                 '4' => '4',
                 '5' => '5',
-            ])
-                ->default('5'),
+            ]),
 
-            RelationDependanceField::make('Pricing base', 'pricingLevel')->onlyOnIndex(),
 
 
 
@@ -148,49 +145,4 @@ class Supplier extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [
-            new Filters\SupplierContractType,
-        ];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
-    }
 }

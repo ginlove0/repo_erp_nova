@@ -1,21 +1,28 @@
 <template>
   <span>
-    <select
-      ref="selectBox"
+    <dropdown
       v-if="actions.length > 0"
-      class="select-box-sm mr-3 h-6 text-xs appearance-none bg-40 pl-2 pr-6 active:outline-none active:shadow-outline focus:outline-none focus:shadow-outline"
-      style="max-width: 90px"
-      @change="handleSelectionChange"
+      class="text-left inline-block bg-30 hover:bg-40 rounded"
     >
-      <option disabled selected>{{ __('Actions') }}</option>
-      <option
-        v-for="action in actions"
-        :key="action.uriKey"
-        :value="action.uriKey"
-      >
-        {{ action.name }}
-      </option>
-    </select>
+      <dropdown-trigger class="text-sm text-90 px-3 py-1 h-!8">
+        {{ __('Actions') }}
+      </dropdown-trigger>
+
+      <dropdown-menu slot="menu" direction="rtl" width="150">
+        <button
+          v-for="action in actions"
+          :key="action.uriKey"
+          class="block px-3 text-90 text-left text-sm w-full leading-normal dim my-2 active:outline-none active:shadow-outline focus:outline-none focus:shadow-outline"
+          @click="
+            () => {
+              selectAndExecuteAction(action)
+            }
+          "
+        >
+          {{ action.name }}
+        </button>
+      </dropdown-menu>
+    </dropdown>
 
     <!-- Action Confirmation Modal -->
     <portal to="modals">
@@ -47,10 +54,9 @@ export default {
   },
 
   methods: {
-    handleSelectionChange(event) {
-      this.selectedActionKey = event.target.value
+    selectAndExecuteAction(action) {
+      this.selectedActionKey = action.uriKey
       this.determineActionStrategy()
-      this.$refs.selectBox.selectedIndex = 0
     },
   },
 

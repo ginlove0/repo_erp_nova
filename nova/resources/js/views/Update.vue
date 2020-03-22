@@ -15,8 +15,6 @@
       <form-panel
         v-for="panel in panelsWithFields"
         @update-last-retrieved-at-timestamp="updateLastRetrievedAtTimestamp"
-        @file-upload-started="handleFileUploadStarted"
-        @file-upload-finished="handleFileUploadFinished"
         :panel="panel"
         :name="panel.name"
         :key="panel.name"
@@ -64,10 +62,9 @@ import {
   Errors,
   InteractsWithResourceInformation,
 } from 'laravel-nova'
-import HandlesUploads from '@/mixins/HandlesUploads'
 
 export default {
-  mixins: [InteractsWithResourceInformation, HandlesUploads],
+  mixins: [InteractsWithResourceInformation],
 
   props: mapProps([
     'resourceName',
@@ -86,6 +83,7 @@ export default {
     panels: [],
     validationErrors: new Errors(),
     lastRetrievedAt: null,
+    isWorking: false,
   }),
 
   async created() {

@@ -36,7 +36,7 @@ class Currency extends Number
     public $currency;
 
     /**
-     * The symbol used by the currency.
+     * The symbol used by the currecy.
      *
      * @var null|string
      */
