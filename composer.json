@@ -28,7 +28,8 @@
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
         "manmohanjit/nova-belongs-to-dependency": "^1.1",
-        "orlyapps/nova-belongsto-depend": "^2.0"
+        "orlyapps/nova-belongsto-depend": "^2.0",
+        "ipsupply/item-to-out-stock": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.0",
@@ -115,6 +116,10 @@
         {
             "type": "path",
             "url": "./nova-components/StockLocation"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ItemToOutStock"
         }
     ]
 }

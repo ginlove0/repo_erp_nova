@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model as DBModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 //use Laravel\Scout\Searchable;
 
@@ -24,7 +25,7 @@ class Model extends DBModel
 
     public function otherModelNames(): HasMany
     {
-       return $this->hasMany(OtherModelName::class, 'modelId', "OtherModelName");
+       return $this->hasMany(OtherModelName::class, 'modelId', "id");
     }
 
     public function manufactors(): BelongsTo
@@ -67,6 +68,13 @@ class Model extends DBModel
     }
 
 
+    public static function insertData($data){
+
+        $value=DB::table('model')->where('name', $data['name'])->get();
+        if($value->count() == 0){
+            DB::table('model')->insert($data);
+        }
+    }
 
 
 

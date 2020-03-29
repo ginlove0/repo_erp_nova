@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\OutStockByItem;
+use App\Nova\Actions\OutStockItem;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
@@ -82,6 +84,8 @@ class Item extends Resource
 
             BelongsTo::make("WHLocation", 'whlocations'),
 
+            Text::make('Note', 'note')
+            ->hideFromIndex(),
 
             Text::make('User', 'addedBy')
             ->onlyOnDetail(),
@@ -112,7 +116,9 @@ class Item extends Resource
     {
         return [
             new ItemStockType,
-            new ItemLocation
+            new ItemLocation,
+
+
         ];
     }
 
@@ -135,6 +141,9 @@ class Item extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new OutStockItem,
+            new OutStockByItem
+        ];
     }
 }

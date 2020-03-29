@@ -3,17 +3,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as DBModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OtherModelName extends Model
+class OtherModelName extends DBModel
 {
     protected $table = "other_model_name";
 
     protected $fillable = ["name", 'modelId'];
 
-    public function models()
+    public function ditmeloicailon(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Model::class, 'modelId');
+        return $this->belongsTo(Model::class, 'modelId');
     }
 
 

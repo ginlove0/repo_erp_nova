@@ -138,6 +138,8 @@
       <path value="$PROJECT_DIR$/vendor/orlyapps/nova-belongsto-depend" />
       <path value="$PROJECT_DIR$/vendor/manmohanjit/nova-belongs-to-dependency" />
       <path value="$PROJECT_DIR$/vendor/eminiarts/nova-tabs" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/item-out-stock" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/item-to-out-stock" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

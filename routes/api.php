@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/ipsupply/findSaleOrderModels/{saleOrderId}',  "SaleOrderController@findSaleOrderModels");
+
+Route::get('/ipsupply/findBySN/{sn}', "ItemController@findBySN");

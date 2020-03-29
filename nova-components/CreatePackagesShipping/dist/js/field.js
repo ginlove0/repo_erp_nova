@@ -532,8 +532,8 @@ Nova.booting(function (Vue, router, store) {
 /* unused harmony export mapActions */
 /* unused harmony export createNamespacedHelpers */
 /**
- * vuex v3.1.2
- * (c) 2019 Evan You
+ * vuex v3.1.3
+ * (c) 2020 Evan You
  * @license MIT
  */
 function applyMixin (Vue) {
@@ -925,7 +925,10 @@ Store.prototype.commit = function commit (_type, _payload, _options) {
       handler(payload);
     });
   });
-  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  this._subscribers
+    .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+    .forEach(function (sub) { return sub(mutation, this$1.state); });
 
   if (
     "development" !== 'production' &&
@@ -957,6 +960,7 @@ Store.prototype.dispatch = function dispatch (_type, _payload) {
 
   try {
     this._actionSubscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
       .filter(function (sub) { return sub.before; })
       .forEach(function (sub) { return sub.before(action, this$1.state); });
   } catch (e) {
@@ -1325,9 +1329,7 @@ function enableStrictMode (store) {
 }
 
 function getNestedState (state, path) {
-  return path.length
-    ? path.reduce(function (state, key) { return state[key]; }, state)
-    : state
+  return path.reduce(function (state, key) { return state[key]; }, state)
 }
 
 function unifyObjectStyle (type, payload, options) {
@@ -1570,7 +1572,7 @@ function getModuleByNamespace (store, helper, namespace) {
 var index_esm = {
   Store: Store,
   install: install,
-  version: '3.1.2',
+  version: '3.1.3',
   mapState: mapState,
   mapMutations: mapMutations,
   mapGetters: mapGetters,
@@ -3288,7 +3290,7 @@ var propTypes = {
 
   resourceId: { type: [Number, String] },
 
-  resourceName: { type: String },
+  resourceName: { type: String, required: true },
 
   field: {
     type: Object,
@@ -3297,17 +3299,20 @@ var propTypes = {
 
   viaResource: {
     type: String,
-    required: false
+    required: true,
+    default: ''
   },
 
   viaResourceId: {
     type: [String, Number],
-    required: false
+    required: true,
+    default: ''
   },
 
   viaRelationship: {
     type: String,
-    required: false
+    required: true,
+    default: ''
   }
 };
 
@@ -5364,12 +5369,15 @@ exports.default = {
     fieldAttribute: function fieldAttribute() {
       return this.field.attribute;
     },
+    validationKey: function validationKey() {
+      return this.field.validationKey;
+    },
     hasError: function hasError() {
-      return this.errors.has(this.fieldAttribute);
+      return this.errors.has(this.validationKey);
     },
     firstError: function firstError() {
       if (this.hasError) {
-        return this.errors.first(this.fieldAttribute);
+        return this.errors.first(this.validationKey);
       }
     }
   }
@@ -5966,7 +5974,7 @@ function singularOrPlural(value, suffix) {
 
 /**
  * Javascript inflector
- *
+ * 
  * @author Dida Nurwanda <didanurwanda@gmail.com>
  * @since 1.0
  */
@@ -6065,7 +6073,7 @@ var _Inflector = {
     Inflector.pluralize('person')           -> 'people'
     Inflector.pluralize('octopus')          -> 'octopi'
     Inflector.pluralize('Hat')              -> 'Hats'
-    Inflector.pluralize('person', 'guys')   -> 'guys'
+    Inflector.pluralize('person', 'guys')   -> 'guys'    
     */
     pluralize: function(str, plural) {
         return this.applyRules(
@@ -6086,7 +6094,7 @@ var _Inflector = {
         return this.applyRules(
             str,
             this.singularRules,
-            this.uncountableWords,
+            this.uncountableWords, 
             singular
         );
     },
@@ -6110,7 +6118,7 @@ var _Inflector = {
         }
         str = str_path.join('::');
 
-        // fix
+        // fix 
         if (lowFirstLetter === true) {
           var first = str.charAt(0).toLowerCase();
           var last = str.slice(1);
@@ -6124,7 +6132,7 @@ var _Inflector = {
     Inflector.underscore('MessageProperties')       -> 'message_properties'
     Inflector.underscore('messageProperties')       -> 'message_properties'
     */
-    underscore: function(str) {
+    underscore: function(str) { 
         var str_path = str.split('::');
         for (var i = 0; i < str_path.length; i++)
         {
@@ -6230,7 +6238,7 @@ var _Inflector = {
     /*
     Inflector.foreignKey('MessageBusProperty')       -> 'message_bus_property_id'
     Inflector.foreignKey('MessageBusProperty', true) -> 'message_bus_propertyid'
-    */
+    */   
     foreignKey: function(str, dropIdUbar) {
         str = this.underscore(this.demodulize(str)) + ((dropIdUbar) ? ('') : ('_')) + 'id';
         return str;
@@ -30356,7 +30364,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Out Stock Item")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Cisco Check (Model)")])
+        _c("th", [_vm._v("Cisco Check (Modelll)")])
       ])
     ])
   }

@@ -78,6 +78,7 @@ class Model extends Resource
                 ->hideFromIndex(),
 
             BelongsTo::make('Category', "categories")
+                ->nullable()
                 ->searchable()
                 ->hideFromIndex(),
 

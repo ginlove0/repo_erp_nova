@@ -43,7 +43,7 @@ class ToolCommand extends Command
         );
 
         // Tool.js replacements...
-        $this->replace('{{ component }}', $this->toolName(), $this->toolPath().'/resources/js/tool.js');
+        $this->replace('{{ component }}', $this->toolName(), $this->toolPath().'/resources/js/field.js');
 
         // Tool.vue replacements...
         $this->replace('{{ title }}', $this->toolTitle(), $this->toolPath().'/resources/js/components/Tool.vue');

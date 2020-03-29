@@ -3,20 +3,12 @@
 namespace App\Nova\Actions;
 
 use App\Models\Item;
-use App\Models\SaleOrder;
-use App\Nova\SaleOrderModelType;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Ipsupply\CreatePackagesShipping\CreatePackagesShipping;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Nova;
-use PhpParser\Node\Expr\Array_;
 
 class ShippingChange extends Action
 {

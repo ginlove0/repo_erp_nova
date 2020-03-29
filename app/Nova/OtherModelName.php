@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
 class OtherModelName extends Resource
@@ -41,11 +40,10 @@ class OtherModelName extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
 
             Text::make('Other name', 'name'),
 
-            BelongsTo::make('Model', 'models')
+            BelongsTo::make('Model', 'ditmeloicailon')
         ];
     }
 }

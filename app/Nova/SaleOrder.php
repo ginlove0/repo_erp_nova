@@ -12,7 +12,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Manmohanjit\BelongsToDependency\BelongsToDependency;
-use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
 
 class SaleOrder extends Resource
@@ -188,17 +187,13 @@ class SaleOrder extends Resource
                 ])
                 ->onlyOnIndex(),
 
-//            HasMany::make('SaleOrderModels'),
 
-//            MorphMany::make('saleordermodeltype')
-//
-        HasMany::make('saleordermodeltype'),
+            HasMany::make('saleordermodeltype'),
 
             HasMany::make('item')
 
 
 
-//            CheckoutItemResourceTool::make("SaleOrderModelType")
 
 
 
