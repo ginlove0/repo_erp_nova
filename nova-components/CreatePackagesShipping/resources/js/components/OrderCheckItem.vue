@@ -1,7 +1,12 @@
 <template>
     <fragment>
         <td>
-            <input placeholder="Serial Number" class="w-full form-control form-input form-input-bordered" v-model="item.serialNumber">
+            <input
+                placeholder="Serial Number"
+                class="w-full form-control form-input form-input-bordered"
+                v-model="item.serialNumber"
+                @submit.prevent
+            />
 
         </td>
 

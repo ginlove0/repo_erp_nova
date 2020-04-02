@@ -18,9 +18,12 @@ class Model extends DBModel
 
     use SoftDeletes;
 
+
     protected $fillable = ["addedBy", "manufactorId", "name",
         "hasSerial" , "shortDescription", "longDescription",
         "note" , "categoryId"];
+
+
 
 
     public function otherModelNames(): HasMany

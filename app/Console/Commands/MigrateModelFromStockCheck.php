@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Manufactor;
 use App\Models\Model;
+use App\Models\Category;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -65,10 +66,10 @@ class MigrateModelFromStockCheck extends Command
 
         // Insert to MySQL database
         foreach($importData_arr as $importData){
-            $newManu = Manufactor::firstOrCreate(['name' => $importData[1]]);
+            $newCate = Category::firstOrCreate(['name' => $importData[1]]);
             $insertData = array(
                 "name"=>$importData[0],
-                'manufactorId' => $newManu -> id,
+                'categoryId' => $newCate -> id,
             );
             Model::insertData($insertData);
 

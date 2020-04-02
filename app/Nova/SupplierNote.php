@@ -2,10 +2,11 @@
 
 namespace App\Nova;
 
+use DigitalCloud\NovaResourceNotes\Fields\Notes;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Textarea;
 
 class SupplierNote extends Resource
 {
@@ -48,11 +49,13 @@ class SupplierNote extends Resource
 //                -> keyLabel( 'Date') ->withMeta(['value' => now()->format('Y-m-d h:m:s')])
 //            ->valueLabel('Note')
 //            ->actionText('Add Note'),
-            DateTime::make('Created At', 'created_at')->withMeta([
-                'value' => now()->format('Y-m-d h:m:s')
-            ]),
-            Text::make('Note', 'internalNote')
-            ->rules('max:255')
+//            DateTime::make('Created At', 'created_at')->withMeta([
+//                'value' => now()->format('Y-m-d h:m:s')
+//            ]),
+            Date::make('Created At')->format('DD MMM YYYY'),
+            Textarea::make('Note', 'internalNote') -> alwaysShow()
+
+//            Notes::make('Note', 'internalNote')
 
         ];
     }

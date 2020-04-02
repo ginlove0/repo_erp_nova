@@ -16,6 +16,8 @@ use App\Services\Model\ModelService;
 use App\Services\Model\ModelServiceInterface;
 use App\Services\SaleOrder\SaleOrderService;
 use App\Services\SaleOrder\SaleOrderServiceInterface;
+use App\Services\SaleOrderNote\SaleOrderNoteInterface;
+use App\Services\SaleOrderNote\SaleOrderNoteService;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesProvider extends ServiceProvider

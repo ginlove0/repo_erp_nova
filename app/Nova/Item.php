@@ -7,12 +7,15 @@ use App\Nova\Actions\OutStockItem;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
+use Ipsupply\ItemToOutStock\ItemToOutStock;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 
 class Item extends Resource
 {
+
+
 
     public static $group = "Product";
     /**
@@ -70,15 +73,11 @@ class Item extends Resource
             -> hideWhenUpdating(),
 
             BelongsTo::make("Sale Order", 'saleorder')
-            ->hideFromIndex()
-            ->hideFromDetail()
-            ->hideWhenCreating()
-            ->hideWhenUpdating(),
+            ->onlyOnDetail(),
 
             Number::make("Quantity", "quantity"),
 
             Text::make("Location", "location"),
-
 
             BelongsTo::make("Condition", 'conditions'),
 
@@ -89,6 +88,7 @@ class Item extends Resource
 
             Text::make('User', 'addedBy')
             ->onlyOnDetail(),
+
 
 
 
@@ -103,7 +103,8 @@ class Item extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+        ];
     }
 
     /**
@@ -146,4 +147,5 @@ class Item extends Resource
             new OutStockByItem
         ];
     }
+
 }

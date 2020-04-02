@@ -24,7 +24,7 @@ class Item extends Model
 
     public function saleorder(): BelongsTo
     {
-        return $this->belongsTo(SaleOrder::class, 'sale_order_id');
+        return $this->belongsTo(SaleOrder::class, 'sale_order_id', 'id');
     }
 
     public function whlocations() : BelongsTo

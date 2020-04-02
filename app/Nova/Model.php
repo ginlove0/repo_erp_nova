@@ -51,6 +51,8 @@ class Model extends Resource
         'name',
     ];
 
+
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -169,8 +171,7 @@ class Model extends Resource
 
 
 //            ->readonly(),
-            HasMany::make('Item', 'items'),
-
+            HasMany::make('Item', 'items')
 
 
         ];

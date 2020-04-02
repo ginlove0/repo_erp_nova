@@ -3,18 +3,16 @@
 
 namespace App\Models;
 
-use App\Nova\SaleOrderModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Laravel\Nova\Fields\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use OptimistDigital\NovaNotesField\Traits\HasNotes;
 
 class SaleOrder extends Model
 {
 
+    use HasNotes;
     protected $casts = [
         'saleordermodels' => 'array'
     ];
@@ -38,8 +36,6 @@ class SaleOrder extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplierId', 'id');
     }
-
-
 
 
     /**
@@ -123,7 +119,7 @@ public function saleordermodeltype(): HasMany
 
 public function item():HasMany
 {
-    return $this->hasMany(Item::class);
+    return $this->hasMany(Item::class, 'sale_order_id', 'id');
 }
 
 

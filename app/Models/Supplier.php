@@ -14,13 +14,14 @@ class Supplier extends Model
 {
     use SoftDeletes;
 
+
     protected $table = 'supplier';
 
     protected $fillable = ['name','contactType',
         'pricingLevel', 'ipsPolicy',
         'warrantyPolicy', 'ipsTerm',
         'customerTerm', 'VAT',
-        'noteShipping', 'noteReceiving', 'note'];
+        'noteShipping', 'noteReceiving'];
 
     public function items(): HasMany
     {
@@ -42,9 +43,9 @@ class Supplier extends Model
         return $this->hasMany(SupplierAddress::class, "supplierId", "id");
     }
 
-    public function suppliernotes(): HasOne
+    public function suppliernotes(): HasMany
     {
-        return $this->hasOne(SupplierNote::class,"supplierId", "id");
+        return $this->hasMany(SupplierNote::class,"supplierId", "id");
     }
 
     public function supplierpayments(): HasMany

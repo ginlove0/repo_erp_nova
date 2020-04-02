@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Manmohanjit\BelongsToDependency\BelongsToDependency;
+use OptimistDigital\NovaNotesField\NotesField;
 
 
 class SaleOrder extends Resource
@@ -188,9 +189,16 @@ class SaleOrder extends Resource
                 ->onlyOnIndex(),
 
 
-            HasMany::make('saleordermodeltype'),
+            HasMany::make('Sale Order Model Type','saleordermodeltype'),
 
-            HasMany::make('item')
+            HasMany::make('Items', 'item'),
+
+            NotesField::make('Notes')
+            ->placeholder('Add Note')
+            ->onlyOnDetail()
+
+
+
 
 
 
@@ -208,4 +216,7 @@ class SaleOrder extends Resource
             new ShippingChange,
         ];
     }
+
+
+
 }

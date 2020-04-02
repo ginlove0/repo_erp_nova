@@ -4,15 +4,11 @@ namespace App\Nova\Actions;
 
 use App\Models\Item;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
-use Ipsupply\ItemOutStock\ItemOutStock;
 use Ipsupply\ItemToOutStock\ItemToOutStock;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class OutStockItem extends Action
 {

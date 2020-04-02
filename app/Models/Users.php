@@ -6,17 +6,15 @@ namespace App\Models;
 
 
 use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Users extends Model implements  AuthenticatableContract, AuthorizableContract, JWTSubject
+class Users extends Model implements  AuthenticatableContract, AuthorizableContract
 {
 
-    use Authenticatable, Authorizable;
+    use Authenticatable;
 
 
     protected $fillable = ['username','password'];
@@ -45,4 +43,15 @@ class Users extends Model implements  AuthenticatableContract, AuthorizableContr
         return [];
     }
 
+    /**
+     * Determine if the entity has a given ability.
+     *
+     * @param string $ability
+     * @param array|mixed $arguments
+     * @return bool
+     */
+    public function can($ability, $arguments = [])
+    {
+        // TODO: Implement can() method.
+    }
 }
