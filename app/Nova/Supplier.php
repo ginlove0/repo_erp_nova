@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Eminiarts\Tabs\Tabs;
 use Illuminate\Http\Request;
-use Ipsupply\RelationDependanceField\RelationDependanceField;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -77,7 +76,10 @@ class Supplier extends Resource
 
 
 
-            new Tabs('Tabs', [
+            (new Tabs('Tabs', [
+                'Sale Order' => [
+                    HasMany::make('Sale Order', 'saleorders', SaleOrder::class)
+                ],
                 'Representative' => [
                     HasMany::make("Representative", 'representatives'),
                 ],
@@ -96,10 +98,12 @@ class Supplier extends Resource
                 ],
                 'Note' => [
                     HasMany::make('Note', 'suppliernotes', SupplierNote::class)
-                ]
+                ],
 
 
-            ]),
+
+
+            ]))->defaultSearch(true),
 
 
 

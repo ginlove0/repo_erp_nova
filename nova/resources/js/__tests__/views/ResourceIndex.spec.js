@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { createRenderer } from 'vue-server-renderer'
-import Index from '@/views/IndexField.vue'
+import Index from '@/views/Index.vue'
 
 // Create a renderer for snapshot testing
 const renderer = createRenderer()
@@ -20,7 +20,7 @@ const renderer = createRenderer()
 
 // global.Nova = new Nova()
 
-describe('IndexField.vue', () => {
+describe('Index.vue', () => {
   it('renders', () => {
     const wrapper = shallowMount(Index, {
       stubs: ['loading-view', 'cards'],

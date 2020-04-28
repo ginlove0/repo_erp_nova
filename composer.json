@@ -19,19 +19,26 @@
         "ipsupply/checkout-item-resource-tool": "*",
         "ipsupply/creatable-hasmany-relation-field": "*",
         "ipsupply/create-packages-shipping": "*",
+        "ipsupply/delete-items-in-sale-order": "*",
         "ipsupply/item-qty-base-condition": "*",
         "ipsupply/item-to-out-stock": "*",
         "ipsupply/relation-dependance-field": "*",
         "ipsupply/stock-location": "*",
         "laravel/cashier": "^10.6",
-        "laravel/framework": "^6.8",
+        "laravel/framework": "^5.8",
         "laravel/nova": "*",
-        "laravel/passport": "^8.4",
-        "laravel/tinker": "^2.0",
+        "laravel/tinker": "^1.0",
+        "laraveldaily/laravel-invoices": "^1.3",
         "manmohanjit/nova-belongs-to-dependency": "^1.1",
         "optimistdigital/nova-notes-field": "^1.3",
         "orlyapps/nova-belongsto-depend": "^2.0",
-        "tanmuhittin/nova-reload-resources": "dev-master"
+        "tanmuhittin/nova-reload-resources": "dev-master",
+        "ipsupply/update-item-in-stock": "*",
+        "ipsupply/warehouse-transfer-tool": "*",
+        "ipsupply/warehouse-transfer-field": "*",
+        "ipsupply/item-transfer-resource-tool": "*",
+        "ipsupply/create-package-whtransfer": "*",
+        "ipsupply/wh_transfer_item_packed_resource_tool": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.0",
@@ -122,6 +129,34 @@
         {
             "type": "path",
             "url": "./nova-components/ItemToOutStock"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/DeleteItemsInSaleOrder"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/UpdateItemInStock"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/WarehouseTransferTool"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/WarehouseTransferField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ItemTransferResourceTool"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/CreatePackageWhtransfer"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/WhTransferItemPackedResourceTool"
         }
     ]
 }

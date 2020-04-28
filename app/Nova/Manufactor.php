@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 
 class Manufactor extends Resource
@@ -12,6 +13,7 @@ class Manufactor extends Resource
      *
      * @var string
      */
+    public static $group= 'Tools';
     public static $model = 'App\Models\Manufactor';
 
     /**
@@ -39,7 +41,9 @@ class Manufactor extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make("Name")
+            Text::make("Name"),
+
+            HasMany::make('Models')
         ];
     }
 }

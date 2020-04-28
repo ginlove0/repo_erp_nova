@@ -24,7 +24,7 @@ class ItemPolicy
     }
 
     public function delete(){
-        return true;
+        return false;
     }
 
     public function view() {
@@ -32,6 +32,11 @@ class ItemPolicy
     }
 
     public function update() {
+        return true;
+    }
+
+    public function forceDelete()
+    {
         return true;
     }
 

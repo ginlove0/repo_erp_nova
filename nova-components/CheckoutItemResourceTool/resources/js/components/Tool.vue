@@ -1,30 +1,33 @@
 <template>
     <div>
 
-        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Order</h1>
+        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items packed</h1>
         <table class="table w-full">
             <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
+                        <th>Alias Model</th>
+                        <th>SN</th>
                         <th>Condition</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Note</th>
+<!--                        <th>Supplier</th>-->
+                        <th>Status</th>
+                        <th>Wh Location</th>
                         <th></th>
                         <th></th>
-
-
                     </tr>
             </thead>
             <tbody>
                 <tr v-for="order in orders">
-                    <td class="text-center">{{order.id}}</td>
+
                     <td class="text-center">{{order.models.name}}</td>
-                    <td class="text-center">{{order.condition.name}}</td>
-                    <td class="text-center">{{order.qty}}</td>
-                    <td class="text-center">{{order.price}}</td>
-                    <td class="text-center">{{order.note}}</td>
+                    <td class="text-center">{{order.aliasModel}}</td>
+                    <td class="text-center">{{order.serialNumber}}</td>
+                    <td class="text-center">{{order.conditions.name}}</td>
+<!--                    <td class="text-center">{{order.suppliers.name}}</td>-->
+                    <td class="text-center">Not in Stock</td>
+                    <td class="text-center">{{order.whlocations.name}}</td>
+<!--                    <td class="text-center">{{order.price}}</td>-->
+<!--                    <td class="text-center">{{order.note}}</td>-->
 
                     <td>
 
@@ -51,7 +54,7 @@ export default {
 
     data() {
       return {
-          orders: []
+          orders: [],
       }
     },
 
@@ -62,11 +65,16 @@ export default {
 
             axios.get('/nova-vendor/checkout-item-resource-tool/' + saleOrderId)
                 .then((res) => {
-                        // console.log("hellos")
-                        this.orders = res.data
+                        console.log(res.data, 'hello');
+                        this.orders = res.data;
                 })
                 .catch(err => console.log(err))
         },
+
+        reload(){
+
+            location.reload();
+        }
     },
   mounted() {
 
@@ -74,6 +82,10 @@ export default {
         Nova.$on('saleOrderModelRefetch', () => {
             this.fetchSaleOrderModel()
         });
+
+      Nova.$on('reload-page', () => {
+          this.reload()
+      });
 
   },
 }

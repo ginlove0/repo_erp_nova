@@ -1,152 +1,83 @@
-model,category
-8.BOX.0100,Location
-8.BOX.0101,Location
-8.BOX.0102,Location
-8.BOX.0103,Location
-8.BOX.0104,Location
-8.BOX.0105,Location
-8.BOX.0106,Location
-8.BOX.0107,Location
-8.BOX.0108,Location
-8.BOX.0109,Location
-8.BOX.0110,Location
-8.BOX.0111,Location
-8.BOX.0112,Location
-8.BOX.0113,Location
-8.BOX.0114,Location
-8.BOX.0115,Location
-8.BOX.0116,Location
-8.BOX.0117,Location
-8.BOX.0118,Location
-8.BOX.0119,Location
-8.BOX.0120,Location
-8.BOX.0121,Location
-8.BOX.0122,Location
-8.BOX.0123,Location
-8.BOX.0124,Location
-8.BOX.0125,Location
-8.BOX.0126,Location
-8.BOX.0127,Location
-8.BOX.0128,Location
-8.BOX.0129,Location
-8.BOX.0130,Location
-8.BOX.0131,Location
-8.BOX.0132,Location
-8.BOX.0133,Location
-8.BOX.0134,Location
-8.BOX.0135,Location
-8.BOX.0136,Location
-8.BOX.0137,Location
-8.BOX.0138,Location
-8.BOX.0139,Location
-8.BOX.0140,Location
-8.BOX.0141,Location
-8.BOX.0142,Location
-8.BOX.0143,Location
-8.BOX.0144,Location
-8.BOX.0145,Location
-8.BOX.0146,Location
-8.BOX.0147,Location
-8.BOX.0148,Location
-8.BOX.0149,Location
-8.BOX.0150,Location
-8.BOX.0151,Location
-8.BOX.0152,Location
-8.BOX.0153,Location
-8.BOX.0154,Location
-8.BOX.0155,Location
-8.BOX.0156,Location
-8.BOX.0157,Location
-8.BOX.0158,Location
-8.BOX.0159,Location
-8.BOX.0160,Location
-8.BOX.0161,Location
-8.BOX.0162,Location
-8.BOX.0163,Location
-8.BOX.0164,Location
-8.BOX.0165,Location
-8.BOX.0166,Location
-8.BOX.0167,Location
-8.BOX.0168,Location
-8.BOX.0169,Location
-8.BOX.0170,Location
-8.BOX.0171,Location
-8.BOX.0172,Location
-8.BOX.0173,Location
-8.BOX.0174,Location
-8.BOX.0175,Location
-8.BOX.0176,Location
-8.BOX.0177,Location
-8.BOX.0178,Location
-8.BOX.0179,Location
-8.BOX.0180,Location
-8.BOX.0181,Location
-8.BOX.0182,Location
-8.BOX.0183,Location
-8.BOX.0184,Location
-8.BOX.0185,Location
-8.BOX.0186,Location
-8.BOX.0187,Location
-8.BOX.0188,Location
-8.BOX.0189,Location
-8.BOX.0190,Location
-8.BOX.0191,Location
-8.BOX.0192,Location
-8.BOX.0193,Location
-8.BOX.0194,Location
-8.BOX.0195,Location
-8.BOX.0196,Location
-8.BOX.0197,Location
-8.BOX.0198,Location
-8.BOX.0199,Location
-8.BOX.0200,Location
-8.BOX.0201,Location
-8.BOX.0202,Location
-8.BOX.0203,Location
-8.BOX.0204,Location
-8.BOX.0205,Location
-8.BOX.0206,Location
-8.BOX.0207,Location
-8.BOX.0208,Location
-8.BOX.0209,Location
-8.BOX.0210,Location
-8.BOX.0211,Location
-8.BOX.0212,Location
-8.BOX.0213,Location
-8.BOX.0214,Location
-8.BOX.0215,Location
-8.BOX.0216,Location
-8.BOX.0217,Location
-8.BOX.0218,Location
-8.BOX.0219,Location
-8.BOX.0220,Location
-8.BOX.0221,Location
-8.BOX.0222,Location
-8.BOX.0223,Location
-8.BOX.0224,Location
-8.BOX.0225,Location
-8.BOX.0226,Location
-8.BOX.0227,Location
-8.BOX.0228,Location
-8.BOX.0229,Location
-8.BOX.0230,Location
-8.BOX.0231,Location
-8.BOX.0232,Location
-8.BOX.0233,Location
-8.BOX.0234,Location
-8.BOX.0235,Location
-8.BOX.0236,Location
-8.BOX.0237,Location
-8.BOX.0238,Location
-8.BOX.0239,Location
-8.BOX.0240,Location
-8.BOX.0241,Location
-8.BOX.0242,Location
-8.BOX.0243,Location
-8.BOX.0244,Location
-8.BOX.0245,Location
-8.BOX.0246,Location
-8.BOX.0247,Location
-8.BOX.0248,Location
-8.BOX.0249,Location
-8.BOX.0250,Location
+SupplierID,Model,SerialNumber,Condition,SmartNet,Note,ReceivedDate,StockStatus
+39,WS-C3750G-48TS-S#JV#PACK3335,FOC1246Y1V8,USEB,NC,"Wh by Trung,----to Curvature US - PO1198702",6.01E+11,0
+39,AIR-ANT2480V-N=#JV#PACK7052,IPS000065,NOB,NC,"Pack#: Pack3194
+                                                From:   MJ System
+
+                                                [2:46:05 PM] Test01 ips: =============================
+                                                [2:46:06 PM] Test01 ips: (Cisco Controller) show inventory
+
+                                                Burned-in MAC Address............................ DC:EB:94:FE:56:A0
+                                                Maximum number of APs supported.................. 25
+                                                NAME: ""Chassis""    , DESCR: ""Cisco 2500 Series Wireless LAN Controller""
+                                                PID: AIR-CT2504-K9,  VID: V05,  SN: PSZ19221KTW
+
+                                                (Cisco Controller) show sysinfo
+
+                                                Manufacturer's Name.............................. Cisco Systems Inc.
+                                                Product Name..................................... Cisco Controller
+                                                Product Version.................................. 7.6.130.0
+                                                Bootloader Version............................... 1.0.20
+                                                Field Recovery Image Version..................... 7.6.101.1
+                                                Firmware Version................................. PIC 20.0
+
+
+                                                Build Type....................................... DATA + WPS
+
+                                                System Name...................................... Cisco_fe:56:a4
+                                                System Location..................................
+                                                System Contact...................................
+                                                System ObjectID.................................. 1.3.6.1.4.1.9.1.1279
+                                                IP Address....................................... 192.168.1.233
+                                                Last Reset....................................... Software reset
+                                                System Up Time................................... 0 days 0 hrs 5 mins 9 secs
+                                                System Timezone Location.........................
+                                                System Stats Realtime Interval................... 5
+                                                System Stats Normal Interval..................... 180
+
+
+                                                --More-- or (q)uit
+                                                Configured Country............................... AU  - Australia
+                                                Operating Environment............................ Commercial (0 to 40 C)
+                                                Internal Temp Alarm Limits....................... 0 to 65 C
+                                                Internal Temperature............................. +33 C
+                                                External Temperature............................. +36 C
+                                                Fan Status....................................... 3200 rpm
+
+                                                State of 802.11b Network......................... Enabled
+                                                State of 802.11a Network......................... Enabled
+                                                Number of WLANs.................................. 1
+                                                Number of Active Clients......................... 0
+
+                                                Burned-in MAC Address............................ DC:EB:94:FE:56:A0
+                                                Maximum number of APs supported.................. 25
+
+                                                (Cisco Controller) show license all
+
+                                                License Store: Primary License Storage
+                                                StoreIndex:  0  Feature: base                              Version: 1.0
+                                                        License Type: Permanent
+                                                        License State: Active, Not in Use
+                                                        License Count: Non-Counted
+                                                        License Priority: Medium
+                                                License Store: Primary License Storage
+                                                StoreIndex:  1  Feature: base-ap-count                     Version: 1.0
+                                                        License Type: Permanent
+                                                        License State: Inactive
+                                                        License Count: 5 / 0 (Active/In-use)
+                                                        License Priority: Medium
+                                                License Store: Primary License Storage
+                                                StoreIndex:  2  Feature: base-ap-count                     Version: 1.0
+                                                        License Type: Permanent
+                                                        License State: Active, In Use
+                                                        License Count: 25 /25 (Active/In-use)
+                                                        License Priority: Medium
+                                                License Store: Evaluation License Storage
+                                                StoreIndex:  0  Feature: base-ap-count                     Version: 1.0
+                                                        License Type: Evaluation
+
+                                                --More-- or (q)uit
+                                                        License State: Inactive
+                                                            Evaluation total period: 12 weeks  6 days
+                                                            Evaluation period left: 12 weeks  6 days
+                                                        License Count: 75 / 0 (Active/In-use)
+                                                        License Priority: None----to Curvature US - PO1190670",6.01004E+11,0

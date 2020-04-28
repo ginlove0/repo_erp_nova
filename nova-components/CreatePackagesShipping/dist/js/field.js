@@ -1849,6 +1849,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /*
     interface Item {
@@ -1893,7 +1894,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
-            console.log(JSON.stringify(this.orders));
             formData.append(this.field.attribute, JSON.stringify(this.orders));
         }
     },
@@ -30006,7 +30006,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -30020,6 +30020,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OrderCheckItemModel__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OrderCheckItemModel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__OrderCheckItemModel__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_fragment__ = __webpack_require__(39);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -30076,7 +30081,7 @@ var timeout;
             Nova.request().get(url).then(function (res) {
                 if (res && res.data && res.data.length > 0) {
                     var model = res.data[0].ITEM_NAME;
-                    _this.fetchedModel = model;
+                    _this.fetchedModel = res.data[0].ITEM_NAME;
                 } else {
                     _this.fetchedModel = '';
                 }
@@ -30271,6 +30276,15 @@ var render = function() {
           attrs: { placeholder: "Serial Number" },
           domProps: { value: _vm.item.serialNumber },
           on: {
+            keydown: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              $event.preventDefault()
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -30364,7 +30378,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Out Stock Item")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Cisco Check (Modelll)")])
+        _c("th", [_vm._v("Cisco Check (Model)")])
       ])
     ])
   }

@@ -6,7 +6,7 @@
 export default {
     props: ['resourceName', 'field'],
     created() {
-        console.log("Fieldssss", this.field.value)
+        console.log("Fieldssss111", this.field.value)
     }
 }
 </script>

@@ -4,7 +4,7 @@
             <tr>
                 <th>Serial Number Check</th>
                 <th>Out Stock Item</th>
-                <th>Cisco Check (Modelll)</th>
+                <th>Cisco Check (Model)</th>
             </tr>
         </thead>
 

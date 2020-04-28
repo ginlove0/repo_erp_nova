@@ -426,7 +426,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -438,6 +437,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: []
+            // supplier: '',
         };
     },
     setInitialValue: function setInitialValue() {

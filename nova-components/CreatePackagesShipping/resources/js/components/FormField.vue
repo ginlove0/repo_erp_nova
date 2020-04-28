@@ -61,7 +61,6 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            console.log(JSON.stringify(this.orders))
             formData.append(this.field.attribute, JSON.stringify(this.orders));
 
         },

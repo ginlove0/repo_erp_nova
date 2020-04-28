@@ -17,6 +17,6 @@ class ItemController extends Controller
 
     public function findBySN($sn)
     {
-        $this -> itemService -> findBySN($sn);
+        return $this -> itemService -> findBySN($sn);
     }
 }

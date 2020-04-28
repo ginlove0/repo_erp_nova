@@ -30,6 +30,10 @@ interface SaleOrderServiceInterface
 
     public function makeShipping(int $saleOrderId);
 
+    public function findItemsBySaleOrder(int $saleOrderId);
+
+    public function findItemBySN(int $itemId);
+
 
 
 

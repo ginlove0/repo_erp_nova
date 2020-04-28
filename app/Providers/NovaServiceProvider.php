@@ -7,6 +7,7 @@ use App\Services\Model\ModelServiceInterface;
 use ErpIpsupply\Model\Model;
 use Illuminate\Support\Facades\Gate;
 use Ipsupply\StockLocation\StockLocation;
+use Ipsupply\WarehouseTransferTool\WarehouseTransferTool;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -84,6 +85,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             new Model,
             new StockLocation,
+            new WarehouseTransferTool
 
         ];
     }

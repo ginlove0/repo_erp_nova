@@ -38,16 +38,16 @@ class CreatableHasmanyRelationField extends Field
      * @param object $model
      * @param string $attribute
      */
-    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
-    {
-        Log::info("O day");
-        Log::info($request);
-        Log::info($requestAttribute);
-        Log::info($model);
-        Log::info($attribute);
-        Log::info('End');
-
-    }
+//    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
+//    {
+//        Log::info("O day");
+//        Log::info($request);
+//        Log::info($requestAttribute);
+//        Log::info($model);
+//        Log::info($attribute);
+//        Log::info('End');
+//
+//    }
 
 
 

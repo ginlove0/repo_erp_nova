@@ -10,11 +10,11 @@ class OtherModelName extends DBModel
 {
     protected $table = "other_model_name";
 
-    protected $fillable = ["name", 'modelId'];
+    protected $fillable = ["name"];
 
-    public function ditmeloicailon(): BelongsTo
+    public function models()
     {
-        return $this->belongsTo(Model::class, 'modelId');
+        return $this->belongsTo(\App\Models\Model::class, 'modelId');
     }
 
 

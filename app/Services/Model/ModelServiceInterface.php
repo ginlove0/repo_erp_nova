@@ -19,4 +19,6 @@ interface ModelServiceInterface
     public function delete($id): Model;
 
     public function getQtyItemByCond(string $condition, int $id, int $whlocationId);
+
+    public function getQtyItemByTransfer(int $id, int $whlocationId);
 }

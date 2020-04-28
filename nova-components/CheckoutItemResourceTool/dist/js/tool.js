@@ -1130,7 +1130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 Nova.booting(function (Vue, router, store) {
-    console.log('router11', router);
+    console.log('router', router);
     Vue.component('checkout-item-resource-tool', __webpack_require__(38));
 });
 
@@ -1169,7 +1169,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1545,10 +1545,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         deleteSaleOrderModel: function deleteSaleOrderModel(id) {
             // /nova-api/sale-order-models?search=&filters=W10%3D&trashed=&viaResource=sale-orders&viaResourceId=4&viaRelationship=saleordermodels&resources[]=12
-            var saleOrderModelResource = 'sale-order-models';
-            var viaRelationship = 'saleordermodels';
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete("/nova-api/" + saleOrderModelResource + "?&trashed=&viaResource=" + this.resourceName + "&viaResourceId=" + this.resourceId + "&viaRelationship=" + viaRelationship + "&resources[]=" + id).then(function () {
-                Nova.$emit('saleOrderModelRefetch');
+            // const saleOrderModelResource = 'sale-order-model-types';
+            // const viaRelationship = 'saleordermodeltype';
+            // axios.delete(`/nova-api/${saleOrderModelResource}?&trashed=&viaResource=${this.resourceName}&viaResourceId=${this.resourceId}&viaRelationship=${viaRelationship}&resources[]=${id}`)
+            //     .then(() => {
+            //         Nova.$emit('saleOrderModelRefetch');
+            //     })
+            //     .catch((err) => {
+            //         console.log(err)
+            //     })
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/nova-vendor/checkout-item-resource-tool/findItem/' + id + '/' + this.resourceId).then(function (res) {
+                Nova.$emit('reload-page');
             }).catch(function (err) {
                 console.log(err);
             });
@@ -2698,6 +2705,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2719,11 +2729,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var saleOrderId = this.resourceId;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/nova-vendor/checkout-item-resource-tool/' + saleOrderId).then(function (res) {
-                // console.log("hellos")
+                console.log(res.data, 'hello');
                 _this.orders = res.data;
             }).catch(function (err) {
                 return console.log(err);
             });
+        },
+        reload: function reload() {
+
+            location.reload();
         }
     },
     mounted: function mounted() {
@@ -2732,6 +2746,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.fetchSaleOrderModel();
         Nova.$on('saleOrderModelRefetch', function () {
             _this2.fetchSaleOrderModel();
+        });
+
+        Nova.$on('reload-page', function () {
+            _this2.reload();
         });
     }
 });
@@ -2746,7 +2764,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h1", { staticClass: "flex-no-shrink text-90 font-normal text-2xl" }, [
-      _vm._v("Order")
+      _vm._v("Items packed")
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table w-full" }, [
@@ -2757,27 +2775,25 @@ var render = function() {
         _vm._l(_vm.orders, function(order) {
           return _c("tr", [
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.id))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
               _vm._v(_vm._s(order.models.name))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.condition.name))
+              _vm._v(_vm._s(order.aliasModel))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.qty))
+              _vm._v(_vm._s(order.serialNumber))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.price))
+              _vm._v(_vm._s(order.conditions.name))
             ]),
             _vm._v(" "),
+            _c("td", { staticClass: "text-center" }, [_vm._v("Not in Stock")]),
+            _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.note))
+              _vm._v(_vm._s(order.whlocations.name))
             ]),
             _vm._v(" "),
             _c(
@@ -2807,17 +2823,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Alias Model")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("SN")]),
         _vm._v(" "),
         _c("th", [_vm._v("Condition")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Quantity")]),
+        _c("th", [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Note")]),
+        _c("th", [_vm._v("Wh Location")]),
         _vm._v(" "),
         _c("th"),
         _vm._v(" "),

@@ -18,16 +18,26 @@
         methods: {
             deleteSaleOrderModel(id) {
                 // /nova-api/sale-order-models?search=&filters=W10%3D&trashed=&viaResource=sale-orders&viaResourceId=4&viaRelationship=saleordermodels&resources[]=12
-                const saleOrderModelResource = 'sale-order-models';
-                const viaRelationship = 'saleordermodels';
-                axios.delete(`/nova-api/${saleOrderModelResource}?&trashed=&viaResource=${this.resourceName}&viaResourceId=${this.resourceId}&viaRelationship=${viaRelationship}&resources[]=${id}`)
-                    .then(() => {
-                        Nova.$emit('saleOrderModelRefetch');
+                // const saleOrderModelResource = 'sale-order-model-types';
+                // const viaRelationship = 'saleordermodeltype';
+                // axios.delete(`/nova-api/${saleOrderModelResource}?&trashed=&viaResource=${this.resourceName}&viaResourceId=${this.resourceId}&viaRelationship=${viaRelationship}&resources[]=${id}`)
+                //     .then(() => {
+                //         Nova.$emit('saleOrderModelRefetch');
+                //     })
+                //     .catch((err) => {
+                //         console.log(err)
+                //     })
+                axios.get('/nova-vendor/checkout-item-resource-tool/findItem/' + id+ '/' + this.resourceId)
+                    .then((res) => {
+                        Nova.$emit('reload-page');
+
                     })
                     .catch((err) => {
                         console.log(err)
                     })
-            }
+            },
+
+
         }
     }
 </script>

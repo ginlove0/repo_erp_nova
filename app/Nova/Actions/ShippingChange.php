@@ -6,6 +6,7 @@ use App\Models\Item;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Ipsupply\CreatePackagesShipping\CreatePackagesShipping;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
@@ -28,6 +29,7 @@ class ShippingChange extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         //array nay de luu so serial number input
+
 
         $sumCountItem = 0;
 

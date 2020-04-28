@@ -44,10 +44,10 @@ class SaleOrderModelType extends Resource
     public function fields(Request $request)
     {
         return [
-            MorphTo::make('Type', 'sale_model')->types([
+            MorphTo::make('Model', 'sale_model')->types([
                 EbayModel::class,
                 Model::class
-            ]),
+            ]) -> searchable(),
             BelongsTo::make('SaleOrder'),
             BelongsTo::make('Condition'),
             Number::make('Quantity', 'qty')

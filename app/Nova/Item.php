@@ -4,13 +4,18 @@ namespace App\Nova;
 
 use App\Nova\Actions\OutStockByItem;
 use App\Nova\Actions\OutStockItem;
+use App\Nova\Actions\UpdateItemInstock;
+use App\Nova\Actions\WarehouseTransfer;
+use App\Nova\Actions\WarehouseTransferSydney;
+use App\Nova\Filters\ItemConditionFilter;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
-use Ipsupply\ItemToOutStock\ItemToOutStock;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use mysql_xdevapi\Table;
 
 class Item extends Resource
 {
@@ -31,14 +36,21 @@ class Item extends Resource
      * @var string
      */
     public static $title = 'serialNumber';
+
+    public function subtitle() {
+
+        return "Model: {$this->models->name}" .  " Condition: {$this->conditions->name}" . " WhLocation: {$this->whlocations->name}";
+    }
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'serialNumber', 'conditionId', 'modelId', 'supplierId'
+        'serialNumber', 'aliasModel'
     ];
+
+    public static $trafficCop = false;
 
     /**
      * Get the fields displayed by the resource.
@@ -54,8 +66,11 @@ class Item extends Resource
             BelongsTo::make("Model", 'models')
                 ->searchable(),
 
+
+            Text::make("Alias Model", "aliasModel"),
+
             Text::make("SN", "serialNumber")
-            ->hideWhenUpdating()
+
             ->hideWhenCreating(),
 
             BelongsTo::make("Supplier", "suppliers")
@@ -70,21 +85,40 @@ class Item extends Resource
                 }
             })
             -> hideWhenCreating()
-            -> hideWhenUpdating(),
+            -> hideWhenUpdating()
+                ->sortable(),
+
+            Date::make('Created At', 'created_at')
+                -> hideWhenCreating()
+                ->hideWhenUpdating()
+            ->sortable(),
+
+//            Text::make('Created At', 'created_at')->displayUsing(function ($value) {
+//                return str_limit($value, '10');
+//            })
+//                -> hideWhenCreating()
+//                ->hideWhenUpdating(),
 
             BelongsTo::make("Sale Order", 'saleorder')
             ->onlyOnDetail(),
 
-            Number::make("Quantity", "quantity"),
-
-            Text::make("Location", "location"),
-
-            BelongsTo::make("Condition", 'conditions'),
-
-            BelongsTo::make("WHLocation", 'whlocations'),
-
-            Text::make('Note', 'note')
+            Number::make("Quantity", "quantity")
             ->hideFromIndex(),
+
+            Text::make("Location", "location")
+                ->sortable(),
+
+            BelongsTo::make("Condition", 'conditions')
+                ->sortable(),
+
+            BelongsTo::make("WHLocation", 'whlocations')
+                ->sortable(),
+
+            Text::make('Note', 'note')->displayUsing(function ($value) {
+                return str_limit($value, '15', '...');
+            }) -> onlyOnIndex(),
+
+            Text::make('Note', 'note') -> hideFromIndex(),
 
             Text::make('User', 'addedBy')
             ->onlyOnDetail(),
@@ -94,6 +128,8 @@ class Item extends Resource
 
         ];
     }
+
+
 
     /**
      * Get the cards available for the request.
@@ -118,6 +154,7 @@ class Item extends Resource
         return [
             new ItemStockType,
             new ItemLocation,
+            new ItemConditionFilter
 
 
         ];
@@ -144,7 +181,9 @@ class Item extends Resource
     {
         return [
             new OutStockItem,
-            new OutStockByItem
+            new UpdateItemInstock,
+            new WarehouseTransfer,
+            new WarehouseTransferSydney,
         ];
     }
 

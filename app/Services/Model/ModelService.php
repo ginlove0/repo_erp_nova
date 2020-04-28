@@ -8,6 +8,7 @@ namespace App\Services\Model;
 
 use App\Models\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ModelService implements ModelServiceInterface
 {
@@ -58,5 +59,23 @@ class ModelService implements ModelServiceInterface
 
         return $data;
         // TODO: Implement getQtyItemByCond() method.
+    }
+
+    public function getQtyItemByTransfer(int $id, int $whlocationId)
+    {
+        $data = DB::select("
+            select sum(quantity) as QTY
+            from item
+            where item.modelId = (select id from `model` WHERE id = ? limit 1)
+            and item.whlocationId = (select id from `whlocation` WHERE id =? limit 1)
+            and item.stockStatus = true
+        ", [
+            $id,
+            $whlocationId,
+        ]);
+
+        return $data;
+
+        // TODO: Implement getQtyItemByTransfer() method.
     }
 }

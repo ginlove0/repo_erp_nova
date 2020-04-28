@@ -3,12 +3,13 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 
 class Category extends Resource
 {
 
-    public static $group = "Other";
+    public static $group = "Tools";
     /**
      * The model the resource corresponds to.
      *
@@ -41,7 +42,9 @@ class Category extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make("Name")
+            Text::make("Name"),
+
+            HasMany::make('Models')
 
 
         ];

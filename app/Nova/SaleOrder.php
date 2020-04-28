@@ -3,11 +3,14 @@
 namespace App\Nova;
 
 
+use App\Nova\Actions\CreateInvoiceSaleOrder;
+use App\Nova\Actions\DeleteItemInSaleOrder;
 use App\Nova\Actions\ShippingChange;
 use App\Nova\Actions\StatusChangeAction;
 use Illuminate\Http\Request;
 use Inspheric\Fields\Indicator;
 use Inspheric\Fields\Url;
+use Ipsupply\CheckoutItemResourceTool\CheckoutItemResourceTool;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -42,9 +45,9 @@ class SaleOrder extends Resource
      *
      * @var array
      */
-    public static $search = [
-        'id',
-    ];
+//    public static $search = [
+//        'id',
+//    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -70,19 +73,22 @@ class SaleOrder extends Resource
 
             BelongsToDependency::make('Billing Address', 'billingaddresses', SupplierAddress::class)
                 ->dependsOn('supplier', 'supplierId')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->required(false),
 
-            BelongsToDependency::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
+            BelongsToDependency::make('Shipping Address', 'billingaddresses', SupplierAddress::class)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex(),
 
             BelongsToDependency::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
                 ->dependsOn('supplier', 'supplierId')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->required(false),
 
             BelongsToDependency::make('Tracking Email', 'suppliertrackingemails', SupplierEmail::class)
                 ->dependsOn('supplier', 'supplierId')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->required(false),
 
 
 
@@ -191,7 +197,9 @@ class SaleOrder extends Resource
 
             HasMany::make('Sale Order Model Type','saleordermodeltype'),
 
-            HasMany::make('Items', 'item'),
+            CheckoutItemResourceTool::make('SaleOrderModelType'),
+
+//            HasMany::make('Items', 'item'),
 
             NotesField::make('Notes')
             ->placeholder('Add Note')
@@ -214,6 +222,8 @@ class SaleOrder extends Resource
         return [
             new StatusChangeAction,
             new ShippingChange,
+            new DeleteItemInSaleOrder,
+            new CreateInvoiceSaleOrder
         ];
     }
 

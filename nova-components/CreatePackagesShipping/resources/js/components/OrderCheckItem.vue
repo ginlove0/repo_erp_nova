@@ -5,7 +5,7 @@
                 placeholder="Serial Number"
                 class="w-full form-control form-input form-input-bordered"
                 v-model="item.serialNumber"
-                @submit.prevent
+                v-on:keydown.enter.prevent
             />
 
         </td>
@@ -64,7 +64,7 @@
                     .then((res) => {
                         if(res && res.data && res.data.length > 0) {
                             const model = res.data[0].ITEM_NAME;
-                            this.fetchedModel = model
+                            this.fetchedModel = res.data[0].ITEM_NAME
                         } else {
                             this.fetchedModel = ''
                         }

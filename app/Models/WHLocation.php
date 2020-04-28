@@ -27,4 +27,6 @@ class WHLocation extends Model
     {
         return $this->hasMany(SaleOrder::class, 'whlocation_id');
     }
+
+
 }

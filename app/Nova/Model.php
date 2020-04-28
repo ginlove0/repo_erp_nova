@@ -2,13 +2,16 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ModelHaveItemFilter;
 use App\Services\Model\ModelService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
 class Model extends Resource
 {
@@ -42,14 +45,19 @@ class Model extends Resource
      */
     public static $title = 'name';
 
+
+
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'name',
+        'name', 'shortDescription'
     ];
+
+    public static $perPageOptions = [10, 25, 50];
+
 
 
 
@@ -65,8 +73,19 @@ class Model extends Resource
 
 
 
-            Text::make("Name")
-                ->rules('unique:model'),
+//            Text::make("Name", function($data){
+////                Log::info($data);
+//                $items = \App\Models\Item::where('modelId', $data -> id)->get();
+////                Log::info($items);
+//                foreach ($items as $item){
+//                    if($item -> stockStatus == 1){
+//                        return $data -> name;
+//                    }
+//                }
+//                return $data -> name;
+//            })
+//                ->rules('unique:model'),
+            Text::make("Name")->sortable(),
 
             Select::make('Has Serial', 'hasSerial')
                 ->options([
@@ -76,96 +95,122 @@ class Model extends Resource
                 ->hideFromIndex(),
 
             BelongsTo::make('Manufactor', 'manufactors')
-                ->searchable()
-                ->hideFromIndex(),
+                ->nullable()
+                ->searchable(),
 
             BelongsTo::make('Category', "categories")
                 ->nullable()
                 ->searchable()
                 ->hideFromIndex(),
 
+            Text::make('Short Description', 'shortDescription')
+            -> hideFromIndex(),
+
+            Textarea::make('Long Description', 'longDescription')
+            ->hideFromIndex(),
+
 
             HasMany::make( 'OtherModelNames')
                 ->hideFromIndex(),
 
+            ItemQtyBaseCondition::make("Incomming AU", "id", function ($data){
+                $qty = $this->modelService->getQtyItemByTransfer($data, 4);
+                return $qty[0]->QTY;
+            })->onlyOnIndex()
+                ->sortable(),
+
 
             ItemQtyBaseCondition::make("AU:NIB", "id", function ($data) {
+
+
                 $qty = $this->modelService->getQtyItemByCond("NIB", $data, 1);
 //                if($qty[0]->QTY <= 0)
-//                    return $qty[0]->QTY = 0;
+//                    return $qty[0]->QTY = null;
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("AU:NOB", "id", function ($data) use ($request) {
-//                $request->user();
-
-
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 1);
 
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("AU:USEA", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 1);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("AU:USEB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEB", $data, 1);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
 
             ItemQtyBaseCondition::make("AU:USEC", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEC", $data, 1);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("AU:PART", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("PART", $data, 1);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
 
 
 
 
 
+            ItemQtyBaseCondition::make("Incomming US", "id", function ($data){
+                $qty = $this->modelService->getQtyItemByTransfer($data, 3);
 
+                return $qty[0]->QTY;
+            })->onlyOnIndex()
+                ->sortable(),
 
 
             ItemQtyBaseCondition::make("US:NIB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("NIB", $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("US:NOB", "id", function ($data) use ($request) {
-//                $request->user();
-
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("US:USEA", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
-            ItemQtyBaseCondition::make("US:USEDB", "id", function ($data) {
+            ItemQtyBaseCondition::make("US:USEB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEB", $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
 
             ItemQtyBaseCondition::make("US:USEC", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEC", $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
             ItemQtyBaseCondition::make("US:PART", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("PART", $data, 2);
                 return $qty[0]->QTY;
-            })->onlyOnIndex(),
+            })->onlyOnIndex()
+                ->sortable(),
 
 
 
@@ -176,5 +221,13 @@ class Model extends Resource
 
         ];
     }
+
+    public function filters(Request $request)
+    {
+        return[
+            new ModelHaveItemFilter,
+        ];
+    }
+
 
 }

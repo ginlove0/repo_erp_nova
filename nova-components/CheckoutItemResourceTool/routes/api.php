@@ -14,4 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- Route::get('/{id}', \Ipsupply\CheckoutItemResourceTool\Http\Controllers\SaleOrderController::class . '@index');
+// Route::get('/{id}', \Ipsupply\CheckoutItemResourceTool\Http\Controllers\SaleOrderController::class . '@index');
+
+ Route::get('/{id}', \Ipsupply\CheckoutItemResourceTool\Http\Controllers\SaleOrderController::class. '@show');
+
+ Route::get('/findItem/{id}/{saleorderId}', \Ipsupply\CheckoutItemResourceTool\Http\Controllers\SaleOrderController::class . '@findItem');
+
+

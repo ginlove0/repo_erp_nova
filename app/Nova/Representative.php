@@ -47,7 +47,8 @@ class Representative extends Resource
     public function fields(Request $request)
     {
         return [
-            BelongsTo::make('Supplier', "suppliers"),
+            BelongsTo::make('Supplier', 'suppliers')
+            ->searchable(),
 
 
             Select::make('Salutation')->options([

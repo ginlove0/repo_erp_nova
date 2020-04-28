@@ -42,7 +42,8 @@ class Condition extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make('Name')
+
+            Text::make('Name'),
         ];
     }
 }

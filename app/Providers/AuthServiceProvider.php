@@ -4,10 +4,12 @@ namespace App\Providers;
 
 
 use App\Models\Item;
+use App\Models\Model;
 use App\Models\SaleOrderModels;
 use App\Models\SaleOrderModelType;
 use App\Models\SaleOrderNote;
 use App\Policies\ItemPolicy;
+use App\Policies\ModelPolicy;
 use App\Policies\SaleOrderModelsPolicy;
 use App\Policies\SaleOrderModelTypePolicy;
 use App\Policies\SaleOrderNotePolicy;
@@ -25,7 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
 //        SaleOrderModels::class => SaleOrderModelsPolicy::class
 
-//        Item::class => ItemPolicy::class,
+        Item::class => ItemPolicy::class,
+        Model::class => ModelPolicy::class,
 //        SaleOrderModelType::class => SaleOrderModelTypePolicy::class
 
 

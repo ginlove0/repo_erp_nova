@@ -6,6 +6,7 @@ use App\Models\Item;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Ipsupply\ItemToOutStock\ItemToOutStock;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
@@ -14,7 +15,7 @@ class OutStockItem extends Action
 {
     use InteractsWithQueue, Queueable;
 
-    public $name = "List Item Out Stock";
+    public $name = "Make a list item out-stock";
 
     public $onlyOnDetail = true;
 
@@ -29,7 +30,7 @@ class OutStockItem extends Action
     {
 
         //
-        $myArrs = explode(',', $fields->item);
+        $myArrs = explode(',', $fields->items_to_out_stock);
         foreach ($myArrs as $myArr){
             $removeTrim = trim($myArr);
 
@@ -54,7 +55,7 @@ class OutStockItem extends Action
     public function fields()
     {
         return [
-            ItemToOutStock::make('Item')
+            ItemToOutStock::make('Items to out stock')
         ];
     }
 }
