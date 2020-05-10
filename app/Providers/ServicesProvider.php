@@ -16,6 +16,8 @@ use App\Services\Model\ModelService;
 use App\Services\Model\ModelServiceInterface;
 use App\Services\SaleOrder\SaleOrderService;
 use App\Services\SaleOrder\SaleOrderServiceInterface;
+use App\Services\Supplier\SupplierService;
+use App\Services\Supplier\SupplierServiceInterface;
 use App\Services\WhTransfer\WhTransferService;
 use App\Services\WhTransfer\WhTransferServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +39,7 @@ class ServicesProvider extends ServiceProvider
         $this->saleOrderService();
         $this->conditionService();
         $this->whTransferService();
+        $this->supplierService();
     }
 
     public function modelService()
@@ -95,6 +98,14 @@ class ServicesProvider extends ServiceProvider
         $this->app->bind(
             WhTransferServiceInterface::class,
             WhTransferService::class
+        );
+    }
+
+    public function supplierService()
+    {
+        $this->app->bind(
+            SupplierServiceInterface::class,
+            SupplierService::class
         );
     }
 }

@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     //
 // });
 
-Route::get('/findItemWithSN/{id}/{note}/{location}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class . '@index')
- ->name('admin.whtransfer');
 
-Route::get('/{sn}', \App\Http\Controllers\ItemController::class.'@findBySN');
+Route::get('/addItem/{sn}/{conditionId}/{whlocationId}/{supplierName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class.'@index');
+
+Route::get('/addItemNoCondition/{sn}/{whlocationId}/{supplierName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class.'@addItemNoCondition');
+
+Route::get('findSupplier', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@show');

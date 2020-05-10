@@ -7,6 +7,7 @@ use App\Services\Model\ModelService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
+use Ipsupply\ItemTransferQtyBaseModel\ItemTransferQtyBaseModel;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Select;
@@ -85,7 +86,10 @@ class Model extends Resource
 //                return $data -> name;
 //            })
 //                ->rules('unique:model'),
-            Text::make("Name")->sortable(),
+            Text::make("Name")->sortable()
+                ->displayUsing(function ($value) {
+                    return str_limit($value, '20', '...');
+                }),
 
             Select::make('Has Serial', 'hasSerial')
                 ->options([
@@ -113,7 +117,7 @@ class Model extends Resource
             HasMany::make( 'OtherModelNames')
                 ->hideFromIndex(),
 
-            ItemQtyBaseCondition::make("Incomming AU", "id", function ($data){
+            ItemTransferQtyBaseModel::make("Incomming AU", "id", function ($data){
                 $qty = $this->modelService->getQtyItemByTransfer($data, 4);
                 return $qty[0]->QTY;
             })->onlyOnIndex()
@@ -167,7 +171,7 @@ class Model extends Resource
 
 
 
-            ItemQtyBaseCondition::make("Incomming US", "id", function ($data){
+            ItemTransferQtyBaseModel::make("Incomming US", "id", function ($data){
                 $qty = $this->modelService->getQtyItemByTransfer($data, 3);
 
                 return $qty[0]->QTY;

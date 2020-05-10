@@ -11,7 +11,7 @@ class SaleOrderModelType extends Model
     //
     protected $table = 'sale_order_model_type';
 
-    protected $fillable = ['sale_model_type', 'sale_model_id', 'sale_order_id', 'conditionId', 'qty', 'price', 'note', 'shipped'];
+    protected $fillable = ['sale_model_type', 'sale_model_id', 'sale_order_id', 'conditionId', 'qty', 'price', 'note'];
 
     public function sale_model(): MorphTo
     {

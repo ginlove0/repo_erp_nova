@@ -1,15 +1,7 @@
 <template>
     <default-field :field="field" :errors="errors">
         <template slot="field">
-                <textarea
-                    :style="styling"
-                    :id="field.name"
-                    type="text"
-                    class="w-full form-control form-input form-input-bordered"
-                    :class="errorClasses"
-                    :placeholder="field.name"
-                    v-model="value"
-                ></textarea>
+                <a href="Google.com.au">Click Me</a>
         </template>
     </default-field>
 </template>
@@ -22,30 +14,16 @@
 
         props: ['resourceName', 'resourceId', 'field'],
 
-        data(){
-            return {
-                items: [],
-                // supplier: '',
-            }
-
-        },
-
-
-        setInitialValue() {
-            this.value = this.items
-        },
 
 
         methods: {
-
-
 
             /**
              * Fill the given FormData object with the field's internal value.
              */
             fill(formData) {
 
-                formData.append(this.field.attribute, this.value.split('\n') || this.value.split(','))
+                formData.append(this.field.attribute, this.value || ' ')
             },
 
             /**

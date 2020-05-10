@@ -14,6 +14,8 @@ class SaleOrderModelType extends Resource
      *
      * @var string
      */
+    public static $displayInNavigation = false;
+
     public static $model = 'App\Models\SaleOrderModelType';
 
 

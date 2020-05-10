@@ -247,12 +247,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resourceName', 'field'],
-    created: function created() {
-        console.log("Fieldssss", this.field.value);
-    }
+    props: ['resourceName', 'field']
 });
 
 /***/ }),
@@ -263,7 +263,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [_vm._v(_vm._s(_vm.field.value))])
+  return _c("div", { staticClass: "font-bold" }, [
+    _c("p", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.field.value))])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3865,12 +3867,15 @@ exports.default = {
     fieldAttribute: function fieldAttribute() {
       return this.field.attribute;
     },
+    validationKey: function validationKey() {
+      return this.field.validationKey;
+    },
     hasError: function hasError() {
-      return this.errors.has(this.fieldAttribute);
+      return this.errors.has(this.validationKey);
     },
     firstError: function firstError() {
       if (this.hasError) {
-        return this.errors.first(this.fieldAttribute);
+        return this.errors.first(this.validationKey);
       }
     }
   }

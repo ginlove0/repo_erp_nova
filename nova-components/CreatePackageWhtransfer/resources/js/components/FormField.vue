@@ -34,7 +34,7 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.attribute, this.value.split('\n') || this.value.split(','))
+            formData.append(this.field.attribute, this.value.split('\n') || this.value.split(',') )
         },
 
         /**

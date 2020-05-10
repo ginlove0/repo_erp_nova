@@ -25,7 +25,8 @@ class SaleOrder extends Model
         "shippingAddressId",	"shippingMethod",
         "discount", "shipping_charge",
         "shipping_method", "sender_id", "supplierInvoiceEmailId",
-        "supplierTrackingEmailId", "required_date", "whlocation_id", "linkEbay", "itemPackedId"];
+        "supplierTrackingEmailId", "required_date", "whlocation_id",
+        "linkEbay", "itemPackedId", "purchase_order_pdf", "attachment", "attachment_name", "attachment_size"];
 
     use SoftDeletes;
 
@@ -108,15 +109,11 @@ class SaleOrder extends Model
      * Get all the model included in the sale order.
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-//    public function saleordermodels(): HasMany
-//    {
-//       return $this->hasMany(SaleOrderModels::class, "sale_order_id");
-//    }
+    public function sale_order_item():HasMany
+    {
+        return $this->hasMany(SaleOrderItem::class,'sale_order_id');
+    }
 
-public function saleordermodeltype(): HasMany
-{
-    return $this->hasMany(SaleOrderModelType::class);
-}
 
 public function item():HasMany
 {

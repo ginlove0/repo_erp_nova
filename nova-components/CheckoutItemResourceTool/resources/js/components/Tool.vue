@@ -9,7 +9,6 @@
                         <th>Alias Model</th>
                         <th>SN</th>
                         <th>Condition</th>
-<!--                        <th>Supplier</th>-->
                         <th>Status</th>
                         <th>Wh Location</th>
                         <th></th>
@@ -20,12 +19,11 @@
                 <tr v-for="order in orders">
 
                     <td class="text-center">{{order.models.name}}</td>
-                    <td class="text-center">{{order.aliasModel}}</td>
-                    <td class="text-center">{{order.serialNumber}}</td>
+                    <td class="text-center">{{order.items.aliasModel}}</td>
+                    <td class="text-center">{{order.items.serialNumber}}</td>
                     <td class="text-center">{{order.conditions.name}}</td>
-<!--                    <td class="text-center">{{order.suppliers.name}}</td>-->
                     <td class="text-center">Not in Stock</td>
-                    <td class="text-center">{{order.whlocations.name}}</td>
+                    <td class="text-center">{{order.whlocation.name}}</td>
 <!--                    <td class="text-center">{{order.price}}</td>-->
 <!--                    <td class="text-center">{{order.note}}</td>-->
 
@@ -34,7 +32,7 @@
                         <DeleteAction
                                 :resourceName="resourceName"
                                 :resourceId="resourceId"
-                                :id="order.id" />
+                                :id="order.item_id" />
 
                     </td>
 
@@ -71,7 +69,7 @@ export default {
                 .catch(err => console.log(err))
         },
 
-        reload(){
+        reload() {
 
             location.reload();
         }

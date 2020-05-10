@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Text;
 
 class EbayModel extends Resource
 {
+    public static $displayInNavigation = false;
     /**
      * The model the resource corresponds to.
      *

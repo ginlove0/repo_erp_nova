@@ -58,7 +58,7 @@ class DeleteItemInSaleOrder extends Action
                         $newItem->sale_order_id = null;
                         $newItem->save();
 
-                        $updateSaleOrderModelType = \App\Models\SaleOrderModelType::where('id', $getItem -> id)->first();
+                        $updateSaleOrderModelType = \App\Models\SaleOrderItem::where('id', $getItem -> id)->first();
 
                         if($updateSaleOrderModelType){
                             $updateSaleOrderModelType -> qty = $updateSaleOrderModelType -> qty + count($serialInputArray);

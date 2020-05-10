@@ -25,8 +25,6 @@ class ChangeStatusWhTransfer extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        Log::info($fields);
-        Log::info($models);
         //
         foreach ($models as $model)
         {

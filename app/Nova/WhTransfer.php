@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use OptimistDigital\NovaNotesField\NotesField;
 
 class WhTransfer extends Resource
 {
@@ -86,7 +87,11 @@ class WhTransfer extends Resource
             ->hideWhenUpdating()
             ->hideWhenCreating(),
 
-//            ItemTransferResourceTool::make('Model'),
+            NotesField::make('Notes')
+                ->placeholder('Add Note')
+                ->onlyOnDetail(),
+
+            ItemTransferResourceTool::make('Model'),
 
             HasMany::make('Wh Transfer Model', 'whtransfermodel'),
 

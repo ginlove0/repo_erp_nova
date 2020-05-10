@@ -3,6 +3,7 @@
 namespace App\Nova\Actions;
 
 use App\Models\Item;
+use App\Models\WhTransferModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -26,18 +27,12 @@ class CreatePackageTransfer extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-
-        Log::info($models);
+        Log::info($fields);
+        $notInstockArray = [];
+        $inTransferArray = [];
         $myArrs = explode(',', $fields->transfer_items);
         foreach ($models as $model)
         {
-//            if($model -> whTransferLocationId === 1)
-//            {
-//                $whlocationtransfer = 3;
-//            }else
-//            {
-//                $whlocationtransfer = 4;
-//            }
             foreach($myArrs as $myArr){
 
                 if($myArr){
@@ -45,28 +40,37 @@ class CreatePackageTransfer extends Action
 
                     $getItem = Item::where('serialNumber', $removeTrim) -> first();
 
-                    if($getItem -> wh_transfer_id)
-                    {
-                        $getItem -> wh_transfer_id = null;
+                    if($getItem && $getItem -> stockStatus == true){
+                        if($getItem -> wh_transfer_id)
+                        {
+                            $getItem -> wh_transfer_id = null;
+                        }
+
+                        if($getItem -> whlocationId === 3 || $getItem -> whlocationId === 4)
+                        {
+                            $getItem -> wh_transfer_id = $model -> id;
+                            $getItem -> save();
+                        }else{
+                            array_push($inTransferArray, $getItem->serialNumber);
+                        }
+                    }else{
+                        array_push($notInstockArray, $removeTrim);
                     }
 
-                    if($getItem && $getItem -> whlocationId != 3 && $getItem -> whlocationId != 4 && $getItem -> stockStatus == true)
-                    {
-//                        $getItem -> whlocationId = $whlocationtransfer;
-                        $getItem -> wh_transfer_id = $model -> id;
-                        $getItem -> save();
-                    }
-                    if($getItem && $getItem -> whlocationId === 3 || $getItem -> whlocationId === 4)
-                    {
-                        return Action::danger('This item '. $getItem->serialNumber.' in transferring! Please check again!');
-                    }
-                    if($getItem && $getItem -> whlocationId != 3 && $getItem -> whlocationId != 4 && $getItem -> stockStatus == false)
-                    {
-                        return Action::danger('This item ' . $getItem -> stockStatus . ' not in stock. Please check again!');
-                    }
+
 
                 }
             }
+
+        }
+        if($inTransferArray)
+        {
+            return Action::danger('This item '. implode(',', $inTransferArray). ' in transferring! Please check again!');
+        }
+        if($notInstockArray)
+        {
+            return Action::danger('This item ' . implode(',', $notInstockArray) .' not in stock. Please check again!');
+
         }
 
     }

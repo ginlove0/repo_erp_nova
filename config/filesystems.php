@@ -64,6 +64,13 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'pdf' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/pdf'),
+            'url' => env('APP_URL').'/storage/pdf',
+            'visibility' => 'public',
+        ]
+
     ],
 
 ];

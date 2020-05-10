@@ -98,4 +98,11 @@ class ItemService implements ItemServiceInterface
 
         return $item;
     }
+
+    public function findBySNwithOther(string $sn)
+    {
+        $item = Item::where('serialNumber', $sn) -> with('whlocations', 'suppliers', 'models', 'conditions') -> get();
+        return $item;
+        // TODO: Implement findBySNwithOther() method.
+    }
 }

@@ -62,13 +62,18 @@ class Model extends DBModel
      */
 //    public function saleordermodels(): HasMany
 //    {
-//        return $this->hasMany(SaleOrderModels::class, 'modelId');
+//        return $this->hasMany(SaleOrderModel::class, 'modelId');
 //    }
 
-    public function saleordermodeltype()
+    public function sale_order_item():HasMany
     {
-        return $this->morphMany(SaleOrderModelType::class, 'sale_model');
+        return $this->hasMany(SaleOrderItem::class,'modelId');
     }
+
+//    public function saleordermodeltype()
+//    {
+//        return $this->morphMany(SaleOrderModelType::class, 'sale_model');
+//    }
 
 
     public static function insertData($data){

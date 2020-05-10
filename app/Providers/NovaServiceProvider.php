@@ -6,6 +6,9 @@ use App\Services\Model\ModelService;
 use App\Services\Model\ModelServiceInterface;
 use ErpIpsupply\Model\Model;
 use Illuminate\Support\Facades\Gate;
+use Ipsupplt\MakeOutStockTool\MakeOutStockTool;
+use Ipsupplt\SearchMultipleItems\SearchMultipleItems;
+use Ipsupply\AddItemWithoutSn\AddItemWithoutSn;
 use Ipsupply\StockLocation\StockLocation;
 use Ipsupply\WarehouseTransferTool\WarehouseTransferTool;
 use Laravel\Nova\Cards\Help;
@@ -84,8 +87,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new Model,
+            new AddItemWithoutSn,
             new StockLocation,
-            new WarehouseTransferTool
+            new WarehouseTransferTool,
+            new SearchMultipleItems,
+            new MakeOutStockTool,
+
 
         ];
     }

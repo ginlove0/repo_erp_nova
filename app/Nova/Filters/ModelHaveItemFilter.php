@@ -35,7 +35,6 @@ class ModelHaveItemFilter extends Filter
             ->groupBy('modelId')
             ->pluck('modelId');
 
-        Log::info($modelIds);
 
         return $query
             ->whereIn('id', $modelIds);

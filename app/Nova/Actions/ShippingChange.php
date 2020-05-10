@@ -3,6 +3,8 @@
 namespace App\Nova\Actions;
 
 use App\Models\Item;
+use App\Models\SaleOrderItem;
+use App\Models\SaleOrderPackedItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
@@ -31,8 +33,9 @@ class ShippingChange extends Action
         //array nay de luu so serial number input
 
 
-        $sumCountItem = 0;
+        $transferingArray = [];
 
+        $notInstockArray = [];
         //array nay de lay data input ve (cai nay type la string)
         $array = $fields->saleorder;
 
@@ -44,59 +47,79 @@ class ShippingChange extends Action
         foreach ($newArray as $getItem  ) {
             $itemArray = $getItem->items;
 
-            //dem tong so item co trong 1 sale order
-            $sumCountItem += count($itemArray);
 
             foreach ($itemArray as $item) {
                 //if serial number bang null thi se ko add vao array
                 $serialInputArray = [];
-                if($item -> serialNumber != ""){
-                    array_push($serialInputArray, $item->serialNumber );
+
+                if ($item->serialNumber != "") {
+                    array_push($serialInputArray, $item->serialNumber);
                 }
 
-            //get serial number trong database va serial input, neu bang nhau thi set stockStatus => outstock
+                //get serial number trong database va serial input, neu bang nhau thi set stockStatus => outstock
 
-                $newItem = Item::where('serialNumber', $item -> serialNumber)->first();
+                $newItem = Item::where('serialNumber', $item->serialNumber)->first();
+                    Log::info($newItem, ['in shipping change']);
 
-                if($newItem && $newItem->stockStatus == true) {
+                if ($newItem) {
+                    if($newItem->stockStatus == true){
+                        if ($newItem->whlocationId == 1 || $newItem->whlocationId == 2)
+                        {
+                            $newItem->stockStatus = false;
+                            $newItem->save();
 
-                    $newItem -> sale_order_id = $model -> id;
-                    $newItem->stockStatus = false;
-                    $newItem->save();
 
-                    //update quantity trong sale order. Khi 1 sn outstock thi qty se giam di
-                    $updateSaleOrderModelType = \App\Models\SaleOrderModelType::where('id', $getItem -> id)->first();
-                    if($updateSaleOrderModelType){
-                        $updateSaleOrderModelType -> qty = $updateSaleOrderModelType -> qty - count($serialInputArray);
+                            SaleOrderPackedItem::create([
+                                'sale_order_id' => $model->id,
+                                'item_id' => $newItem->id,
+                                'modelId' => $newItem->modelId,
+                                'conditionId' => $newItem->conditionId,
+                                'whlocationId' => $newItem->whlocationId
+                            ]);
 
-                        //check so luong quantity, neu lon hon 0 thi status cua packed => partial
-                        if($updateSaleOrderModelType -> qty > 0){
-                            $model->packed = 'partial';
-                            $model->shipped = 'partial';
-                            $model->status = 'confirm';
-                            $model->save();
-                            $this->markAsFinished($model);
+                            //update quantity trong sale order. Khi 1 sn outstock thi qty se giam di
+                            $updateSaleOrderModelType = SaleOrderItem::where('id', $getItem->id)->first();
+                            if ($updateSaleOrderModelType) {
+                                $updateSaleOrderModelType->qty = $updateSaleOrderModelType->qty - count($serialInputArray);
+
+                                //check so luong quantity, neu lon hon 0 thi status cua packed => partial
+                                if ($updateSaleOrderModelType->qty > 0) {
+                                    $model->packed = 'partial';
+                                    $model->shipped = 'partial';
+                                    $model->status = 'confirm';
+                                    $model->save();
+                                    $this->markAsFinished($model);
+                                } //neu so luong qty = 0 thi doi status packed thanh all packed
+                                else {
+                                    $model->packed = 'full';
+                                    $model->shipped = 'full';
+                                    $model->status = 'complete';
+                                    $model->save();
+                                    $this->markAsFinished($model);
+                                }
+                                $updateSaleOrderModelType->shipped += count($serialInputArray);
+                                $updateSaleOrderModelType->save();
+                            }
+
                         }
-                        //neu so luong qty = 0 thi doi status packed thanh all packed
                         else{
-                            $model->packed = 'full';
-                            $model->shipped = 'full';
-                            $model->status = 'complete';
-                            $model->save();
-                            $this->markAsFinished($model);
+                            array_push($transferingArray, $newItem->serialNumber);
                         }
-
-
-                        $updateSaleOrderModelType -> shipped += count($serialInputArray);
-                        $updateSaleOrderModelType -> save();
+                    }else{
+                        array_push($notInstockArray, $newItem->serialNumber);
                     }
-
                 }
-
             }
+        }
 
+        if($transferingArray != null)
+        {
+            return Action::danger('Items ' . json_encode($transferingArray) . 'in transferring now! Please check again');
+        }
 
-
+        if($notInstockArray != null)
+        {
+            return Action::danger('Items ' . json_encode($notInstockArray) . 'not in stock now! Please check again');
         }
 
 
@@ -120,7 +143,7 @@ class ShippingChange extends Action
 
         return [
 
-            CreatePackagesShipping::make("SaleOrder"),
+            CreatePackagesShipping::make("SaleOrder")->required(),
 
         ];
     }

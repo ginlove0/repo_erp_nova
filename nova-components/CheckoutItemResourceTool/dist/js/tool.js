@@ -2706,8 +2706,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -2779,11 +2777,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.aliasModel))
+              _vm._v(_vm._s(order.items.aliasModel))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.serialNumber))
+              _vm._v(_vm._s(order.items.serialNumber))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
@@ -2793,7 +2791,7 @@ var render = function() {
             _c("td", { staticClass: "text-center" }, [_vm._v("Not in Stock")]),
             _vm._v(" "),
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(order.whlocations.name))
+              _vm._v(_vm._s(order.whlocation.name))
             ]),
             _vm._v(" "),
             _c(
@@ -2803,7 +2801,7 @@ var render = function() {
                   attrs: {
                     resourceName: _vm.resourceName,
                     resourceId: _vm.resourceId,
-                    id: order.id
+                    id: order.item_id
                   }
                 })
               ],

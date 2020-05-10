@@ -101,7 +101,7 @@ export default {
                         }
                         return {
                             id: value.id,
-                            model: value.sale_model.name,
+                            model: value.models.name,
                             quantity,
                             items
                         }

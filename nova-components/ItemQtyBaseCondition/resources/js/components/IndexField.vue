@@ -1,12 +1,12 @@
 <template>
-    <span>{{ field.value }}</span>
+    <div class="font-bold">
+        <p class="text-center">{{field.value}}</p>
+    </div>
+
 </template>
 
 <script>
 export default {
     props: ['resourceName', 'field'],
-    created() {
-        console.log("Fieldssss111", this.field.value)
-    }
 }
 </script>

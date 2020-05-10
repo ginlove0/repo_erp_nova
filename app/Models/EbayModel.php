@@ -12,8 +12,5 @@ class EbayModel extends Model
 
     protected $fillable =['name', 'shortDescription', 'longDescription', 'note'];
 
-    public function saleordermodeltype()
-    {
-        return $this->morphMany(SaleOrderModelType::class, 'sale_model');
-    }
+
 }

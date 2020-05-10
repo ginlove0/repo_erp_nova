@@ -6,8 +6,7 @@ namespace App\Services\SaleOrder;
 
 use App\Models\SaleModelItem;
 use App\Models\SaleOrder;
-use App\Models\SaleOrderModels;
-use App\Models\SaleOrderModelType;
+use App\Models\SaleOrderItem;
 
 interface SaleOrderServiceInterface
 {
@@ -18,7 +17,7 @@ interface SaleOrderServiceInterface
 
     public function createModelsOrder(array $request): SaleOrder;
 
-    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderModelType;
+    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderItem;
 
 //    create both sale order and assign models in the sale
     public function createSaleOrderAndAssignModelsOrder(array $saleOrderRequest, array $modelOrderRequest): SaleOrder;
@@ -33,6 +32,10 @@ interface SaleOrderServiceInterface
     public function findItemsBySaleOrder(int $saleOrderId);
 
     public function findItemBySN(int $itemId);
+
+    public function findQtySaleOrder(int $id);
+
+    public function findItemBySaleOrderId(int $saleOrderId);
 
 
 

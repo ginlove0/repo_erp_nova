@@ -1,7 +1,8 @@
 <template>
     <div>
 
-        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items transfered</h1>
+<!--        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items transfered</h1>-->
+        <h2 class="flex-no-shrink text-90 font-normal text-2xl">Total Item Packed: {{items.length}}</h2>
         <table class="table w-full">
             <thead>
             <tr>
@@ -17,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item in items">
+            <tr v-for="item in sortArrays(items)">
 
                 <td class="text-center">{{item.models.name}}</td>
                 <td class="text-center">{{item.aliasModel}}</td>
@@ -48,6 +49,7 @@
 <script>
     import DeleteAction from "./DeleleAction";
     import axios from 'axios';
+    import _ from 'lodash';
 export default {
     components: {DeleteAction},
     props: ['resourceName', 'resourceId', 'panel'],
@@ -70,9 +72,12 @@ export default {
                 .catch((err) => {
                     console.log(err)
                 })
+        },
 
-
+        sortArrays(items) {
+            return _.orderBy(items, 'models.name', 'asc');
         }
+
     },
 
   mounted() {
@@ -81,7 +86,9 @@ export default {
 
         this.fetchWhTransferModel()
 
-      })
+      });
+
+
     //
   },
 }

@@ -7,8 +7,11 @@ namespace App\Services\SaleOrder;
 use App\Models\Item;
 use App\Models\SaleModelItem;
 use App\Models\SaleOrder;
-use App\Models\SaleOrderModels;
+use App\Models\SaleOrderItem;
+use App\Models\SaleOrderModel;
 use App\Models\SaleOrderModelType;
+use App\Models\SaleOrderPackedItem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class SaleOrderService implements SaleOrderServiceInterface
@@ -20,10 +23,10 @@ class SaleOrderService implements SaleOrderServiceInterface
         return SaleOrder::create($request);
     }
 
-    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderModelType
+    public function createSaleOrder(int $saleOrderId, array $model): SaleOrderItem
     {
 
-        return SaleOrderModelType::create(
+        return SaleOrderItem::create(
             array_merge($model, [
                 "sale_order_id" => $saleOrderId
             ])
@@ -82,7 +85,7 @@ class SaleOrderService implements SaleOrderServiceInterface
 
     public function findSaleOrderModels(int $saleOrderId)
     {
-        $saleOrder = SaleOrderModelType::where('sale_order_id', $saleOrderId)->with('sale_model','condition')->get();
+        $saleOrder = SaleOrderItem::where('sale_order_id', $saleOrderId)->with('models','conditions')->get();
 
         return $saleOrder;
         // TODO: Implement findSaleOrderModels() method.
@@ -96,5 +99,27 @@ class SaleOrderService implements SaleOrderServiceInterface
 
     public function findItemBySN(int $itemId){
         return Item::where("id" , $itemId)->firstOrFail();
+    }
+
+    public function findQtySaleOrder(int $id)
+    {
+        $data = DB::select("
+            select qty as QTY from sale_order_model
+            where sale_order_model.sale_order_id = (select id from `sale_order` where id = ? limit 1)
+        ", [
+            $id
+        ]);
+
+        Log::info($data[0]);
+
+        return $data;
+    }
+
+    public function findItemBySaleOrderId(int $saleOrderId)
+    {
+        $item = SaleOrderPackedItem::where('sale_order_id', $saleOrderId)->with('saleorder', 'items', 'models', 'conditions', 'whlocation')->get();
+
+        return $item;
+        // TODO: Implement findItemBySaleOrderId() method.
     }
 }

@@ -14,16 +14,27 @@
         "erp-ipsupply/model": "*",
         "erp-ipsupply/quantity-base-condition": "*",
         "fideloper/proxy": "^4.0",
+        "inspheric/nova-defaultable": "^1.2",
         "inspheric/nova-indicator-field": "^1.43",
         "inspheric/nova-url-field": "^1.4",
+        "ipsupplt/make-out-stock-tool": "*",
+        "ipsupplt/search-multiple-items": "*",
+        "ipsupply/add-item-without-sn": "*",
         "ipsupply/checkout-item-resource-tool": "*",
         "ipsupply/creatable-hasmany-relation-field": "*",
+        "ipsupply/create-package-whtransfer": "*",
         "ipsupply/create-packages-shipping": "*",
         "ipsupply/delete-items-in-sale-order": "*",
+        "ipsupply/display-qty-sale-order-item-field": "*",
         "ipsupply/item-qty-base-condition": "*",
         "ipsupply/item-to-out-stock": "*",
+        "ipsupply/item-transfer-resource-tool": "*",
         "ipsupply/relation-dependance-field": "*",
         "ipsupply/stock-location": "*",
+        "ipsupply/update-item-in-stock": "*",
+        "ipsupply/warehouse-transfer-field": "*",
+        "ipsupply/warehouse-transfer-tool": "*",
+        "ipsupply/wh_transfer_item_packed_resource_tool": "*",
         "laravel/cashier": "^10.6",
         "laravel/framework": "^5.8",
         "laravel/nova": "*",
@@ -33,12 +44,7 @@
         "optimistdigital/nova-notes-field": "^1.3",
         "orlyapps/nova-belongsto-depend": "^2.0",
         "tanmuhittin/nova-reload-resources": "dev-master",
-        "ipsupply/update-item-in-stock": "*",
-        "ipsupply/warehouse-transfer-tool": "*",
-        "ipsupply/warehouse-transfer-field": "*",
-        "ipsupply/item-transfer-resource-tool": "*",
-        "ipsupply/create-package-whtransfer": "*",
-        "ipsupply/wh_transfer_item_packed_resource_tool": "*"
+        "ipsupply/item-transfer-qty-base-model": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.0",
@@ -157,6 +163,26 @@
         {
             "type": "path",
             "url": "./nova-components/WhTransferItemPackedResourceTool"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/SearchMultipleItems"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/DisplayQtySaleOrderItemField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/AddItemWithoutSn"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/MakeOutStockTool"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ItemTransferQtyBaseModel"
         }
     ]
 }

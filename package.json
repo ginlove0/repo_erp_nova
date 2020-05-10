@@ -57,7 +57,17 @@
         "build-create-package-whtransfer": "cd nova-components/CreatePackageWhtransfer && npm run dev",
         "build-create-package-whtransfer-prod": "cd nova-components/CreatePackageWhtransfer && npm run prod",
         "build-wh_transfer_item_packed_resource_tool": "cd nova-components/WhTransferItemPackedResourceTool && npm run dev",
-        "build-wh_transfer_item_packed_resource_tool-prod": "cd nova-components/WhTransferItemPackedResourceTool && npm run prod"
+        "build-wh_transfer_item_packed_resource_tool-prod": "cd nova-components/WhTransferItemPackedResourceTool && npm run prod",
+        "build-search-multiple-items": "cd nova-components/SearchMultipleItems && npm run dev",
+        "build-search-multiple-items-prod": "cd nova-components/SearchMultipleItems && npm run prod",
+        "build-display-qty-sale-order-item-field": "cd nova-components/DisplayQtySaleOrderItemField && npm run dev",
+        "build-display-qty-sale-order-item-field-prod": "cd nova-components/DisplayQtySaleOrderItemField && npm run prod",
+        "build-add-item-without-sn": "cd nova-components/AddItemWithoutSn && npm run dev",
+        "build-add-item-without-sn-prod": "cd nova-components/AddItemWithoutSn && npm run prod",
+        "build-make-out-stock-tool": "cd nova-components/MakeOutStockTool && npm run dev",
+        "build-make-out-stock-tool-prod": "cd nova-components/MakeOutStockTool && npm run prod",
+        "build-item-transfer-qty-base-model": "cd nova-components/ItemTransferQtyBaseModel && npm run dev",
+        "build-item-transfer-qty-base-model-prod": "cd nova-components/ItemTransferQtyBaseModel && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

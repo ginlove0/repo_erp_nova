@@ -1,0 +1,213 @@
+<template>
+    <div class="dropdown" v-if="options">
+
+        <!-- Dropdown Input -->
+        <input class="dropdown-input"
+               :name="name"
+               @focus="showOptions()"
+               @keyup="keyMonitor"
+               v-model="searchFilter"
+               :disabled="disabled"
+               @blur="onBlur"
+               :placeholder="placeholder" />
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown-content"
+             v-show="optionsShown">
+            <div
+                class="dropdown-item"
+                @mousedown="selectOption(option)"
+                v-for="(option, index) in filteredOptions"
+                :key="index">
+                {{ option.name || '-' }}
+            </div>
+            <div>
+                <button
+                    class="inline-flex appearance-none cursor-pointer text-70 hover:text-primary mr-3 has-tooltip">
+                    <svg class="svg-icon">
+                    <path fill="none" d="M13.68,9.448h-3.128V6.319c0-0.304-0.248-0.551-0.552-0.551S9.448,6.015,9.448,6.319v3.129H6.319
+								c-0.304,0-0.551,0.247-0.551,0.551s0.247,0.551,0.551,0.551h3.129v3.129c0,0.305,0.248,0.551,0.552,0.551s0.552-0.246,0.552-0.551
+								v-3.129h3.128c0.305,0,0.552-0.247,0.552-0.551S13.984,9.448,13.68,9.448z M10,0.968c-4.987,0-9.031,4.043-9.031,9.031
+								c0,4.989,4.044,9.032,9.031,9.032c4.988,0,9.031-4.043,9.031-9.032C19.031,5.012,14.988,0.968,10,0.968z M10,17.902
+								c-4.364,0-7.902-3.539-7.902-7.903c0-4.365,3.538-7.902,7.902-7.902S17.902,5.635,17.902,10C17.902,14.363,14.364,17.902,10,17.902
+								z">
+
+                    </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'Dropdown',
+        template: 'Dropdown',
+        props: {
+            name: {
+                type: String,
+                required: false,
+                default: 'dropdown',
+                note: 'Input name'
+            },
+            options: {
+                type: Array,
+                required: true,
+                default: [],
+                note: 'Options of dropdown. An array of options with id and name',
+            },
+            placeholder: {
+                type: String,
+                required: false,
+                default: 'Please select an option',
+                note: 'Placeholder of dropdown'
+            },
+            disabled: {
+                type: Boolean,
+                required: false,
+                default: false,
+                note: 'Disable the dropdown'
+            },
+            maxItem: {
+                type: Number,
+                required: false,
+                default: 6,
+                note: 'Max items showing'
+            }
+        },
+        data() {
+            return {
+                selected: {},
+                optionsShown: false,
+                searchFilter: ''
+            }
+        },
+        created() {
+            this.$emit('selected', this.selected);
+        },
+        computed: {
+            filteredOptions() {
+                const filtered = [];
+                const regOption = new RegExp(this.searchFilter, 'ig');
+                for (const option of this.options) {
+                    if (this.searchFilter.length < 1 || option.name.match(regOption)){
+                        if (filtered.length < this.maxItem) filtered.push(option);
+                    }
+                }
+                return filtered;
+            }
+        },
+        methods: {
+            selectOption(option) {
+                this.selected = option;
+                this.optionsShown = false;
+                this.searchFilter = this.selected.name;
+                this.$emit('selected', this.selected);
+            },
+            showOptions(){
+                if (!this.disabled) {
+                    this.searchFilter = '';
+                    this.optionsShown = true;
+                }
+            },
+            // exit() {
+            //     if (!this.selected.id) {
+            //         this.selected = {};
+            //         this.searchFilter = '';
+            //     } else {
+            //         this.searchFilter = this.selected.name;
+            //     }
+            //     this.$emit('selected', this.selected);
+            //     this.optionsShown = false;
+            // },
+            // Selecting when pressing Enter
+            keyMonitor: function(event) {
+                if (event.key === "Enter" && this.filteredOptions[0])
+                    this.selectOption(this.filteredOptions[0]);
+            },
+
+            onBlur: function() {
+                this.optionsShown = false;
+            }
+        },
+        watch: {
+            searchFilter() {
+                if (this.filteredOptions.length === 0) {
+                    this.selected = {};
+                } else {
+                    this.selected = this.filteredOptions[0];
+                }
+                this.$emit('filter', this.searchFilter);
+            }
+        }
+    };
+</script>
+
+
+<style lang="scss" scoped>
+    .dropdown {
+        position: relative;
+        display: block;
+        margin: auto;
+        .dropdown-input {
+            background: #fff;
+            cursor: pointer;
+            border: 1px solid #e7ecf5;
+            border-radius: 3px;
+            color: #333;
+            display: block;
+            font-size: .8em;
+            padding: 6px;
+            min-width: 250px;
+            max-width: 250px;
+            &:hover {
+                background: #f8f8fa;
+            }
+        }
+        .dropdown-content {
+            position: absolute;
+            background-color: #fff;
+            min-width: 248px;
+            max-width: 248px;
+            max-height: 248px;
+            border: 1px solid #e7ecf5;
+            box-shadow: 0px -8px 34px 0px rgba(0,0,0,0.05);
+            overflow: auto;
+            z-index: 1;
+            .dropdown-item {
+                color: black;
+                font-size: .7em;
+                line-height: 1em;
+                padding: 8px;
+                text-decoration: none;
+                display: block;
+                cursor: pointer;
+                &:hover {
+                    background-color: #e7ecf5;
+                }
+            }
+        }
+        .dropdown:hover .dropdowncontent {
+            display: block;
+        }
+
+
+    }
+    .svg-icon {
+        width: 2rem;
+        height: 1.5rem;
+        margin-left: 120px;
+    }
+
+    .svg-icon path,
+    .svg-icon polygon,
+    .svg-icon rect {
+        fill: #4691f6;
+    }
+
+    .svg-icon circle {
+        stroke: #4691f6;
+        stroke-width: 1;
+    }
+</style>

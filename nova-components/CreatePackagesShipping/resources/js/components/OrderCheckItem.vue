@@ -5,7 +5,7 @@
                 placeholder="Serial Number"
                 class="w-full form-control form-input form-input-bordered"
                 v-model="item.serialNumber"
-                v-on:keydown.enter.prevent
+                v-on:keydown.enter
             />
 
         </td>

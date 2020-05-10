@@ -11,7 +11,7 @@ class WhTransferModel extends Model
     //
     protected $table='wh_transfer_model';
 
-    protected $fillable=['modelId', 'conditionId', 'qty', 'note', 'whTransferId'];
+    protected $fillable=['modelId', 'conditionId', 'qty', 'note', 'whTransferId', 'packed_qty'];
 
     public function models():BelongsTo
     {

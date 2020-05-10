@@ -16,18 +16,20 @@ class ItemController extends Controller
         $this -> itemService = $itemService;
     }
 
-    public function index($id, $note, $whlocation)
+    public function index($sn, $conditionId, $whlocationId, $supplierName)
     {
 
-        Log::info($id);
-        Log::info($note);
-        Log::info($whlocation);
-        $item = Item::where('serialNumber', $id)->first();
-        if($item){
-            $item -> note = $item -> note . '#' . $note;
-            $item -> whlocationId = $whlocation;
-            $item -> save();
-        }
+        Log::info($sn);
+        Log::info($conditionId);
+        Log::info($whlocationId);
+        Log::info($supplierName);
 
+    }
+
+    public function addItemNoCondition($sn, $whlocationId, $supplierName)
+    {
+        Log::info($sn);
+        Log::info($whlocationId);
+        Log::info($supplierName);
     }
 }

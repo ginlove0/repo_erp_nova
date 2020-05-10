@@ -17,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/endpoint', function (Request $request) {
 //     //
 // });
-Route::get('/addProductToWhTransfer/{$products}', \Ipsupply\ItemTransferResourceTool\Http\Controllers\WhTransferController::class . '@index');
+Route::get('/addProductToWhTransfer/{whtransferId}/{product}', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class . '@addProduct');
+
+Route::get('findModel', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllModel');
+
+Route::get('findCondition', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllCondition');

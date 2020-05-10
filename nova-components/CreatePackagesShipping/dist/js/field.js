@@ -1921,12 +1921,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var saleOrderModelUrl = "/api/ipsupply/findSaleOrderModels/" + this.resourceId;
 
         Nova.request().get(saleOrderModelUrl).then(function (res) {
-            console.log(res);
             if (res && res.data) {
 
                 //create order object
                 _this.orders = res.data.map(function (value) {
-
                     var quantity = value.qty;
                     var items = [];
                     for (var i = 0; i < quantity; i++) {
@@ -1938,7 +1936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                     return {
                         id: value.id,
-                        model: value.sale_model.name,
+                        model: value.models.name,
                         quantity: quantity,
                         items: items
                     };
@@ -30283,7 +30281,6 @@ var render = function() {
               ) {
                 return null
               }
-              $event.preventDefault()
             },
             input: function($event) {
               if ($event.target.composing) {

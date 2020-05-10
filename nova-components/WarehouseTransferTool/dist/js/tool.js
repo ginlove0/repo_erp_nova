@@ -170,7 +170,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -633,9 +633,8 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SearchSupplier__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SearchSupplier___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SearchSupplier__);
 //
 //
 //
@@ -677,82 +676,128 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { Dropdown: __WEBPACK_IMPORTED_MODULE_0__SearchSupplier___default.a },
     props: ['resourceName', 'resourceId', 'field'],
 
     data: function data() {
         return {
-            item: [],
-            note: '',
+            items: [],
+            condition: '',
             whlocation: '',
-            options: []
+            supplier: [],
+            dataCisco: [],
+            ITEM_NAME: ''
+
         };
     },
 
 
     methods: {
-        handleChange: function handleChange() {
+        addSerialNumber: function addSerialNumber() {
             var _this = this;
 
-            var replaced_hastag_note = this.note.replace(/#/g, "");
-            var replaced_space_sn = this.item.replace(/\n/gi, " ");
+            var replaced_space_sn = this.items.replace(/\n/gi, " ");
             var replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
             var arr_sn = replaced_comma_sn.split(' ');
             var removed_duplicated_sn = _.uniq(arr_sn);
-            removed_duplicated_sn.map(function (newitem) {
-                if (newitem) {
-                    var serialNumber = newitem.trim();
-                    if (_this.note && _this.whlocation) {
-                        _this.create(serialNumber, replaced_hastag_note, _this.whlocation);
-                    } else {
-                        return alert('Please fill up everything!');
-                    }
-                }
+            var hello = removed_duplicated_sn.toString();
+            var listSerialNumber = hello.trim();
+            console.log(hello.trim(), 'hello');
+
+            var url = 'http://apisn.ipsupply.net:2580/api/check-sn/' + listSerialNumber;
+
+            axios.get(url).then(function (res) {
+                _this.dataCisco = res.data;
+
+                console.log(_this.dataCisco);
+            }).catch(function (err) {
+                console.log(err);
             });
+            this.items = [];
         },
-        create: function create($id, $note, $location) {
+        handleChange: function handleChange() {
+            var replaced_space_sn = this.items.replace(/\n/gi, " ");
+            var replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
+            var arr_sn = replaced_comma_sn.split(' ');
+            var removed_duplicated_sn = _.uniq(arr_sn);
+            var hello = removed_duplicated_sn.toString();
+            var listSerialNumber = hello.trim();
+            console.log(hello.trim(), 'hello');
+
+            var url = 'http://apisn.ipsupply.net:2580/api/check-sn/' + listSerialNumber;
+
+            axios.get(url).then(function (res) {
+                console.log(res);
+            }).catch(function (err) {
+                console.log(err);
+            });
+
+            // removed_duplicated_sn.map((newitem) => {
+            //     if (newitem) {
+            //         const serialNumber = newitem.trim();
+            //
+            //         // let self = this;
+            //         if(serialNumber && this.condition && this.whlocation && this.selected)
+            //         {
+            //             axios.get('/nova-vendor/warehouse-transfer-tool/addItem/' + serialNumber + '/' + this.condition+ '/' +this.whlocation+ '/' + JSON.stringify(this.selected))
+            //                 .then((res) => {
+            //                     // self.datas.push(res.data[0]);
+            //                     console.log(res)
+            //
+            //                 })
+            //                 .catch(err => console.log(err))
+            //         }
+            //
+            //         if(serialNumber && this.whlocation && this.selected)
+            //         {
+            //             axios.get('/nova-vendor/warehouse-transfer-tool/addItemNoCondition/' + serialNumber + '/' +this.whlocation+ '/' + JSON.stringify(this.selected))
+            //                 .then((res) => {
+            //                     console.log(res)
+            //                 })
+            //                 .catch(err => console.log(err))
+            //         }
+            //
+            //     }
+            //
+            // });
+
+        },
+        getAllSupplier: function getAllSupplier() {
             var _this2 = this;
 
-            axios.get('/nova-vendor/warehouse-transfer-tool/' + $id).then(function (res) {
-                if (res.data) {
-                    _this2.item = _this2.item.replace(res.data.serialNumber, '');
-                    _this2.note = '';
-                    _this2.whlocation = '';
-                    axios.get('/nova-vendor/warehouse-transfer-tool/findItemWithSN/' + res.data.serialNumber + '/' + $note + '/' + $location).then(function (res) {}).catch(function (err) {
-                        console.log(err);
-                    });
-                }
+            axios.get('/nova-vendor/warehouse-transfer-tool/findSupplier').then(function (res) {
+                // console.log(res.data)
+                _this2.supplier = res.data;
+                console.log(_this2.supplier);
             }).catch(function (err) {
-                return alert('Error, Item ' + $id + ' not in DB');
+                console.log(err.message);
             });
+        },
+        validateSelection: function validateSelection(selection) {
+            this.selected = selection;
+            console.log(selection.name + ' has been selected');
+        },
+        getDropdownValues: function getDropdownValues(keyword) {
+            console.log('You could refresh options by querying the API with ' + keyword);
         }
     },
 
     mounted: function mounted() {
         //
+        this.getAllSupplier();
     },
 
 
     computed: {
-        styling: function styling() {
-            return {
 
-                height: '200px'
-            };
-        },
-
-        notestyle: function notestyle() {
-            return {
-                width: '300px',
-                height: '100px'
-            };
-        },
-
-        locationstyle: function locationstyle() {
-            return {
-                width: '200px'
-            };
-        }
+        // styling: function() {
+        //     return {
+        //
+        //         height: '200px'
+        //     }
+        // }
     }
 });
 
@@ -771,58 +816,42 @@ var render = function() {
       _vm._v(" "),
       _c("label", [_vm._v("Serial Number")]),
       _vm._v(" "),
-      _c("textarea", {
+      _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.item,
-            expression: "item"
+            value: _vm.items,
+            expression: "items"
           }
         ],
         staticClass: "w-full form-control form-input form-input-bordered",
         class: _vm.errorClasses,
-        style: _vm.styling,
-        attrs: { type: "text" },
-        domProps: { value: _vm.item },
+        attrs: {
+          placeholder: "SerialNumber input...",
+          type: "text",
+          required: ""
+        },
+        domProps: { value: _vm.items },
         on: {
+          keydown: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            $event.preventDefault()
+            return _vm.addSerialNumber($event)
+          },
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.item = $event.target.value
+            _vm.items = $event.target.value
           }
         }
       }),
-      _vm._v(" "),
-      _c("label", [_vm._v("Note")]),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.note,
-            expression: "note"
-          }
-        ],
-        staticClass: "w-full form-control form-input form-input-bordered",
-        class: _vm.errorClasses,
-        attrs: { type: "text" },
-        domProps: { value: _vm.note },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.note = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", [_vm._v("Wh Location")]),
-      _vm._v(" "),
-      _c("br"),
       _vm._v(" "),
       _c(
         "select",
@@ -835,7 +864,7 @@ var render = function() {
               expression: "whlocation"
             }
           ],
-          style: _vm.locationstyle,
+          attrs: { required: "" },
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -853,13 +882,20 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { value: "2" } }, [_vm._v("US")]),
+          _c("option", { attrs: { value: "1" } }, [_vm._v("Sydney")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("Sydney")])
+          _c("option", { attrs: { value: "2" } }, [_vm._v("US")])
         ]
       ),
       _vm._v(" "),
-      _c("br"),
+      _c("Dropdown", {
+        attrs: {
+          options: _vm.supplier,
+          disabled: false,
+          placeholder: "Please select supplier"
+        },
+        on: { selected: _vm.validateSelection, filter: _vm.getDropdownValues }
+      }),
       _vm._v(" "),
       _c(
         "button",
@@ -892,6 +928,341 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(16)
+}
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(18)
+/* template */
+var __vue_template__ = __webpack_require__(19)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-fae5c682"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/SearchSupplier.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fae5c682", Component.options)
+  } else {
+    hotAPI.reload("data-v-fae5c682", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(17);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("0576d5c6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fae5c682\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchSupplier.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fae5c682\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchSupplier.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.dropdown[data-v-fae5c682] {\n  position: relative;\n  display: block;\n  margin: auto;\n}\n.dropdown .dropdown-input[data-v-fae5c682] {\n    background: #fff;\n    cursor: pointer;\n    border: 1px solid #e7ecf5;\n    border-radius: 3px;\n    color: #333;\n    display: block;\n    font-size: .8em;\n    padding: 6px;\n    min-width: 250px;\n    max-width: 250px;\n}\n.dropdown .dropdown-input[data-v-fae5c682]:hover {\n      background: #f8f8fa;\n}\n.dropdown .dropdown-content[data-v-fae5c682] {\n    position: absolute;\n    background-color: #fff;\n    min-width: 248px;\n    max-width: 248px;\n    max-height: 248px;\n    border: 1px solid #e7ecf5;\n    -webkit-box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.05);\n            box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.05);\n    overflow: auto;\n    z-index: 1;\n}\n.dropdown .dropdown-content .dropdown-item[data-v-fae5c682] {\n      color: black;\n      font-size: .7em;\n      line-height: 1em;\n      padding: 8px;\n      text-decoration: none;\n      display: block;\n      cursor: pointer;\n}\n.dropdown .dropdown-content .dropdown-item[data-v-fae5c682]:hover {\n        background-color: #e7ecf5;\n}\n.dropdown .dropdown:hover .dropdowncontent[data-v-fae5c682] {\n    display: block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'Dropdown',
+    template: 'Dropdown',
+    props: {
+        name: {
+            type: String,
+            required: false,
+            default: 'dropdown',
+            note: 'Input name'
+        },
+        options: {
+            type: Array,
+            required: true,
+            default: [],
+            note: 'Options of dropdown. An array of options with id and name'
+        },
+        placeholder: {
+            type: String,
+            required: false,
+            default: 'Please select an option',
+            note: 'Placeholder of dropdown'
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
+            note: 'Disable the dropdown'
+        },
+        maxItem: {
+            type: Number,
+            required: false,
+            default: 6,
+            note: 'Max items showing'
+        }
+    },
+    data: function data() {
+        return {
+            selected: {},
+            optionsShown: false,
+            searchFilter: ''
+        };
+    },
+    created: function created() {
+        this.$emit('selected', this.selected);
+    },
+
+    computed: {
+        filteredOptions: function filteredOptions() {
+            var filtered = [];
+            var regOption = new RegExp(this.searchFilter, 'ig');
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var option = _step.value;
+
+                    if (this.searchFilter.length < 1 || option.name.match(regOption)) {
+                        if (filtered.length < this.maxItem) filtered.push(option);
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return filtered;
+        }
+    },
+    methods: {
+        selectOption: function selectOption(option) {
+            this.selected = option;
+            this.optionsShown = false;
+            this.searchFilter = this.selected.name;
+            this.$emit('selected', this.selected);
+        },
+        showOptions: function showOptions() {
+            if (!this.disabled) {
+                this.searchFilter = '';
+                this.optionsShown = true;
+            }
+        },
+
+        // exit() {
+        //     if (!this.selected.id) {
+        //         this.selected = {};
+        //         this.searchFilter = '';
+        //     } else {
+        //         this.searchFilter = this.selected.name;
+        //     }
+        //     this.$emit('selected', this.selected);
+        //     this.optionsShown = false;
+        // },
+        // Selecting when pressing Enter
+        keyMonitor: function keyMonitor(event) {
+            if (event.key === "Enter" && this.filteredOptions[0]) this.selectOption(this.filteredOptions[0]);
+        }
+    },
+    watch: {
+        searchFilter: function searchFilter() {
+            if (this.filteredOptions.length === 0) {
+                this.selected = {};
+            } else {
+                this.selected = this.filteredOptions[0];
+            }
+            this.$emit('filter', this.searchFilter);
+        }
+    }
+});
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.options
+    ? _c("div", { staticClass: "dropdown" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchFilter,
+              expression: "searchFilter"
+            }
+          ],
+          staticClass: "dropdown-input",
+          attrs: {
+            name: _vm.name,
+            disabled: _vm.disabled,
+            placeholder: _vm.placeholder
+          },
+          domProps: { value: _vm.searchFilter },
+          on: {
+            focus: function($event) {
+              return _vm.showOptions()
+            },
+            keyup: _vm.keyMonitor,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchFilter = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.optionsShown,
+                expression: "optionsShown"
+              }
+            ],
+            staticClass: "dropdown-content"
+          },
+          _vm._l(_vm.filteredOptions, function(option, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass: "dropdown-item",
+                on: {
+                  mousedown: function($event) {
+                    return _vm.selectOption(option)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n            " + _vm._s(option.name || "-") + "\n        "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-fae5c682", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

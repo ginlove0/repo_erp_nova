@@ -3,12 +3,10 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
+
 
 class WhTransferModel extends Resource
 {
@@ -17,6 +15,7 @@ class WhTransferModel extends Resource
      *
      * @var string
      */
+
 
     public static $model = 'App\Models\WhTransferModel';
 
@@ -37,6 +36,9 @@ class WhTransferModel extends Resource
         'id',
     ];
 
+    public static $perPageOptions = [30];
+
+    public static $perPageViaRelationship = 30;
     /**
      * Get the fields displayed by the resource.
      *
@@ -51,9 +53,10 @@ class WhTransferModel extends Resource
             BelongsTo::make('Models', 'models')
             ->searchable(),
 
-            BelongsTo::make('Condition', 'conditions'),
+            BelongsTo::make('Condition', 'conditions')->default(3000),
 
             Number::make('Qty', 'qty'),
+
 
             Textarea::make('Note', 'note')->alwaysShow()
             ->showOnIndex()

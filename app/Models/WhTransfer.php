@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use OptimistDigital\NovaNotesField\Traits\HasNotes;
 
 class WhTransfer extends Model
 {
+    use HasNotes;
     //
     protected $table='wh_transfer';
 

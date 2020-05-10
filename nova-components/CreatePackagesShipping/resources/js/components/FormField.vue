@@ -93,12 +93,10 @@ export default {
 
         Nova.request().get(saleOrderModelUrl)
         .then((res) => {
-            console.log(res)
             if(res && res.data) {
 
                 //create order object
                 this.orders = res.data.map((value) => {
-
                     const quantity = value.qty;
                     let items = [];
                     for(let i = 0; i < quantity; i ++) {
@@ -110,7 +108,7 @@ export default {
                     }
                     return {
                         id: value.id,
-                        model: value.sale_model.name,
+                        model: value.models.name,
                         quantity,
                         items
                     }

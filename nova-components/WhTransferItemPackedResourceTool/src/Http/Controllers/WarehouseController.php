@@ -3,10 +3,12 @@
 namespace Ipsupply\WhTransferItemPackedResourceTool\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\WhTransferModel;
 use App\Services\WhTransfer\WhTransferServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Laravel\Nova\Actions\Action;
 
 class WarehouseController extends Controller
 {
@@ -25,24 +27,26 @@ class WarehouseController extends Controller
 
     public function deleteItem($id, $whtransferId)
     {
-        Log::info($id);
-        Log::info($whtransferId);
 
         $item = Item::where('id', $id) -> first();
 
+
         if($item)
         {
-//            if($item -> whlocationId === 3)
-//            {
-//                $newLocationId = 1;
-//            }
-//            else {
-//                $newLocationId = 2;
-//            }
-
             $item -> wh_transfer_id = null;
-//            $item -> whlocationId = $newLocationId;
             $item -> save();
+
+        }
+
+        $getModels = WhTransferModel::where('whTransferId', $whtransferId) -> get();
+        foreach ($getModels as $getModel)
+        {
+            if($getModel -> packed_qty > 0 && $getModel -> packed_qty <= $getModel -> qty)
+            {
+                $getModel -> packed_qty = $getModel -> packed_qty - 1;
+                $getModel->save();
+                return Action::message('Finished!');
+            }
 
         }
     }

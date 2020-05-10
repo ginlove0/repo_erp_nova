@@ -2,20 +2,18 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\OutStockByItem;
 use App\Nova\Actions\OutStockItem;
 use App\Nova\Actions\UpdateItemInstock;
-use App\Nova\Actions\WarehouseTransfer;
-use App\Nova\Actions\WarehouseTransferSydney;
 use App\Nova\Filters\ItemConditionFilter;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use mysql_xdevapi\Table;
+use Laravel\Nova\Fields\Textarea;
 
 class Item extends Resource
 {
@@ -67,7 +65,10 @@ class Item extends Resource
                 ->searchable(),
 
 
-            Text::make("Alias Model", "aliasModel"),
+            Text::make("Alias Model", "aliasModel")
+                ->displayUsing(function ($value) {
+                    return str_limit($value, '15', '...');
+                }),
 
             Text::make("SN", "serialNumber")
 
@@ -93,11 +94,11 @@ class Item extends Resource
                 ->hideWhenUpdating()
             ->sortable(),
 
-//            Text::make('Created At', 'created_at')->displayUsing(function ($value) {
-//                return str_limit($value, '10');
-//            })
-//                -> hideWhenCreating()
-//                ->hideWhenUpdating(),
+            Date::make('Updated At', 'updated_at')
+                ->hideWhenUpdating()
+                ->hideWhenCreating()
+                ->sortable(),
+
 
             BelongsTo::make("Sale Order", 'saleorder')
             ->onlyOnDetail(),
@@ -118,7 +119,7 @@ class Item extends Resource
                 return str_limit($value, '15', '...');
             }) -> onlyOnIndex(),
 
-            Text::make('Note', 'note') -> hideFromIndex(),
+            Textarea::make('Note', 'note') -> hideFromIndex(),
 
             Text::make('User', 'addedBy')
             ->onlyOnDetail(),
@@ -182,8 +183,6 @@ class Item extends Resource
         return [
             new OutStockItem,
             new UpdateItemInstock,
-            new WarehouseTransfer,
-            new WarehouseTransferSydney,
         ];
     }
 

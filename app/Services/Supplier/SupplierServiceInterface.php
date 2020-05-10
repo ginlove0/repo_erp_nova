@@ -6,14 +6,9 @@ namespace App\Services\Supplier;
 
 interface SupplierServiceInterface
 {
-    public function createEmail();
 
-    public function createAddress();
+    public function findByName($name);
 
-    public function createNote();
-
-    public function createPayment();
-
-    public function create();
+    public function getAllSupplier();
 
 }

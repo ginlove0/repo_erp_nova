@@ -5,6 +5,7 @@ namespace App\Models;
 
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,7 @@ class Item extends Model
     protected $fillable = ["addedBy", "whlocationId", "supplierId",
         "modelId", "serialNumber", "price",
         "note", "extra", "quantity", "conditionId", "stockStatus",
-        "location", "smartnet", "version", "sale_order_id", "old_model_id", "created_at"];
+        "location", "smartnet", "version", "sale_order_id", "old_model_id", "created_at", "updated_at"];
 
 
     public function saleorder(): BelongsTo
