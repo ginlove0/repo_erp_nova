@@ -21,4 +21,12 @@ Route::get('/addProductToWhTransfer/{whtransferId}/{product}', \Ipsupply\ItemTra
 
 Route::get('findModel', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllModel');
 
-Route::get('findCondition', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllCondition');
+Route::get('/findModelInWhTransfer/{whTransferId}', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@fetchModelWhTransfer');
+
+Route::get('/deleteItem/{id}', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@deleteItemInWhTransfer');
+
+Route::get('/addNewModelInWhTransfer/{modelDetail}', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@addModel');
+
+Route::get('findManufactor', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllManufactor');
+
+Route::get('findCategory', \Ipsupply\ItemTransferResourceTool\Http\Controllers\ItemTransferResourceToolController::class.'@findAllCategory');

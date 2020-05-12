@@ -3,7 +3,8 @@
         <div>
             <heading class="mb-6">Search & Update Multiple Items</heading>
 
-            <label>Serial Number</label>
+
+            <label>Serial Number:</label>
             <textarea
                 :style="styling"
                 type="text"
@@ -18,6 +19,8 @@
             </button>
 
             <button
+                :id="UpdateOutStock"
+                :disabled="ableToUpdateOutStock"
                 @click="handleOutStock()"
                 class="btn btn-block border-2 btn-group-lg"
             >
@@ -25,11 +28,19 @@
             </button>
 
             <button
+                :id="UpdateInStock"
+                :disabled="ableToUpdateInStock"
                 @click="handleInstock()"
                 class="btn btn-block border-2 btn-group-lg"
             >
                 Update To In Stock
             </button>
+
+            <div class="analytic-number">
+                Total input: {{countInput.length}}
+                <br/>
+                Total found and able to update: {{displayDatas.length}}
+            </div>
 
         </div>
 
@@ -60,6 +71,7 @@
                     <!--                    <td class="text-center">{{order.price}}</td>-->
                     <!--                    <td class="text-center">{{order.note}}</td>-->
                 </tr>
+
                 </tbody>
             </table>
 
@@ -79,7 +91,11 @@
                 inputItems: [],
                 displayDatas: [],
                 itemsNotInstock: [],
-                arrayItem: []
+                arrayItem: [],
+                ableToUpdateInStock: true,
+                ableToUpdateOutStock: true,
+                itemNotInDatabase: [],
+                countInput: [],
             }
 
         },
@@ -107,14 +123,19 @@
 
             handleChange() {
                 this.handleSerialInput();
+
+                this.ableToUpdateInStock = false;
+                this.ableToUpdateOutStock = false;
+                this.countInput = [];
+
                 this.arrayItem.map((newitem) => {
                     if (newitem) {
                         const serialNumber = newitem.trim();
-
+                        this.countInput.push(serialNumber);
                         let self = this;
                         axios.get('/nova-vendor/search-multiple-items/' + serialNumber)
                             .then((res) => {
-                                if(res && res.data && res.data[0])
+                                if(res.data[0])
                                 {
                                     if(res.data[0].stockStatus === 1)
                                     {
@@ -124,6 +145,7 @@
                                         res.data[0].stockStatus = 'Not in stock'
                                     }
                                     self.displayDatas.push(res.data[0]);
+
                                 }
 
                             })
@@ -136,11 +158,13 @@
                 });
                 this.displayDatas = [];
 
+
             },
 
             handleOutStock() {
                 this.handleSerialInput();
-                alert('Are you sure to update ' + this.arrayItem.toString() + ' OUT STOCK????');
+                this.ableToUpdateOutStock = true;
+                this.ableToUpdateInStock = false;
                 this.arrayItem.map((newitem) => {
                     if (newitem) {
                         const serialNumber = newitem.trim();
@@ -163,7 +187,8 @@
 
             handleInstock() {
                 this.handleSerialInput();
-                alert('Are you sure to update ' + this.arrayItem.toString() + ' IN STOCK????');
+                this.ableToUpdateInStock = true;
+                this.ableToUpdateOutStock = false;
                 this.arrayItem.map((newitem) => {
                     if (newitem) {
                         const serialNumber = newitem.trim();
@@ -210,9 +235,15 @@
 <style>
     /* Scoped Styles */
     .btn-group-lg {
-margin-left: 5px;
+        margin-left: 5px;
         padding-top: 10px;
         padding-bottom: 10px;
         text-align: center;
+    }
+    .analytic-number {
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 </style>

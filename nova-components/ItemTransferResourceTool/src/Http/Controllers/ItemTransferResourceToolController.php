@@ -13,13 +13,7 @@ class ItemTransferResourceToolController extends Controller
     public function addProduct($whtransferId, $product)
     {
         $object = json_decode($product);
-
-        Log::info($object -> modelId);
-        Log::info($object -> qty);
-        Log::info($object -> conditionId);
-        Log::info($object->note);
-
-        Log::info($whtransferId);
+        Log::info($object -> conditionId, ['conditionId']);
         WhTransferModel::create([
             'whTransferId' => $whtransferId,
             'modelId' => $object -> modelId,
@@ -29,19 +23,60 @@ class ItemTransferResourceToolController extends Controller
         ]);
 
 
-        return 'hello';
     }
 
     public function findAllModel()
     {
-        $datas = DB::select('SELECT name, id FROM model');
+        $datas = DB::select('SELECT name, id FROM `model`');
 
         return $datas;
     }
 
-    public function findAllCondition()
+
+    public function fetchModelWhTransfer($whtransferId)
     {
-        $datas = DB::select('SELECT name, id FROM `condition`');
+        $datas = WhTransferModel::where('whTransferId', $whtransferId)->with('models', 'conditions')->get();
+
+
+        return $datas;
+    }
+
+    public function deleteItemInWhTransfer($id)
+    {
+        $deleteItem = WhTransferModel::where('id', $id)->first();
+        if($deleteItem)
+        {
+            $deleteItem -> delete();
+        }
+    }
+
+    public function addModel($modelDetail)
+    {
+
+        $object = json_decode($modelDetail);
+        Log::info($object -> name, ['name']);
+        Log::info($object -> manufactorId);
+        Log::info($object -> categoryId);
+
+        Model::create([
+            'name' => $object -> name,
+            'manufactorId' => $object -> manufactorId,
+            'categoryId' => $object -> categoryId,
+            'shortDescription' => $object -> shortDescription,
+            'longDescription' => $object -> longDescription
+        ]);
+    }
+
+    public function findAllManufactor()
+    {
+        $datas = DB::select('SELECT name, id FROM `manufactor`');
+
+        return $datas;
+    }
+
+    public function findAllCategory()
+    {
+        $datas = DB::select('SELECT name, id FROM `category`');
 
         return $datas;
     }

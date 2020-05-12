@@ -60,7 +60,9 @@ class WhTransfer extends Resource
             Text::make('Courier Name', 'trackingCourier'),
 
 
-            Date::make('Expect ship in', 'expect_ship_in'),
+            Date::make('Expect ship in', 'expect_ship_in', function ($value) {
+                return $value -> format('d/m/Y');
+            }),
 
             Indicator::make('Status', 'status')
             ->labels([
@@ -79,7 +81,9 @@ class WhTransfer extends Resource
             ]),
 
 
-            Date::make('Created Date', 'created_at')
+            Date::make('Created Date', 'created_at', function ($value) {
+                return $value -> format('d/m/Y');
+            })
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),
 
@@ -93,7 +97,7 @@ class WhTransfer extends Resource
 
             ItemTransferResourceTool::make('Model'),
 
-            HasMany::make('Wh Transfer Model', 'whtransfermodel'),
+//            HasMany::make('Wh Transfer Model', 'whtransfermodel'),
 
             WhTransferItemPackedResourceTool::make('WhTransferModel')
         ];

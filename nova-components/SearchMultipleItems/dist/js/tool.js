@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Scoped Styles */\n.btn-group-lg {\nmargin-left: 5px;\n        padding-top: 10px;\n        padding-bottom: 10px;\n        text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n.btn-group-lg {\n    margin-left: 5px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n    text-align: center;\n}\n.analytic-number {\n    font-weight: bold;\n    font-size: 18px;\n    margin-top: 5px;\n    margin-bottom: 5px;\n}\n", ""]);
 
 // exports
 
@@ -704,6 +704,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resourceName', 'resourceId', 'field'],
@@ -713,7 +725,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             inputItems: [],
             displayDatas: [],
             itemsNotInstock: [],
-            arrayItem: []
+            arrayItem: [],
+            ableToUpdateInStock: true,
+            ableToUpdateOutStock: true,
+            itemNotInDatabase: [],
+            countInput: []
         };
     },
 
@@ -737,13 +753,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.handleSerialInput();
+
+            this.ableToUpdateInStock = false;
+            this.ableToUpdateOutStock = false;
+            this.countInput = [];
+
             this.arrayItem.map(function (newitem) {
                 if (newitem) {
                     var serialNumber = newitem.trim();
-
+                    _this.countInput.push(serialNumber);
                     var self = _this;
                     axios.get('/nova-vendor/search-multiple-items/' + serialNumber).then(function (res) {
-                        if (res && res.data && res.data[0]) {
+                        if (res.data[0]) {
                             if (res.data[0].stockStatus === 1) {
                                 res.data[0].stockStatus = 'In stock';
                             } else {
@@ -762,7 +783,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             this.handleSerialInput();
-            alert('Are you sure to update ' + this.arrayItem.toString() + ' OUT STOCK????');
+            this.ableToUpdateOutStock = true;
+            this.ableToUpdateInStock = false;
             this.arrayItem.map(function (newitem) {
                 if (newitem) {
                     var serialNumber = newitem.trim();
@@ -783,7 +805,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             this.handleSerialInput();
-            alert('Are you sure to update ' + this.arrayItem.toString() + ' IN STOCK????');
+            this.ableToUpdateInStock = true;
+            this.ableToUpdateOutStock = false;
             this.arrayItem.map(function (newitem) {
                 if (newitem) {
                     var serialNumber = newitem.trim();
@@ -836,7 +859,7 @@ var render = function() {
           _vm._v("Search & Update Multiple Items")
         ]),
         _vm._v(" "),
-        _c("label", [_vm._v("Serial Number")]),
+        _c("label", [_vm._v("Serial Number:")]),
         _vm._v(" "),
         _c("textarea", {
           directives: [
@@ -879,6 +902,10 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-block border-2 btn-group-lg",
+            attrs: {
+              id: _vm.UpdateOutStock,
+              disabled: _vm.ableToUpdateOutStock
+            },
             on: {
               click: function($event) {
                 return _vm.handleOutStock()
@@ -892,6 +919,7 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-block border-2 btn-group-lg",
+            attrs: { id: _vm.UpdateInStock, disabled: _vm.ableToUpdateInStock },
             on: {
               click: function($event) {
                 return _vm.handleInstock()
@@ -899,7 +927,21 @@ var render = function() {
             }
           },
           [_vm._v("\n                Update To In Stock\n            ")]
-        )
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "analytic-number" }, [
+          _vm._v(
+            "\n                Total input: " +
+              _vm._s(_vm.countInput.length) +
+              "\n                "
+          ),
+          _c("br"),
+          _vm._v(
+            "\n                Total found and able to update: " +
+              _vm._s(_vm.displayDatas.length) +
+              "\n            "
+          )
+        ])
       ],
       1
     ),

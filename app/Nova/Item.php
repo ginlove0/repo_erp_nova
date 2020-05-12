@@ -89,12 +89,16 @@ class Item extends Resource
             -> hideWhenUpdating()
                 ->sortable(),
 
-            Date::make('Created At', 'created_at')
+            Date::make('Created At', 'created_at', function($value){
+                return $value->format('m/d/Y');
+            })
                 -> hideWhenCreating()
                 ->hideWhenUpdating()
             ->sortable(),
 
-            Date::make('Updated At', 'updated_at')
+            Date::make('Updated At', 'updated_at', function($value){
+                return $value->format('m/d/Y');
+            })
                 ->hideWhenUpdating()
                 ->hideWhenCreating()
                 ->sortable(),

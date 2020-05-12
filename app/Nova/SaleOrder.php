@@ -60,14 +60,17 @@ class SaleOrder extends Resource
         return [
             ID::make(),
 
-            BelongsTo::make('Sender', 'senders'),
+            BelongsTo::make('Sender', 'senders')
+            ->required(false),
 
 
 
-            BelongsTo::make('Customer', 'supplier', 'App\Nova\Supplier'),
+            BelongsTo::make('Customer', 'supplier', 'App\Nova\Supplier')
+            ->required(false),
 
 
             BelongsToDependency::make('Representative', 'representatives')
+                ->required(false)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex(),
 
@@ -78,7 +81,8 @@ class SaleOrder extends Resource
 
             BelongsToDependency::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
                 ->dependsOn('supplier', 'supplierId')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->required(false),
 
             BelongsToDependency::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
                 ->dependsOn('supplier', 'supplierId')
@@ -129,8 +133,8 @@ class SaleOrder extends Resource
 
             BelongsTo::make('Warehouse', 'whlocations', WHLocation::class)
                 ->hideFromIndex()
-                ->searchable(),
-
+                ->searchable()
+                ->required(false),
 
 
 
@@ -151,7 +155,8 @@ class SaleOrder extends Resource
                 ->storeSize('attachment_size')
                 ->prunable()
                 ->acceptedTypes('.pdf')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->required(),
 
 //
 

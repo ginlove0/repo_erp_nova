@@ -1,9 +1,10 @@
 <template>
   <div>
-      <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items Prepare</h1>
+      <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items need to prepare</h1>
       <table class="table table-bordered table-form w-full">
           <thead>
           <tr>
+              <th></th>
               <th>Name</th>
               <th>Qty</th>
               <th>Condition</th>
@@ -13,65 +14,78 @@
           </tr>
           </thead>
           <tbody>
-<!--          <tr v-for="item in items">-->
-<!--              <td class="text-center">{{item.models.name}}</td>-->
-<!--              <td class="text-center">{{item.qty}}</td>-->
-<!--              <td class="text-center">{{item.conditions.name}}</td>-->
-<!--              <td class="text-center">{{item.note}}</td>-->
-<!--          </tr>-->
-          <tr v-for="order in orders">
+          <tr class="display-model" v-for="item in datas">
+              <td><input type="checkbox" id="checkbox" v-model="checked"></td>
+              <td class="text-center">{{item.models.name}}</td>
+              <td class="text-center">{{item.qty}}</td>
+              <td class="text-center">{{item.conditions.name}}</td>
+              <td class="text-center">{{item.note}}</td>
+              <td>
 
+                  <DeleteAction
+                      :resourceName="resourceName"
+                      :resourceId="resourceId"
+                      :id="item.id" />
+
+              </td>
+          </tr>
+          <tr v-for="order in orders">
+              <td></td>
               <td class="table-name">
                   <Dropdown
+                      id="model-dropdown"
+                      :click-create="showModal"
                       :options="models"
                       v-on:selected="validateSelectionModel"
-                      v-on:filter="getDropdownValues"
+                      v-on:filter="getDropdownValuesInModel"
                       :disabled="false"
                       placeholder="Please select model">
                   </Dropdown>
+                  <ModelModal
+                      :input-name="fromModal"
+                      v-show="isModalVisible"
+                      @close="closeModal"
+                      v-on:modelAdded="getModelNameFromModal"
+                  />
               </td>
               <td class="table-qty">
                   <input type="number" class="table-input-qty" v-model="order.qty">
               </td>
-              <td class="table-condition">
-                  <Dropdown
-                      :options="conditions"
-                      v-on:selected="validateSelectionCondition"
-                      v-on:filter="getDropdownValues"
-                      :disabled="false"
-                      placeholder="Please select condition">
-                  </Dropdown>
+              <td>
+
+                  <select v-model="order.conditionId" class="table-condition">
+                      <option value="1000">NIB</option>
+                      <option value="1500">NOB</option>
+                      <option value="2750">USEA</option>
+                      <option selected value="3000">USEB</option>
+                      <option value="4000">USEC</option>
+                      <option value="5001">REF</option>
+                      <option value="5000">PART</option>
+                  </select>
               </td>
               <td class="table-name">
-                  <textarea class="table-input" v-model="order.note"></textarea>
+                  <textarea placeholder="Please enter note here..." class="table-input" v-model="order.note"></textarea>
               </td>
-              <td class="table-remove">
-                  <button
-                      @click="removeItem(key)"
-                      class="inline-flex appearance-none cursor-pointer text-70 hover:text-primary mr-3 has-tooltip">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-labelledby="delete" role="presentation" class="fill-current">
-                          <path fill-rule="nonzero" d="M6 4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6H1a1 1 0 1 1 0-2h5zM4 6v12h12V6H4zm8-2V2H8v2h4zM8 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1z"></path>
-                      </svg>
-                  </button>
 
-              </td>
           </tr>
           </tbody>
-          <tfoot>
-            <tr>
-                <td class="table-empty" colspan="1">
-                    <button @click="addLine" class="table-add_line">Add Line & Submit</button>
-                </td>
-            </tr>
-          </tfoot>
+
+
+
       </table>
+      <div>
+          <button @click="addLine" class="active table-add-line">Add Line & Submit</button>
+      </div>
+
   </div>
 </template>
 
 <script>
     import Dropdown from "./SearchDropdown";
+    import DeleteAction from "./DeteleAction";
+    import ModelModal from "./ModelModal";
 export default {
-    components:{Dropdown},
+    components:{Dropdown, DeleteAction, ModelModal},
     props: ['resourceName', 'resourceId', 'panel'],
 
     data() {
@@ -79,46 +93,56 @@ export default {
           orders: [{
               modelId: '',
               qty: 1,
-              conditionId: '',
+              conditionId: 3000,
               note: '',
           }],
           models: [],
-          conditions: []
+          datas: [],
+          isModalVisible: false,
+          fromModal: '',
       }
     },
 
     methods:{
       addLine: function() {
           this.handleSubmit();
-
       },
 
-        removeItem(key) {
-            this.orders.splice(key, 1)
-        },
-
       handleSubmit() {
-          console.log(this.orders[0].conditionId, 'condition');
-          console.log(this.orders[0].modelId, 'model');
-          if(this.orders[0].conditionId != null && this.orders[0].modelId != null)
+          console.log(this.orders[0].conditionId,'condition')
+          if(this.orders[0].conditionId && this.orders[0].modelId  && this.orders[0].qty )
           {
-              // for(let i = 0; i < this.orders.length; i++)
-              // {
                   axios.get('/nova-vendor/item-transfer-resource-tool/addProductToWhTransfer/'+this.resourceId+'/'+ JSON.stringify(this.orders[0]))
                       .then((res) => {
-                          console.log(res);
-                          this.orders.push({modelId: '', qty: 1, conditionId: '', note: ''});
+                          console.log(res)
+                          Nova.$emit('refetch-model');
                       })
                       .catch((err) => {
                           console.log(err);
                       })
-              // }
+
           }else{
               return alert('Please fill name and condition')
           }
 
+          this.orders = [{modelId: '', conditionId: 3000, qty: 1, note: ''}];
+
       },
 
+        //get all Model added in Wh Transfer
+        fetchModelWhTransfer(){
+            axios.get('/nova-vendor/item-transfer-resource-tool/findModelInWhTransfer/' + this.resourceId)
+                .then((res) => {
+                    console.log(res.data, 'fetchData')
+                    this.datas = res.data
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+
+        //get add model in DB
         getAllModel(){
             axios.get('/nova-vendor/item-transfer-resource-tool/findModel')
                 .then((res) => {
@@ -129,34 +153,48 @@ export default {
                 })
         },
 
-        getAllCondition(){
-            axios.get('/nova-vendor/item-transfer-resource-tool/findCondition')
-                .then((res) => {
-                    console.log('hello', res)
-                    this.conditions = res.data
-                })
-                .catch((err) => {
-                    console.log(err.message)
-                })
-        },
-
+        //selected model
         validateSelectionModel(selection) {
             this.orders[0].modelId = selection.id;
             console.log(selection.name+' has been selected');
         },
-        validateSelectionCondition(selection) {
-            this.orders[0].conditionId = selection.id;
-            console.log(selection.name+' has been selected');
+
+        getDropdownValuesInModel(keyword) {
+
+            console.log('You could refresh options by querying the API with '+ keyword);
+            this.fromModal = keyword;
         },
-        getDropdownValues(keyword) {
-            console.log('You could refresh options by querying the API with '+keyword);
-        }
+
+
+        showModal() {
+            this.isModalVisible = true;
+
+        },
+
+        closeModal() {
+            this.isModalVisible = false;
+        },
+
+
     },
+
+    //mounted function same with useEffect in React, always run first when application be executed.
 
   mounted() {
     //
-        this.getAllModel();
-      this.getAllCondition();
+      this.getAllModel();
+      this.fetchModelWhTransfer();
+      Nova.$on('refetch-model', () => {
+          this.fetchModelWhTransfer()
+      });
+
+      Nova.$on('refetch-model-list', () => {
+          this.getAllModel()
+      });
+
+      Nova.$on('close', () => {
+          this.closeModal()
+      });
   },
 }
 </script>
@@ -165,25 +203,52 @@ export default {
     .table-input {
         background: #fff;
         cursor: pointer;
-        border: 1px solid #e7ecf5;
+        border: 1px solid;
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: .8em;
+        font-size: 22px;
         padding: 6px;
-        min-width: 250px;
-        max-width: 250px;
+        min-width: 1200px;
+        max-width: 1200px;
+        max-height: 60px;
+        min-height: 60px;
     }
     .table-input-qty {
         background: #fff;
         cursor: pointer;
-        border: 1px solid #e7ecf5;
+        border: 1px solid;
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: .8em;
+        font-size: 15px;
         padding: 6px;
-        min-width: 100px;
-        max-width: 100px;
+        min-width: 50px;
+        max-width: 50px;
+        max-height: 50px;
+        min-height: 50px;
+    }
+    .table-add-line {
+        width: 100%;
+        height: 40px;
+        border: 0.5px solid;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 25px;
+    }
+    .display-model {
+        font-size: 18px;
+        color: black;
+    }
+    .table-name {
+        font-size: 22px;
+    }
+    .table-condition {
+        font-size: 22px;
+        border: 0.5px solid;
+
     }
 </style>
