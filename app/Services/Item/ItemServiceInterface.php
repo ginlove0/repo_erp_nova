@@ -29,6 +29,7 @@ interface ItemServiceInterface
 
     public function findBySNwithOther(string $sn);
 
+    public function showStatusByDate(int $id);
 
 
 }

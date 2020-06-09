@@ -14,6 +14,11 @@ class ItemStockType extends Filter
      */
     public $component = 'select-filter';
 
+    public function default()
+    {
+        return 1;
+    }
+
     /**
      * Apply the filter to the given query.
      *

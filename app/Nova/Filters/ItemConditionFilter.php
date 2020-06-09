@@ -26,7 +26,14 @@ class ItemConditionFilter extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('conditionId', $value);
+        if($value == 1)
+        {
+            return $query;
+        }
+        else{
+            return $query->where('conditionId', $value);
+        }
+
     }
 
     /**
@@ -45,6 +52,12 @@ class ItemConditionFilter extends Filter
             'USEC' => 4000,
             'PART' => 5000,
             'REF' => 6000,
+            'All Condition' => 1,
         ];
+    }
+
+    public function default()
+    {
+        return 1;
     }
 }

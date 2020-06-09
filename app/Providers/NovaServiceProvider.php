@@ -6,9 +6,10 @@ use App\Services\Model\ModelService;
 use App\Services\Model\ModelServiceInterface;
 use ErpIpsupply\Model\Model;
 use Illuminate\Support\Facades\Gate;
-use Ipsupplt\MakeOutStockTool\MakeOutStockTool;
 use Ipsupplt\SearchMultipleItems\SearchMultipleItems;
-use Ipsupply\AddItemWithoutSn\AddItemWithoutSn;
+//use Ipsupply\MagicManagermentTool\MagicManagermentTool;
+use Ipsupply\ModelQuickView\ModelQuickView;
+use Ipsupply\SearchMultipleUsItem\SearchMultipleUsItem;
 use Ipsupply\StockLocation\StockLocation;
 use Ipsupply\WarehouseTransferTool\WarehouseTransferTool;
 use Laravel\Nova\Cards\Help;
@@ -25,6 +26,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+
     }
 
     /**
@@ -87,11 +90,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new Model,
-            new AddItemWithoutSn,
-            new StockLocation,
             new WarehouseTransferTool,
-            new SearchMultipleItems,
-            new MakeOutStockTool,
+//            (new MagicManagermentTool) -> canSee(function ($request) {
+//                return $request->user()->user_type === 'admin';
+//            }),
+            new ModelQuickView,
+            (new StockLocation)->canSee(function ($request) {
+                return $request->user()->user_type === 'admin';
+            }),
+            (new SearchMultipleItems)->canSee(function ($request) {
+                return $request->user()->user_type === 'admin';
+            }),
+            (new SearchMultipleUsItem)->canSee(function ($request) {
+                return $request->user()->user_type === 'user';
+            })
 
 
         ];

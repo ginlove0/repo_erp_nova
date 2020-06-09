@@ -13,7 +13,7 @@ class WhTransfer extends Model
     //
     protected $table='wh_transfer';
 
-    protected $fillable=['trackNumber', 'trackingCourier', 'createdBy', 'whTransferLocationId', 'created_at', 'expect_ship_in', 'status'];
+    protected $fillable=['trackNumber', 'trackingCourier', 'createdBy', 'whTransferLocationId', 'created_at', 'expect_ship_in', 'status', 'transfer_pack'];
     protected $casts = ['expect_ship_in' => 'date'];
 
     public function whtransferlocation():BelongsTo

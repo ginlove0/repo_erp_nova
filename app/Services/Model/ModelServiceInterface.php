@@ -21,4 +21,8 @@ interface ModelServiceInterface
     public function getQtyItemByCond(string $condition, int $id, int $whlocationId);
 
     public function getQtyItemByTransfer(int $id, int $whlocationId);
+
+    public function getQtyItemByModel(int $id);
+
+
 }

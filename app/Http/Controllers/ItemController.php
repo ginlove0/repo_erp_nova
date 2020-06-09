@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Services\Item\ItemServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ItemController extends Controller
 {
@@ -24,4 +26,5 @@ class ItemController extends Controller
     {
         return $this->itemService->findBySNwithOther($sn);
     }
+
 }

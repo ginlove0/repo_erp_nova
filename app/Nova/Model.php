@@ -10,6 +10,7 @@ use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
 use Ipsupply\ItemTransferQtyBaseModel\ItemTransferQtyBaseModel;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -57,7 +58,7 @@ class Model extends Resource
         'name', 'shortDescription'
     ];
 
-    public static $perPageOptions = [10, 25, 50];
+    public static $perPageOptions = [50, 100, 200];
 
 
 
@@ -71,7 +72,7 @@ class Model extends Resource
     public function fields(Request $request)
     {
         return [
-
+            ID::make()->sortable(),
 
 
 //            Text::make("Name", function($data){
@@ -86,10 +87,33 @@ class Model extends Resource
 //                return $data -> name;
 //            })
 //                ->rules('unique:model'),
-            Text::make("Name")->sortable()
+            Text::make("Name")
+            ->hideFromIndex()
+            ->hideFromDetail(),
+
+            Text::make("Name", function($value){
+                return "<a class=\"no-underline font-bold dim text-primary\" href='http://admin.ipsupply.net/nova/resources/models/$value->id'>$value->name</a>";
+            })
+                ->asHtml()
+                ->sortable()
+                ->hideWhenCreating()
+                ->hideWhenUpdating()
                 ->displayUsing(function ($value) {
                     return str_limit($value, '20', '...');
                 }),
+
+            Text::make("BB", "name", function($value){
+                return "<a class=\"no-underline font-bold dim text-primary\" target=\"_blank\" href='https://members.brokerbin.com/?loc=partkey&parts=$value'>BB</a>";
+            })
+            ->asHtml()
+            ->onlyOnIndex(),
+
+            Text::make("Ebay", "name", function($value){
+                return "<a class=\"no-underline font-bold dim text-primary\" target=\"_blank\" href='https://www.ebay.com/sch/i.html?_nkw=$value&_sop=15'>Ebay</a>";
+            })
+                ->asHtml()
+                ->onlyOnIndex(),
+
 
             Select::make('Has Serial', 'hasSerial')
                 ->options([
@@ -117,7 +141,7 @@ class Model extends Resource
             HasMany::make( 'OtherModelNames')
                 ->hideFromIndex(),
 
-            ItemTransferQtyBaseModel::make("Incomming AU", "id", function ($data){
+            ItemTransferQtyBaseModel::make("2 AU", "id", function ($data){
                 $qty = $this->modelService->getQtyItemByTransfer($data, 4);
                 return $qty[0]->QTY;
             })->onlyOnIndex()
@@ -171,7 +195,7 @@ class Model extends Resource
 
 
 
-            ItemTransferQtyBaseModel::make("Incomming US", "id", function ($data){
+            ItemTransferQtyBaseModel::make("2 US", "id", function ($data){
                 $qty = $this->modelService->getQtyItemByTransfer($data, 3);
 
                 return $qty[0]->QTY;

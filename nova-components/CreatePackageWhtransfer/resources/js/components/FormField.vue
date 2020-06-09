@@ -1,17 +1,46 @@
 <template>
-    <default-field :field="field" :errors="errors">
-        <template slot="field">
+    <div>
+        <div>
             <textarea
-                :style="styling"
-                :id="field.name"
+                id="serial-input"
                 type="text"
-                class="w-full form-control form-input form-input-bordered"
+                class="form-control form-input form-input-bordered"
                 :class="errorClasses"
-                :placeholder="field.name"
+                placeholder="Serial number"
                 v-model="value"
-            />
-        </template>
-    </default-field>
+            ></textarea>
+
+            <button
+                type="button"
+                id="check-btn"
+                @click="handleCheck"
+                class="btn btn-block border-2 btn-group-lg">
+                Check
+            </button>
+
+        </div>
+
+        <div class="testing-code ">
+            <header>Item(s) not available in stock:
+                <span class="btn btn-info border-2 copy-btn ml-auto" @click.stop.prevent="copyTestingCode">
+                    Copy
+                </span>
+            </header>
+            <table>
+                <tbody>
+                    <tr v-for="model in displayModel">
+                        <td> {{model}}
+                            <input type="hidden" id="testing-code" :value="displayModel">
+                        </td>
+
+                    </tr>
+                </tbody>
+
+             </table>
+        </div>
+
+
+    </div>
 </template>
 
 <script>
@@ -21,6 +50,13 @@ export default {
     mixins: [FormField, HandlesValidationErrors],
 
     props: ['resourceName', 'resourceId', 'field'],
+
+    data() {
+        return {
+            arrayItem: [],
+            displayModel: []
+        }
+    },
 
     methods: {
         /*
@@ -43,6 +79,45 @@ export default {
         handleChange(value) {
             this.value = value
         },
+
+        handleCheck(){
+            const replaced_space_sn = this.value.replace(/\n/gi, " ");
+            const replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
+            const arr_sn = replaced_comma_sn.split(' ');
+            this.arrayItem = _.uniq(arr_sn);
+            this.arrayItem.map((item) => {
+                if(item) {
+                    const serialNumber = item.trim();
+                    let self = this;
+                    axios.get('/api/ipsupply/checkLegitSn/' + serialNumber)
+                        .then((res) => {
+                            if(res.data.length === 0)
+                            {
+                                self.displayModel.push(serialNumber)
+                            }
+                        })
+                }
+            })
+            this.displayModel = [];
+        },
+
+        copyTestingCode () {
+            let testingCodeToCopy = document.querySelector('#testing-code')
+            testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+            testingCodeToCopy.select()
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                alert('Testing code was copied ' + msg);
+            } catch (err) {
+                alert('Oops, unable to copy');
+            }
+
+            /* unselect the range */
+            testingCodeToCopy.setAttribute('type', 'hidden')
+            window.getSelection().removeAllRanges()
+        },
     },
 
     computed: {
@@ -55,3 +130,31 @@ export default {
     }
 }
 </script>
+
+<style>
+    #serial-input {
+        height: 180px;
+        border: 1px solid;
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+
+    #check-btn {
+        background-color: #4099de;
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        color: white;
+    }
+
+    header {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+
+</style>

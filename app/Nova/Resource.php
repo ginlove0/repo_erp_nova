@@ -4,8 +4,6 @@ namespace App\Nova;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
-//use Titasgailius\SearchRelations\SearchesRelations;
-use Inspheric\NovaDefaultable\HasDefaultableFields;
 
 abstract class Resource extends NovaResource
 {
@@ -60,4 +58,9 @@ abstract class Resource extends NovaResource
     {
         return parent::relatableQuery($request, $query);
     }
+
+//    public static function perPageOptions()
+//    {
+//        return [25, 50, 100];
+//    }
 }

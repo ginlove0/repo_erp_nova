@@ -24,7 +24,14 @@ class ItemLocation extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('whlocationId', $value);
+        if($value == 3)
+        {
+            return $query;
+        }else
+        {
+            return $query->where('whlocationId', $value);
+        }
+
     }
 
     /**
@@ -37,7 +44,13 @@ class ItemLocation extends Filter
     {
         return [
             'Sydney' => 1,
-            'US' => 2
+            'US' => 2,
+            'All Location' => 3
         ];
+    }
+
+    public function default()
+    {
+        return 3;
     }
 }

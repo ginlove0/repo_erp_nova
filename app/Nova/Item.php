@@ -2,23 +2,23 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\OutStockItem;
-use App\Nova\Actions\UpdateItemInstock;
+use App\Nova\Filters\CreatedDateFilter;
 use App\Nova\Filters\ItemConditionFilter;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
+use App\Nova\Filters\PaginationHasManyItemField;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Item extends Resource
 {
-
-
 
     public static $group = "Product";
     /**
@@ -48,6 +48,23 @@ class Item extends Resource
         'serialNumber', 'aliasModel'
     ];
 
+    public static $perPageViaRelationship = 50;
+
+
+    public static function softDeletes()
+    {
+        return false;
+    }
+
+    public static $perPageOptions = [50, 100, 200, 1000];
+
+//    public static function indexQuery(NovaRequest $request, $query)
+//    {
+//        $whlocationId = \App\Models\Item::where('whlocationId', 2);
+//
+//        return $query->where('whlocationId', 2);
+//    }
+
     public static $trafficCop = false;
 
     /**
@@ -65,14 +82,29 @@ class Item extends Resource
                 ->searchable(),
 
 
+
             Text::make("Alias Model", "aliasModel")
                 ->displayUsing(function ($value) {
-                    return str_limit($value, '15', '...');
-                }),
+                    return str_limit($value, '20', '...');
+                })
+                -> hideFromDetail()
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+
+            Text::make("Alias Model", "aliasModel")
+                ->hideFromIndex(),
 
             Text::make("SN", "serialNumber")
+                ->hideFromDetail()
+                ->hideFromIndex()
+                ->hideWhenCreating(),
 
-            ->hideWhenCreating(),
+            Text::make("SN", function($value){
+                return "<a class=\"no-underline font-bold dim text-primary\" href='http://127.0.0.1:8000/resources/items/$value->id'>$value->serialNumber</a>";
+            })
+                ->asHtml()
+            ->hideWhenCreating()
+            ->hideWhenUpdating(),
 
             BelongsTo::make("Supplier", "suppliers")
                 ->searchable(),
@@ -90,14 +122,20 @@ class Item extends Resource
                 ->sortable(),
 
             Date::make('Created At', 'created_at', function($value){
-                return $value->format('m/d/Y');
+                if($value){
+                    return $value -> format('d/m/Y');
+                }
+                return null;
             })
                 -> hideWhenCreating()
                 ->hideWhenUpdating()
             ->sortable(),
 
             Date::make('Updated At', 'updated_at', function($value){
-                return $value->format('m/d/Y');
+                if($value){
+                    return $value -> format('d/m/Y');
+                }
+                return null;
             })
                 ->hideWhenUpdating()
                 ->hideWhenCreating()
@@ -107,11 +145,11 @@ class Item extends Resource
             BelongsTo::make("Sale Order", 'saleorder')
             ->onlyOnDetail(),
 
-            Number::make("Quantity", "quantity")
-            ->hideFromIndex(),
+            Number::make("Qty", "quantity"),
 
             Text::make("Location", "location")
-                ->sortable(),
+                ->sortable()
+                ->nullable(),
 
             BelongsTo::make("Condition", 'conditions')
                 ->sortable(),
@@ -119,11 +157,22 @@ class Item extends Resource
             BelongsTo::make("WHLocation", 'whlocations')
                 ->sortable(),
 
+            BelongsTo::make("Wh Transfer", "whtransfer")
+                ->hideWhenUpdating()
+                ->hideWhenCreating()
+                ->hideFromIndex(),
+
             Text::make('Note', 'note')->displayUsing(function ($value) {
                 return str_limit($value, '15', '...');
             }) -> onlyOnIndex(),
 
-            Textarea::make('Note', 'note') -> hideFromIndex(),
+            Textarea::make('Test report', 'test_report')
+                ->hideFromIndex()
+                ->nullable(),
+
+            Textarea::make('Note', 'note')
+                ->hideFromIndex()
+                ->alwaysShow(),
 
             Text::make('User', 'addedBy')
             ->onlyOnDetail(),
@@ -159,7 +208,9 @@ class Item extends Resource
         return [
             new ItemStockType,
             new ItemLocation,
-            new ItemConditionFilter
+            new ItemConditionFilter,
+            new CreatedDateFilter,
+//            new PaginationHasManyItemField,
 
 
         ];
@@ -185,8 +236,7 @@ class Item extends Resource
     public function actions(Request $request)
     {
         return [
-            new OutStockItem,
-            new UpdateItemInstock,
+
         ];
     }
 

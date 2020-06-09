@@ -19,6 +19,11 @@ class ModelHaveItemFilter extends Filter
     public $component = 'select-filter';
 
 
+    public function default()
+    {
+        return 1;
+    }
+
 
     /**
      * Apply the filter to the given query.
@@ -30,8 +35,7 @@ class ModelHaveItemFilter extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        $modelIds = Item::whereNotNull('serialNumber')
-            ->where('stockStatus', '=', true)
+        $modelIds = Item::where('stockStatus', '=', true)
             ->groupBy('modelId')
             ->pluck('modelId');
 
@@ -52,11 +56,6 @@ class ModelHaveItemFilter extends Filter
 
         return ['Model With Item Only'=>1];
 
-    }
-
-    public function default()
-    {
-        return true;
     }
 
 

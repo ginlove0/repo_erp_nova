@@ -48,7 +48,7 @@ class MigrateModelFromStockCheck extends Command
     {
         //
         $location = 'uploads';
-        $filename = 'itemWithNewModelName_AU.csv';
+        $filename = 'AU_withname.csv';
         $filepath = public_path($location."/".$filename);
         $file = fopen($filepath,"r");
 
@@ -73,29 +73,30 @@ class MigrateModelFromStockCheck extends Command
         foreach($importData_arr as $importData){
 
 //            $newSup = Supplier::firstOrCreate(['name' => $importData[0]])
-//            $newModelll = explode('#', $importData[1]) ;
+            $newModelll = explode('#', $importData[1]) ;
 
-//            if($importData[8] == ""){
-//                $newModel = explode('#', $importData[2]) ;
-//                $importData[8] = $newModel[0];
+//            if($importData[9] == ""){
+//                $newModellll = explode('#', $importData[1]) ;
+//                $importData[9] = $newModellll[0];
 //            }
 //
 //            if($importData[7] == ""){
 //                $importData[7] = $importData[2];
 //            }
-            Log::info($importData[5]);
-            $newModel = Model::updateOrCreate(['name' => $importData[1]],[ 'addedBy' => 'Old Data']);
+            $newModel = Model::updateOrCreate(['name' => $newModelll[0]],[ 'addedBy' => 'Old Data']);
             $newCon = Condition::firstOrCreate(['name' => $importData[3]]);
 
-            if(!$importData[3] || $importData[3] == 6.01E+11 || $importData[3] == 6.01004E+11){
-                $importData[3] = now() -> timestamp;
+            if(!$importData[5] || $importData[5] == 6.01E+11 || $importData[5] == 6.01004E+11){
+                $importData[5] = now() -> timestamp;
             }
+
 
             $insertData = array(
 
                 "supplierId" => 39,
                 "conditionId" => $newCon -> id,
                 "created_at" => date('Y/m/d H:i:s', $importData[5]),
+                "updated_at" => now(),
                 "serialNumber" => $importData[2],
                 "stockStatus" => $importData[6],
                 "note"=> $importData[4],

@@ -13,7 +13,7 @@
                             <tr>
                                 <td>Name</td>
                                 <td>
-                                    <input required class="input-group" v-model="inputName" type="text" />
+                                    <input required class="input-group" v-model="inputName" type="text" placeholder="Input model name"/>
                                 </td>
                             </tr>
 
@@ -46,14 +46,14 @@
                             <tr>
                                 <td>Short Description</td>
                                 <td>
-                                    <input class="input-group" v-model="newModel.shortDescription" type="text"  />
+                                    <input class="input-group" v-model="newModel.shortDescription" type="text"  placeholder="Short description"/>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>Long Description</td>
                                 <td>
-                                    <textarea class="textarea-group" v-model="newModel.longDescription" type="text"></textarea>
+                                    <textarea class="textarea-group" v-model="newModel.longDescription" type="text" placeholder="Long description"></textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -248,24 +248,24 @@
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: .8em;
+        font-size: 1em;
         padding: 6px;
-        min-width: 250px;
-        max-width: 250px;
-        max-height: 50px;
-        min-height: 50px;
+        min-width: 350px;
+        max-width: 350px;
+        max-height: 40px;
+        min-height: 40px;
     }
 
     .textarea-group{
-        min-width: 250px;
-        max-width: 250px;
+        min-width: 350px;
+        max-width: 350px;
         background: #fff;
         cursor: pointer;
         border: 1px solid;
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: .8em;
+        font-size: 1em;
         padding: 6px;
         min-height: 70px;
     }
@@ -278,6 +278,11 @@
         font-weight: bold;
         color: black;
         background: transparent;
+    }
+
+    .table-modal {
+        display: block;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
 
 </style>

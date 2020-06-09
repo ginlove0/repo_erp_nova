@@ -21,7 +21,9 @@ class Item extends Model
     protected $fillable = ["addedBy", "whlocationId", "supplierId",
         "modelId", "serialNumber", "price",
         "note", "extra", "quantity", "conditionId", "stockStatus",
-        "location", "smartnet", "version", "sale_order_id", "old_model_id", "created_at", "updated_at"];
+        "location", "smartnet", "version", "sale_order_id", "old_model_id",
+        "created_at", "updated_at", "test_report", "wh_transfer_id",
+        "transfer_pack", "test_status"];
 
 
     public function saleorder(): BelongsTo
@@ -34,6 +36,10 @@ class Item extends Model
         return $this->belongsTo(WHLocation::class, "whlocationId", "id");
     }
 
+    public function whtransfer(): BelongsTo
+    {
+        return $this->belongsTo(WhTransfer::class, "wh_transfer_id", "id");
+    }
 
     public function suppliers(): BelongsTo
     {

@@ -15,9 +15,8 @@ class OutStockItem extends Action
 {
     use InteractsWithQueue, Queueable;
 
-    public $name = "Make a list item out-stock";
+    public $name = "Make item(s) need to test";
 
-    public $onlyOnDetail = true;
 
     /**
      * Perform the action on the given models.
@@ -30,19 +29,14 @@ class OutStockItem extends Action
     {
 
         //
-        $myArrs = explode(',', $fields->items_to_out_stock);
-        foreach ($myArrs as $myArr){
-            $removeTrim = trim($myArr);
+        foreach ($models as $model){
+            $model -> test_status = 'Need test';
+            $model -> timestamps = false;
 
-            //check sn in DB
-            $newItem = Item::where('serialNumber', $removeTrim)->first();
-            if($newItem && $newItem->stockStatus == true) {
-                $newItem->stockStatus = false;
-                $newItem->save();
-            }
+            $model -> save();
         }
 
-        return Action::message('Out stock success');
+        return Action::message('Update test status to Need test success!');
 
 
     }
@@ -55,7 +49,7 @@ class OutStockItem extends Action
     public function fields()
     {
         return [
-            ItemToOutStock::make('Items to out stock')
+//            ItemToOutStock::make('Items to out stock')
         ];
     }
 }

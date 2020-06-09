@@ -139,6 +139,13 @@
       <path value="$PROJECT_DIR$/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/add_item_without_sn_us" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/search_multiple_us_item" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/magic-managerment-tool" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/display-model-with-link" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/model-quick-view" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/model-quick-view-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

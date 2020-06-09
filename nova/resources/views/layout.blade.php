@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=1280">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ \Laravel\Nova\Nova::name() }}</title>
+
+        <title>@yield('title')</title>
+{{--    <title>{{config('nova.name')}}</title>--}}
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i" rel="stylesheet">
@@ -51,6 +54,7 @@
 
                     @if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
                         <global-search dusk="global-search-component"></global-search>
+
                     @endif
 
                     <dropdown class="ml-auto h-9 flex items-center dropdown-right">
@@ -96,3 +100,18 @@
     </script>
 </body>
 </html>
+
+{{--<style>--}}
+{{--    body {--}}
+{{--        font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;;--}}
+{{--        font-size: 18px;--}}
+{{--    }--}}
+
+{{--    .text-sm {--}}
+{{--        font-size: 16px;--}}
+{{--    }--}}
+
+{{--    .text-xs {--}}
+{{--        font-size: 14px;--}}
+{{--    }--}}
+{{--</style>--}}

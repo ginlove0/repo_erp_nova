@@ -19,8 +19,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/addItem/{sn}/{conditionId}/{whlocationId}/{supplierName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class.'@index');
 
-Route::get('/addItemNoCondition/{sn}/{whlocationId}/{supplierName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class.'@addItemNoCondition');
+Route::get('/timThuXemNhe/findAllSupplierInDB', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@show');
 
-Route::get('findSupplier', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@show');
+Route::get('/findSomething/modelGetAll', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@show');
+
+Route::get('/addItemToStock/{product}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ItemController::class.'@addItemToStock');
+
+Route:: get('/findCategoryInManuallyAdd/Category', \Ipsupply\WarehouseTransferTool\Http\Controllers\Category::class.'@show');
+
+Route::get('/findManufactorInManuallyAdd/Manufactor', \Ipsupply\WarehouseTransferTool\Http\Controllers\ManyfactorController::class.'@show');
+
+Route::get('/addNewModel/{modelDetail}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@addModelInManuallyAdd');
+
+Route::get('/findModelByName/{modelName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@findModelByName');
+
+Route::get('/addNewSupplier/{supplierDetail}', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@addSupplierInManuallyAdd');
+
+

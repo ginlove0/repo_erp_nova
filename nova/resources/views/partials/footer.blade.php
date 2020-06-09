@@ -1,7 +1,9 @@
-<p class="mt-8 text-center text-xs text-80">
-    <a href="https://nova.laravel.com" class="text-primary dim no-underline">Laravel Nova</a>
+<p class="mt-8 text-center text-xs text-80 text-foot">
+    <a href="https://ipsupply.com.au" class="text-primary dim no-underline">IP SUPPLY</a>
     <span class="px-1">&middot;</span>
-    &copy; {{ date('Y') }} Laravel LLC - By Taylor Otwell, David Hemphill, and Steve Schoger.
+    &copy; {{ date('Y') }} IpSupply - By Daniel Vu.
     <span class="px-1">&middot;</span>
     v{{ \Laravel\Nova\Nova::version() }}
 </p>
+
+

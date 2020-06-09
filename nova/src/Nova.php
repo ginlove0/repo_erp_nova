@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Laravel\Nova\Actions\ActionResource;
@@ -217,6 +218,8 @@ class Nova
                 'perPageOptions' => $resource::perPageOptions(),
             ], $resource::additionalInformation($request));
         })->values()->all();
+
+
     }
 
     /**
@@ -331,8 +334,12 @@ class Nova
      */
     public static function resourceForKey($key)
     {
+
         return collect(static::$resources)->first(function ($value) use ($key) {
+
             return $value::uriKey() === $key;
+
+
         });
     }
 

@@ -20,13 +20,13 @@ class SaleOrder extends Model
 
     protected $table = "sale_order";
 
-    protected $fillable = ["supplierId", "representativeId",
-        "supplierEmailId",	"billingAddressId",
-        "shippingAddressId",	"shippingMethod",
-        "discount", "shipping_charge",
+    protected $fillable = [
+        "supplierId", "representativeId", "billingAddressId",
+        "shippingAddressId", "discount", "shipping_charge",
         "shipping_method", "sender_id", "supplierInvoiceEmailId",
-        "supplierTrackingEmailId", "required_date", "whlocation_id",
-        "linkEbay", "itemPackedId", "purchase_order_pdf", "attachment", "attachment_name", "attachment_size"];
+        "supplierTrackingEmailId", "required_date",
+        "linkEbay", "itemPackedId", "purchase_order_pdf",
+        "attachment", "attachment_name", "attachment_size", "note"];
 
     use SoftDeletes;
 
@@ -49,15 +49,6 @@ class SaleOrder extends Model
         return $this->belongsTo(Representative::class, 'representativeId', 'id');
     }
 
-
-    /**
-     * Get the supplier email associated with the sale order.
-     * @return BelongsTo
-     */
-    public function supplieremails(): BelongsTo
-    {
-        return $this->belongsTo(SupplierEmail::class,'supplierEmailId', 'id');
-    }
 
     /**
      * Get the supplier address define as billing address associated with the sale order.
@@ -132,14 +123,7 @@ public function item():HasMany
         return $this->belongsTo(Sender::class, "sender_id");
     }
 
-    /**
-     * Get the warehouse location of the sale order.
-     * @return BelongsTo
-     */
-    public function whlocations() : BelongsTo
-    {
-        return $this->belongsTo(WHLocation::class, "whlocation_id", "id");
-    }
+
 
 
 

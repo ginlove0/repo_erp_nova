@@ -6,13 +6,17 @@
                :name="name"
                @focus="showOptions()"
                @keyup="keyMonitor"
+               @blur="onBlur()"
                v-model="searchFilter"
                :disabled="disabled"
                :placeholder="placeholder"/>
 
+
         <!-- Dropdown Menu -->
         <div class="dropdown-content"
-             v-show="optionsShown">
+             v-show="optionsShown"
+        >
+
             <div
                 class="dropdown-item"
                 @mousedown="selectOption(option)"
@@ -21,30 +25,28 @@
                 {{ option.name || '-' }}
             </div>
 
-
-            <div v-if="clickCreate" class="dropdown-item" @click="clickCreate">
-                <div >
-                    <svg class="svg-icon">
-                        <path fill="none" d="M13.68,9.448h-3.128V6.319c0-0.304-0.248-0.551-0.552-0.551S9.448,6.015,9.448,6.319v3.129H6.319
+            <div v-if="clickCreate" class="dropdown-item" @mousedown="clickCreate">
+                <svg class="svg-icon">
+                    <path fill="none" d="M13.68,9.448h-3.128V6.319c0-0.304-0.248-0.551-0.552-0.551S9.448,6.015,9.448,6.319v3.129H6.319
 								c-0.304,0-0.551,0.247-0.551,0.551s0.247,0.551,0.551,0.551h3.129v3.129c0,0.305,0.248,0.551,0.552,0.551s0.552-0.246,0.552-0.551
 								v-3.129h3.128c0.305,0,0.552-0.247,0.552-0.551S13.984,9.448,13.68,9.448z M10,0.968c-4.987,0-9.031,4.043-9.031,9.031
 								c0,4.989,4.044,9.032,9.031,9.032c4.988,0,9.031-4.043,9.031-9.032C19.031,5.012,14.988,0.968,10,0.968z M10,17.902
 								c-4.364,0-7.902-3.539-7.902-7.903c0-4.365,3.538-7.902,7.902-7.902S17.902,5.635,17.902,10C17.902,14.363,14.364,17.902,10,17.902
 								z">
 
-                        </path>
-                    </svg>
-                </div>
+                    </path>
+                </svg>
             </div>
 
 
-            <div class="dropdown-item" @click="onBlur">
-                <div >
-                    <svg class="svg-icon" >
-                        <path d="M14.776,10c0,0.239-0.195,0.434-0.435,0.434H5.658c-0.239,0-0.434-0.195-0.434-0.434s0.195-0.434,0.434-0.434h8.684C14.581,9.566,14.776,9.762,14.776,10 M18.25,10c0,4.558-3.693,8.25-8.25,8.25c-4.557,0-8.25-3.691-8.25-8.25c0-4.557,3.693-8.25,8.25-8.25C14.557,1.75,18.25,5.443,18.25,10 M17.382,10c0-4.071-3.312-7.381-7.382-7.381C5.929,2.619,2.619,5.93,2.619,10c0,4.07,3.311,7.382,7.381,7.382C14.07,17.383,17.382,14.07,17.382,10"></path>
-                    </svg>
-                </div>
-            </div>
+
+<!--            <div class="dropdown-item" @click="onBlur">-->
+<!--                <div >-->
+<!--                    <svg class="svg-icon" >-->
+<!--                        <path d="M14.776,10c0,0.239-0.195,0.434-0.435,0.434H5.658c-0.239,0-0.434-0.195-0.434-0.434s0.195-0.434,0.434-0.434h8.684C14.581,9.566,14.776,9.762,14.776,10 M18.25,10c0,4.558-3.693,8.25-8.25,8.25c-4.557,0-8.25-3.691-8.25-8.25c0-4.557,3.693-8.25,8.25-8.25C14.557,1.75,18.25,5.443,18.25,10 M17.382,10c0-4.071-3.312-7.381-7.382-7.381C5.929,2.619,2.619,5.93,2.619,10c0,4.07,3.311,7.382,7.381,7.382C14.07,17.383,17.382,14.07,17.382,10"></path>-->
+<!--                    </svg>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </template>
@@ -175,12 +177,13 @@
             border-radius: 3px;
             color: #333;
             display: block;
-            font-size: .8em;
+            font-size: 1em;
             padding: 6px;
             min-width: 350px;
             max-width: 350px;
-            max-height: 50px;
-            min-height: 50px;
+            max-height: 40px;
+            min-height: 40px;
+            font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
             &:hover {
                 background: #f8f8fa;
             }

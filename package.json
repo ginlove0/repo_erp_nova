@@ -67,7 +67,19 @@
         "build-make-out-stock-tool": "cd nova-components/MakeOutStockTool && npm run dev",
         "build-make-out-stock-tool-prod": "cd nova-components/MakeOutStockTool && npm run prod",
         "build-item-transfer-qty-base-model": "cd nova-components/ItemTransferQtyBaseModel && npm run dev",
-        "build-item-transfer-qty-base-model-prod": "cd nova-components/ItemTransferQtyBaseModel && npm run prod"
+        "build-item-transfer-qty-base-model-prod": "cd nova-components/ItemTransferQtyBaseModel && npm run prod",
+        "build-add_item_without_sn_us": "cd nova-components/AddItemWithoutSnUs && npm run dev",
+        "build-add_item_without_sn_us-prod": "cd nova-components/AddItemWithoutSnUs && npm run prod",
+        "build-search_multiple_us_item": "cd nova-components/SearchMultipleUsItem && npm run dev",
+        "build-search_multiple_us_item-prod": "cd nova-components/SearchMultipleUsItem && npm run prod",
+        "build-magic-managerment-tool": "cd nova-components/MagicManagermentTool && npm run dev",
+        "build-magic-managerment-tool-prod": "cd nova-components/MagicManagermentTool && npm run prod",
+        "build-display-model-with-link": "cd nova-components/DisplayModelWithLink && npm run dev",
+        "build-display-model-with-link-prod": "cd nova-components/DisplayModelWithLink && npm run prod",
+        "build-model-quick-view": "cd nova-components/ModelQuickView && npm run dev",
+        "build-model-quick-view-prod": "cd nova-components/ModelQuickView && npm run prod",
+        "build-model-quick-view-field": "cd nova-components/ModelQuickViewField && npm run dev",
+        "build-model-quick-view-field-prod": "cd nova-components/ModelQuickViewField && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

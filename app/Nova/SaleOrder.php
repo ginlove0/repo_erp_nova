@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Textarea;
 use Manmohanjit\BelongsToDependency\BelongsToDependency;
 use OptimistDigital\NovaNotesField\NotesField;
 
@@ -60,39 +61,42 @@ class SaleOrder extends Resource
         return [
             ID::make(),
 
-            BelongsTo::make('Sender', 'senders')
-            ->required(false),
+            BelongsTo::make('Sender', 'senders'),
 
 
 
             BelongsTo::make('Customer', 'supplier', 'App\Nova\Supplier')
-            ->required(false),
+            ->nullable(),
 
 
             BelongsToDependency::make('Representative', 'representatives')
-                ->required(false)
+                ->nullable()
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex(),
 
             BelongsToDependency::make('Billing Address', 'billingaddresses', SupplierAddress::class)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex()
-                ->required(false),
+                ->nullable(),
 
             BelongsToDependency::make('Shipping Address', 'shippingaddresses', SupplierAddress::class)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex()
-                ->required(false),
+                ->nullable(),
 
             BelongsToDependency::make('Invoice Email', 'supplierinvoiceemails', SupplierEmail::class)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex()
-                ->required(false),
+                ->nullable(),
 
             BelongsToDependency::make('Tracking Email', 'suppliertrackingemails', SupplierEmail::class)
                 ->dependsOn('supplier', 'supplierId')
                 ->hideFromIndex()
-                ->required(false),
+                ->nullable(),
+
+            Textarea::make('Note', 'note')
+            ->hideFromIndex()
+            ->alwaysShow(),
 
 
 
@@ -130,11 +134,6 @@ class SaleOrder extends Resource
 //            -> hideFromIndex()
 //                ->hideWhenUpdating(),
 
-
-            BelongsTo::make('Warehouse', 'whlocations', WHLocation::class)
-                ->hideFromIndex()
-                ->searchable()
-                ->required(false),
 
 
 
@@ -234,7 +233,6 @@ class SaleOrder extends Resource
             NotesField::make('Notes')
             ->placeholder('Add Note')
             ->onlyOnDetail()
-
 
 
 

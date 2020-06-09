@@ -9,6 +9,7 @@ namespace App\Services\Model;
 use App\Models\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class ModelService implements ModelServiceInterface
 {
@@ -77,5 +78,22 @@ class ModelService implements ModelServiceInterface
         return $data;
 
         // TODO: Implement getQtyItemByTransfer() method.
+    }
+
+    public function getQtyItemByModel(int $id)
+    {
+        $data = DB::select("
+            select sum(quantity) as QTY, modelId as Model
+            from item
+            where item.modelId = $id
+            and item.stockStatus = true
+            group by created_at
+        ");
+
+        
+
+        return $data;
+
+        // TODO: Implement getQtyItemByModel() method.
     }
 }

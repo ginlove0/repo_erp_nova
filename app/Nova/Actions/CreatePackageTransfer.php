@@ -40,14 +40,27 @@ class CreatePackageTransfer extends Action
 
                     $getItem = Item::where('serialNumber', $removeTrim) -> first();
 
-                    if($getItem && $getItem -> stockStatus == true){
+                    if($getItem){
                         if($getItem -> wh_transfer_id)
                         {
                             $getItem -> wh_transfer_id = null;
+                            $getItem -> save();
                         }
 
-                        if($getItem -> whlocationId === 3 || $getItem -> whlocationId === 4)
+                        if($getItem -> transfer_pack)
                         {
+                            $getItem -> transfer_pack = null;
+                            $getItem -> save();
+                        }
+
+                        if($getItem -> stockStatus == false){
+                            $getItem -> stockStatus = true;
+                            $getItem -> save();
+                        }
+
+                        if($getItem -> whlocationId == 1 || $getItem -> whlocationId == 2)
+                        {
+                            $getItem -> transfer_pack = $model -> transfer_pack;
                             $getItem -> wh_transfer_id = $model -> id;
                             $getItem -> save();
                         }else{

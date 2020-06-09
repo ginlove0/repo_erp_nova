@@ -18,7 +18,7 @@ class Supplier extends Resource
      * @var string
      */
 
-    public static $group = 'Supplier';
+    public static $group = 'Tool';
 
     public static $model = 'App\Models\Supplier';
 
@@ -99,7 +99,9 @@ class Supplier extends Resource
                 'Note' => [
                     HasMany::make('Note', 'suppliernotes', SupplierNote::class)
                 ],
-
+                'Items' => [
+                    HasMany::make('Items', 'items', Item::class)
+                ]
 
 
 

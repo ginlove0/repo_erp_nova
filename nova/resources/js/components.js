@@ -81,6 +81,7 @@ import RestoreResourceModal from '@/components/Modals/RestoreResourceModal'
 import ScrollWrap from '@/components/ScrollWrap'
 import Search from '@/components/Icons/Search'
 import SearchInput from '@/components/SearchInput'
+import ModelSearch from "./components/ModelSearch";
 import SortableIcon from '@/components/Index/SortableIcon'
 import TrendMetric from '@/components/Metrics/TrendMetric'
 import Tooltip from '@/components/Tooltip'
@@ -180,6 +181,7 @@ Vue.component('tooltip', Tooltip)
 Vue.component('tooltip-content', TooltipContent)
 Vue.component('scroll-wrap', ScrollWrap)
 Vue.component('search-input', SearchInput)
+Vue.component('model-search', ModelSearch)
 Vue.component('sortable-icon', SortableIcon)
 Vue.component('trend-metric', TrendMetric)
 Vue.component('validation-errors', ValidationErrors)

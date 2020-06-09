@@ -1,6 +1,7 @@
 <template>
-    <div class="font-bold">
+    <div  class="font-bold">
         <p class="text-center">{{field.value}}</p>
+
     </div>
 
 </template>

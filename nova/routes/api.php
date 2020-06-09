@@ -65,7 +65,7 @@ Route::get('/{resource}/relate-authorization', 'RelatableAuthorizationController
 Route::get('/{resource}/soft-deletes', 'SoftDeleteStatusController@show');
 
 // Resource Management...
-Route::get('/{resource}', 'ResourceIndexController@handle');
+Route::get('/{resource}', 'ResourceIndexController@handle') ;
 Route::get('/{resource}/count', 'ResourceCountController@show');
 Route::delete('/{resource}/detach', 'ResourceDetachController@handle');
 Route::put('/{resource}/restore', 'ResourceRestoreController@handle');
@@ -84,3 +84,4 @@ Route::get('/{resource}/morphable/{field}', 'MorphableController@index');
 Route::post('/{resource}/{resourceId}/attach/{relatedResource}', 'ResourceAttachController@handle');
 Route::post('/{resource}/{resourceId}/update-attached/{relatedResource}/{relatedResourceId}', 'AttachedResourceUpdateController@handle');
 Route::post('/{resource}/{resourceId}/attach-morphed/{relatedResource}', 'MorphedResourceAttachController@handle');
+

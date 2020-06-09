@@ -1,48 +1,51 @@
 <template>
-    <div>
+    <div >
 
 <!--        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items transfered</h1>-->
         <h2 class="flex-no-shrink text-90 font-normal text-2xl">Total Item Packed: {{items.length}}</h2>
-        <table class="table w-full">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Alias Model</th>
-                <th>SN</th>
-                <th>Condition</th>
-<!--                <th>Supplier</th>-->
-                <th>Status</th>
-                <th>Wh Location</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="item in sortArrays(items)">
+        <div class="parent">
+            <table class="table w-full">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Alias Model</th>
+                    <th>SN</th>
+                    <th>Condition</th>
+                    <!--                <th>Supplier</th>-->
+                    <th>Status</th>
+                    <th>Wh Location</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in sortArrays(items)">
 
-                <td class="text-center">{{item.models.name}}</td>
-                <td class="text-center">{{item.aliasModel}}</td>
-                <td class="text-center">{{item.serialNumber}}</td>
-                <td class="text-center">{{item.conditions.name}}</td>
-<!--                <td class="text-center">{{item.suppliers.name}}</td>-->
-                <td class="text-center">In Stock</td>
-                <td class="text-center">{{item.whlocations.name}}</td>
-                <!--                    <td class="text-center">{{order.price}}</td>-->
-                <!--                    <td class="text-center">{{order.note}}</td>-->
+                    <td class="text-center">{{item.models.name}}</td>
+                    <td class="text-center">{{item.aliasModel}}</td>
+                    <td class="text-center">{{item.serialNumber}}</td>
+                    <td class="text-center">{{item.conditions.name}}</td>
+                    <!--                <td class="text-center">{{item.suppliers.name}}</td>-->
+                    <td class="text-center">In Stock</td>
+                    <td class="text-center">{{item.whlocations.name}}</td>
+                    <!--                    <td class="text-center">{{order.price}}</td>-->
+                    <!--                    <td class="text-center">{{order.note}}</td>-->
 
-                <td>
+                    <td>
 
-                    <DeleteAction
-                        :resourceName="resourceName"
-                        :resourceId="resourceId"
-                        :id="item.id" />
+                        <DeleteAction
+                            :resourceName="resourceName"
+                            :resourceId="resourceId"
+                            :id="item.id" />
 
-                </td>
+                    </td>
 
 
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </template>
 
@@ -93,3 +96,9 @@ export default {
   },
 }
 </script>
+<style>
+    .table td {
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
+        font-size: 18px;
+    }
+</style>

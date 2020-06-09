@@ -1,10 +1,17 @@
 @extends('nova::layout')
 
+@section('title', request()->segment(1))
+{{--@section('title', trans(request()->segment(2)))--}}
+
 @section('content')
     <loading ref="loading"></loading>
 
     <fade-transition>
-        <router-view :key="$route.name + ($route.params.resourceName || '')"></router-view>
+
+        <router-view :key="$route.name + ($route.params.resourceName || '')">
+
+        </router-view>
+
     </fade-transition>
 
     <portal-target name="modals" transition="fade-transition"></portal-target>

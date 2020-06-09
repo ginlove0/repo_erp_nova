@@ -110,8 +110,6 @@ class SaleOrderService implements SaleOrderServiceInterface
             $id
         ]);
 
-        Log::info($data[0]);
-
         return $data;
     }
 

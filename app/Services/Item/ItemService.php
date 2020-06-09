@@ -105,4 +105,19 @@ class ItemService implements ItemServiceInterface
         return $item;
         // TODO: Implement findBySNwithOther() method.
     }
+
+    public function showStatusByDate(int $id)
+    {
+        $item = Item::where('id', $id)->first();
+        if($item){
+            if($item -> updated_at === $item -> created_at)
+            {
+                return 'New';
+            }
+            else{
+                return 'Update';
+            }
+        }
+        // TODO: Implement showStatusByDate() method.
+    }
 }

@@ -17,6 +17,8 @@ class SaleOrderItem extends Resource
 
     private $saleOrderService;
 
+    public static $displayInNavigation = false;
+
     public function __construct($resource)
     {
         parent::__construct($resource);
@@ -84,8 +86,6 @@ class SaleOrderItem extends Resource
                 return $newData;
             }) -> onlyOnDetail(),
 
-            Number::make('Shipped', 'shipped')
-            ->onlyOnIndex(),
             Number::make('Price','price'),
             Text::make('Note',' note')
 

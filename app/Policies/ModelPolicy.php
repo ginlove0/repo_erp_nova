@@ -38,4 +38,10 @@ class ModelPolicy
     public function forceDetele() {
         return false;
     }
+
+    public function viewAny(User $user)
+    {
+        //
+        return $user->user_type === 'admin';
+    }
 }

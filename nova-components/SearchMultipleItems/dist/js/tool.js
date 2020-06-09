@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n.btn-group-lg {\n    margin-left: 5px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n    text-align: center;\n}\n.analytic-number {\n    font-weight: bold;\n    font-size: 18px;\n    margin-top: 5px;\n    margin-bottom: 5px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n.btn-group-lg {\n    margin-left: 5px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n    text-align: center;\n}\n.analytic-number {\n    font-weight: bold;\n    font-size: 1.5rem;\n    margin-top: 15px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.table-div {\n    margin-top: 15px;\n}\nlabel {\n    font-size: 1.5rem;\n    font-weight: bold;\n    margin: auto;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.table-detail {\n    font-weight: bold;\n    font-size: 20px;\n}\n.table-header {\n    border: 1px solid;\n}\n.table-body {\n    margin-top: 5px;\n}\n.newtext {\n    border: 1px solid;\n}\n", ""]);
 
 // exports
 
@@ -716,33 +716,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resourceName', 'resourceId', 'field'],
 
     data: function data() {
         return {
-            inputItems: [],
+            inputItems: [{
+                serialNumber: '',
+                note: '',
+                conditionId: ''
+            }],
             displayDatas: [],
             itemsNotInstock: [],
             arrayItem: [],
             ableToUpdateInStock: true,
             ableToUpdateOutStock: true,
+            enableSerialInput: false,
+            ableToCancel: true,
+            enableSearch: false,
             itemNotInDatabase: [],
-            countInput: []
+            countInput: [],
+            testNotAva: []
         };
     },
 
 
     methods: {
         handleSerialInput: function handleSerialInput() {
-            var replaced_space_sn = this.inputItems.replace(/\n/gi, " ");
+            var replaced_space_sn = this.inputItems.serialNumber.replace(/\n/gi, " ");
             var replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
             var arr_sn = replaced_comma_sn.split(' ');
             this.arrayItem = _.uniq(arr_sn);
         },
         checkStockStatus: function checkStockStatus(res) {
-            if (res.data.stockStatus === true) {
+            if (res.data.stockStatus === 1) {
                 res.data.stockStatus = 'In stock';
             } else {
                 res.data.stockStatus = 'Not in stock';
@@ -756,14 +808,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.ableToUpdateInStock = false;
             this.ableToUpdateOutStock = false;
+            this.enableSearch = true;
+            this.enableSerialInput = true;
+            this.ableToCancel = false;
+
             this.countInput = [];
 
             this.arrayItem.map(function (newitem) {
-                if (newitem) {
+                if (newitem.length > 0) {
                     var serialNumber = newitem.trim();
                     _this.countInput.push(serialNumber);
+                    if (serialNumber.length === 12 && serialNumber.charAt(0) === 'S') {
+                        newitem = serialNumber.slice(0, 0) + serialNumber.slice(1);
+                    }
+                    _this.inputItems[0].serialNumber = newitem;
+
                     var self = _this;
-                    axios.get('/nova-vendor/search-multiple-items/' + serialNumber).then(function (res) {
+                    axios.get('/nova-vendor/search-multiple-items/' + JSON.stringify(_this.inputItems[0])).then(function (res) {
                         if (res.data[0]) {
                             if (res.data[0].stockStatus === 1) {
                                 res.data[0].stockStatus = 'In stock';
@@ -771,6 +832,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 res.data[0].stockStatus = 'Not in stock';
                             }
                             self.displayDatas.push(res.data[0]);
+                        } else {
+                            self.testNotAva.push(newitem);
                         }
                     }).catch(function (err) {
                         console.log(err.message);
@@ -778,18 +841,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             this.displayDatas = [];
+            this.testNotAva = [];
         },
         handleOutStock: function handleOutStock() {
             var _this2 = this;
 
             this.handleSerialInput();
+
             this.ableToUpdateOutStock = true;
-            this.ableToUpdateInStock = false;
+            this.ableToUpdateInStock = true;
+            this.enableSerialInput = false;
+            this.enableSearch = false;
+            this.ableToCancel = true;
+
             this.arrayItem.map(function (newitem) {
-                if (newitem) {
+                if (newitem.length > 0) {
                     var serialNumber = newitem.trim();
+                    if (serialNumber.length === 12 && serialNumber.charAt(0) === 'S') {
+                        newitem = serialNumber.slice(0, 0) + serialNumber.slice(1);
+                    }
+                    _this2.inputItems[0].serialNumber = newitem;
                     var self = _this2;
-                    axios.get('/nova-vendor/search-multiple-items/outStock/' + serialNumber).then(function (res) {
+                    axios.get('/nova-vendor/search-multiple-items/outStock/' + JSON.stringify(_this2.inputItems[0])).then(function (res) {
+
                         if (res && res.data) {
                             _this2.checkStockStatus(res);
                             self.displayDatas.push(res.data);
@@ -800,20 +874,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             this.displayDatas = [];
+            // this.inputItems = [{note: '', conditionId: ''}];
         },
         handleInstock: function handleInstock() {
             var _this3 = this;
 
             this.handleSerialInput();
+
             this.ableToUpdateInStock = true;
-            this.ableToUpdateOutStock = false;
+            this.ableToUpdateOutStock = true;
+            this.enableSerialInput = false;
+            this.enableSearch = false;
+            this.ableToCancel = true;
+
             this.arrayItem.map(function (newitem) {
-                if (newitem) {
+                if (newitem.length > 0) {
                     var serialNumber = newitem.trim();
+                    if (serialNumber.length === 12 && serialNumber.charAt(0) === 'S') {
+                        newitem = serialNumber.slice(0, 0) + serialNumber.slice(1);
+                    }
+                    _this3.inputItems[0].serialNumber = newitem;
                     var self = _this3;
-                    axios.get('/nova-vendor/search-multiple-items/inStock/' + serialNumber).then(function (res) {
+                    axios.get('/nova-vendor/search-multiple-items/inStock/' + JSON.stringify(_this3.inputItems[0])).then(function (res) {
                         if (res && res.data) {
                             _this3.checkStockStatus(res);
+                            console.log(res);
                             self.displayDatas.push(res.data);
                         }
                     }).catch(function (err) {
@@ -822,6 +907,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             this.displayDatas = [];
+            // this.inputItems = [{note: '', conditionId: ''}];
+        },
+        handleCancel: function handleCancel() {
+            this.ableToUpdateOutStock = true;
+            this.ableToUpdateInStock = true;
+            this.enableSerialInput = false;
+            this.enableSearch = false;
+            this.ableToCancel = true;
+        },
+        sortArrays: function sortArrays(items) {
+            return _.orderBy(items, 'models.name', 'asc');
         }
     },
 
@@ -836,8 +932,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         styling: function styling() {
             return {
-
                 height: '200px'
+            };
+        },
+        stylingNote: function stylingNote() {
+            return {
+                height: '70px'
             };
         }
     }
@@ -866,21 +966,100 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.inputItems,
-              expression: "inputItems"
+              value: _vm.inputItems.serialNumber,
+              expression: "inputItems.serialNumber"
             }
           ],
           staticClass: "w-full form-control form-input form-input-bordered",
           class: _vm.errorClasses,
           style: _vm.styling,
-          attrs: { type: "text" },
-          domProps: { value: _vm.inputItems },
+          attrs: { type: "text", disabled: _vm.enableSerialInput },
+          domProps: { value: _vm.inputItems.serialNumber },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.inputItems = $event.target.value
+              _vm.$set(_vm.inputItems, "serialNumber", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", [_vm._v("Condition:")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inputItems[0].conditionId,
+                expression: "inputItems[0].conditionId"
+              }
+            ],
+            staticClass: "w-full form-control form-input form-input-bordered",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.inputItems[0],
+                  "conditionId",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { selected: "", value: "" } }, [
+              _vm._v("NO CHANGE CONDITION")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1000" } }, [_vm._v("NIB")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1250" } }, [_vm._v("N0B")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1500" } }, [_vm._v("USEA")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3000" } }, [_vm._v("USEB")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4000" } }, [_vm._v("USEC")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "5000" } }, [_vm._v("PART")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "5001" } }, [_vm._v("REF")])
+          ]
+        ),
+        _vm._v(" "),
+        _c("label", [_vm._v("Note:")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.inputItems[0].note,
+              expression: "inputItems[0].note"
+            }
+          ],
+          staticClass: "w-full form-control form-input form-input-bordered",
+          class: _vm.errorClasses,
+          style: _vm.stylingNote,
+          attrs: { type: "text" },
+          domProps: { value: _vm.inputItems[0].note },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.inputItems[0], "note", $event.target.value)
             }
           }
         }),
@@ -889,13 +1068,14 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-block border-2 btn-group-lg",
+            attrs: { disabled: _vm.enableSearch },
             on: {
               click: function($event) {
                 return _vm.handleChange()
               }
             }
           },
-          [_vm._v("\n                Search\n            ")]
+          [_vm._v("\n            Search\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -912,7 +1092,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                Update To Out Stock\n            ")]
+          [_vm._v("\n            Update To Out Stock\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -926,57 +1106,96 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                Update To In Stock\n            ")]
+          [_vm._v("\n            Update To In Stock\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block border-2 btn-group-lg",
+            attrs: { id: _vm.Cancel, disabled: _vm.ableToCancel },
+            on: {
+              click: function($event) {
+                return _vm.handleCancel()
+              }
+            }
+          },
+          [_vm._v("\n            Cancel\n        ")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "analytic-number" }, [
           _vm._v(
-            "\n                Total input: " +
+            "\n            Total input: " +
               _vm._s(_vm.countInput.length) +
-              "\n                "
+              "\n            "
           ),
           _c("br"),
           _vm._v(
-            "\n                Total found and able to update: " +
+            "\n            Total found and able to update: " +
               _vm._s(_vm.displayDatas.length) +
-              "\n            "
+              "\n        "
           )
         ])
       ],
       1
     ),
     _vm._v(" "),
-    _c("div", [
-      _c("table", { staticClass: "table w-full" }, [
+    _c("div", { staticClass: "label-div" }, [
+      _c("label", [
+        _vm._v("Item not available: " + _vm._s(_vm.testNotAva.length))
+      ]),
+      _vm._v(" "),
+      _c("table", [
+        _c(
+          "tbody",
+          _vm._l(_vm.testNotAva, function(item) {
+            return _c("tr", [_c("td", [_vm._v(_vm._s(item))])])
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-div" }, [
+      _c("label", [_vm._v("Table Details:")]),
+      _vm._v(" "),
+      _c("table", { staticClass: "table-detail w-full font-bold" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.displayDatas, function(item) {
+          { staticClass: "table-body" },
+          _vm._l(_vm.sortArrays(_vm.displayDatas), function(item) {
             return _c("tr", [
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.models.name))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.aliasModel))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.serialNumber))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.conditions.name))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.stockStatus))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
+              _c("td", { staticClass: "newtext" }, [
                 _vm._v(_vm._s(item.whlocations.name))
-              ])
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "newtext" }, [
+                _vm._v(_vm._s(item.transfer_pack))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "newtext" }, [_vm._v(_vm._s(item.note))])
             ])
           }),
           0
@@ -990,23 +1209,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
+    return _c("thead", { staticClass: "table-header" }, [
       _c("tr", [
-        _c("th", [_vm._v("Name")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Alias Model")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("Alias Model")]),
         _vm._v(" "),
-        _c("th", [_vm._v("SN")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("SN")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Condition")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("Condition")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Wh Location")]),
+        _c("th", { staticClass: "newtext" }, [_vm._v("Warehouse")]),
         _vm._v(" "),
-        _c("th"),
+        _c("th", { staticClass: "newtext" }, [_vm._v("PackJV")]),
         _vm._v(" "),
-        _c("th")
+        _c("th", { staticClass: "newtext" }, [_vm._v("Note")])
       ])
     ])
   }

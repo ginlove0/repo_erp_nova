@@ -20,7 +20,7 @@ class ItemPolicy
     }
 
     public function create() {
-        return true;
+        return false;
     }
 
     public function delete(){
@@ -40,4 +40,9 @@ class ItemPolicy
         return true;
     }
 
+    public function viewAny(User $user)
+    {
+        //
+        return $user->user_type === 'admin';
+    }
 }

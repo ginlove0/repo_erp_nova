@@ -54,14 +54,15 @@ class ItemTransferResourceToolController extends Controller
     {
 
         $object = json_decode($modelDetail);
-        Log::info($object -> name, ['name']);
-        Log::info($object -> manufactorId);
-        Log::info($object -> categoryId);
+//        if(!$object -> categoryId)
+//        {
+//            $object -> categoryId = 1;
+//        }
 
         Model::create([
             'name' => $object -> name,
             'manufactorId' => $object -> manufactorId,
-            'categoryId' => $object -> categoryId,
+            'categoryId' => $object -> categoryId || '',
             'shortDescription' => $object -> shortDescription,
             'longDescription' => $object -> longDescription
         ]);

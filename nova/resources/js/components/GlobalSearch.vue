@@ -6,7 +6,7 @@
         <icon type="search" class="absolute search-icon-center ml-3 text-80" />
 
         <input
-          dusk="global-search"
+          dusk="model-search"
           ref="input"
           @input.stop="search"
           @keydown.stop=""
@@ -20,6 +20,8 @@
           :placeholder="__('Press / to search')"
           class="pl-search w-full form-global-search"
         />
+
+
       </div>
 
       <!-- Loader -->

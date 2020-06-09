@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -643,18 +643,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         //
         this.redirectPage();
     },
+    data: function data() {
+        return {
+            style: {
+                height: window.screen.height - 100 + 'px',
+                width: '100%'
+            }
+        };
+    },
 
 
     methods: {
-        redirectPage: function redirectPage() {
-            window.location.href = 'http://admin.ipsupply.net/nova/resources/items/new';
-        }
+        // redirectPage() {
+        //     window.location.href = 'http://erp.ipsupply.net/item/add';
+        // }
     }
 
 });
@@ -667,7 +678,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { style: _vm.style }, [
+    _c("iframe", {
+      attrs: {
+        height: "100%",
+        width: "100%",
+        src: "http://erp.ipsupply.net/item/add",
+        frameborder: "0"
+      }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

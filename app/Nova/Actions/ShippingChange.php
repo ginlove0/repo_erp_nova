@@ -8,6 +8,7 @@ use App\Models\SaleOrderPackedItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Ipsupply\CreatePackagesShipping\CreatePackagesShipping;
 use Laravel\Nova\Actions\Action;
@@ -31,9 +32,10 @@ class ShippingChange extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         //array nay de luu so serial number input
-
-
         $transferingArray = [];
+
+        //if serial number bang null thi se ko add vao array
+        $serialInputArray = [];
 
         $notInstockArray = [];
         //array nay de lay data input ve (cai nay type la string)
@@ -44,13 +46,11 @@ class ShippingChange extends Action
 
         foreach($models as $model) {
 
-        foreach ($newArray as $getItem  ) {
-            $itemArray = $getItem->items;
+        foreach ($newArray as $item  ) {
+//            $itemArray = $getItem->items;
 
+//            foreach ($itemArray as $item) {
 
-            foreach ($itemArray as $item) {
-                //if serial number bang null thi se ko add vao array
-                $serialInputArray = [];
 
                 if ($item->serialNumber != "") {
                     array_push($serialInputArray, $item->serialNumber);
@@ -77,30 +77,6 @@ class ShippingChange extends Action
                                 'whlocationId' => $newItem->whlocationId
                             ]);
 
-                            //update quantity trong sale order. Khi 1 sn outstock thi qty se giam di
-                            $updateSaleOrderModelType = SaleOrderItem::where('id', $getItem->id)->first();
-                            if ($updateSaleOrderModelType) {
-                                $updateSaleOrderModelType->qty = $updateSaleOrderModelType->qty - count($serialInputArray);
-
-                                //check so luong quantity, neu lon hon 0 thi status cua packed => partial
-                                if ($updateSaleOrderModelType->qty > 0) {
-                                    $model->packed = 'partial';
-                                    $model->shipped = 'partial';
-                                    $model->status = 'confirm';
-                                    $model->save();
-                                    $this->markAsFinished($model);
-                                } //neu so luong qty = 0 thi doi status packed thanh all packed
-                                else {
-                                    $model->packed = 'full';
-                                    $model->shipped = 'full';
-                                    $model->status = 'complete';
-                                    $model->save();
-                                    $this->markAsFinished($model);
-                                }
-                                $updateSaleOrderModelType->shipped += count($serialInputArray);
-                                $updateSaleOrderModelType->save();
-                            }
-
                         }
                         else{
                             array_push($transferingArray, $newItem->serialNumber);
@@ -109,8 +85,38 @@ class ShippingChange extends Action
                         array_push($notInstockArray, $newItem->serialNumber);
                     }
                 }
-            }
+//            }
         }
+
+            $datas = DB::select("
+                                select sum(qty) as QTY
+                                from sale_order_model
+                                where sale_order_model.sale_order_id = (select id from `sale_order` where id =? limit 1)
+                            ",[
+                $model->id
+            ]);
+
+            $dataItem = SaleOrderPackedItem::where('sale_order_id', $model->id)->get();
+
+            if($datas)
+            {
+                $countModel = $datas[0]->QTY - sizeof($dataItem);
+
+                if($countModel > 0)
+                {
+                    $model->packed = 'partial';
+                    $model->shipped = 'partial';
+                    $model->status = 'confirm';
+                    $model->save();
+                    $this->markAsFinished($model);
+                }else{
+                    $model->packed = 'full';
+                    $model->shipped = 'full';
+                    $model->status = 'complete';
+                    $model->save();
+                    $this->markAsFinished($model);
+                }
+            }
 
         if($transferingArray != null)
         {

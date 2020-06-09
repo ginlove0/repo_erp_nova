@@ -1,83 +1,85 @@
 <template>
-  <div>
-      <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items need to prepare</h1>
-      <table class="table table-bordered table-form w-full">
-          <thead>
-          <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Qty</th>
-              <th>Condition</th>
-              <th>Note</th>
-              <th></th>
-              <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="display-model" v-for="item in datas">
-              <td><input type="checkbox" id="checkbox" v-model="checked"></td>
-              <td class="text-center">{{item.models.name}}</td>
-              <td class="text-center">{{item.qty}}</td>
-              <td class="text-center">{{item.conditions.name}}</td>
-              <td class="text-center">{{item.note}}</td>
-              <td>
+    <div>
+        <h1 class="flex-no-shrink text-90 font-normal text-2xl">Items need to prepare</h1>
 
-                  <DeleteAction
-                      :resourceName="resourceName"
-                      :resourceId="resourceId"
-                      :id="item.id" />
+        <table class="table table-bordered table-form w-full table-whtransfer-modal">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Condition</th>
+                <th>Note</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="display-model" v-for="item in datas">
+                <td><input type="checkbox" id="checkbox" v-model="checked"></td>
+                <td class="text-center">{{item.models.name}}</td>
+                <td class="text-center">{{item.qty}}</td>
+                <td class="text-center">{{item.conditions.name}}</td>
+                <td class="text-center">{{item.note}}</td>
+                <td>
 
-              </td>
-          </tr>
-          <tr v-for="order in orders">
-              <td></td>
-              <td class="table-name">
-                  <Dropdown
-                      id="model-dropdown"
-                      :click-create="showModal"
-                      :options="models"
-                      v-on:selected="validateSelectionModel"
-                      v-on:filter="getDropdownValuesInModel"
-                      :disabled="false"
-                      placeholder="Please select model">
-                  </Dropdown>
-                  <ModelModal
-                      :input-name="fromModal"
-                      v-show="isModalVisible"
-                      @close="closeModal"
-                      v-on:modelAdded="getModelNameFromModal"
-                  />
-              </td>
-              <td class="table-qty">
-                  <input type="number" class="table-input-qty" v-model="order.qty">
-              </td>
-              <td>
+                    <DeleteAction
+                        :resourceName="resourceName"
+                        :resourceId="resourceId"
+                        :id="item.id" />
 
-                  <select v-model="order.conditionId" class="table-condition">
-                      <option value="1000">NIB</option>
-                      <option value="1500">NOB</option>
-                      <option value="2750">USEA</option>
-                      <option selected value="3000">USEB</option>
-                      <option value="4000">USEC</option>
-                      <option value="5001">REF</option>
-                      <option value="5000">PART</option>
-                  </select>
-              </td>
-              <td class="table-name">
-                  <textarea placeholder="Please enter note here..." class="table-input" v-model="order.note"></textarea>
-              </td>
+                </td>
+            </tr>
+            <tr v-for="order in orders">
+                <td></td>
+                <td class="table-name">
+                    <Dropdown
+                        id="model-dropdown"
+                        :click-create="showModal"
+                        :options="models"
+                        v-on:selected="validateSelectionModel"
+                        v-on:filter="getDropdownValuesInModel"
+                        :disabled="false"
+                        placeholder="Please select model">
+                    </Dropdown>
+                    <ModelModal
+                        :input-name="fromModal"
+                        v-show="isModalVisible"
+                        @close="closeModal"
+                        v-on:modelAdded="getModelNameFromModal"
+                    />
+                </td>
+                <td class="table-qty">
+                    <input type="number" class="table-input-qty" v-model="order.qty">
+                </td>
+                <td>
 
-          </tr>
-          </tbody>
+                    <select v-model="order.conditionId" class="table-condition">
+                        <option value="1000">NIB</option>
+                        <option value="1250">NOB</option>
+                        <option value="1500">USEA</option>
+                        <option selected value="3000">USEB</option>
+                        <option value="4000">USEC</option>
+                        <option value="5001">REF</option>
+                        <option value="5000">PART</option>
+                    </select>
+                </td>
+                <td class="table-name">
+                    <textarea placeholder="Please enter note here..." class="table-input" v-model="order.note"></textarea>
+                </td>
+
+            </tr>
+            </tbody>
 
 
 
-      </table>
-      <div>
-          <button @click="addLine" class="active table-add-line">Add Line & Submit</button>
-      </div>
+        </table>
 
-  </div>
+        <div>
+            <button @click="addLine" class="active table-add-line">Add Line & Submit</button>
+        </div>
+
+    </div>
 </template>
 
 <script>
@@ -114,7 +116,7 @@ export default {
           {
                   axios.get('/nova-vendor/item-transfer-resource-tool/addProductToWhTransfer/'+this.resourceId+'/'+ JSON.stringify(this.orders[0]))
                       .then((res) => {
-                          console.log(res)
+                          console.log(res, 'res ne')
                           Nova.$emit('refetch-model');
                       })
                       .catch((err) => {
@@ -207,12 +209,13 @@ export default {
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: 22px;
+        font-size: 1em;
         padding: 6px;
         min-width: 1200px;
         max-width: 1200px;
-        max-height: 60px;
-        min-height: 60px;
+        max-height: 40px;
+        min-height: 40px;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
     .table-input-qty {
         background: #fff;
@@ -221,12 +224,13 @@ export default {
         border-radius: 3px;
         color: #333;
         display: block;
-        font-size: 15px;
+        font-size: 1em;
         padding: 6px;
         min-width: 50px;
         max-width: 50px;
-        max-height: 50px;
-        min-height: 50px;
+        max-height: 40px;
+        min-height: 40px;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
     .table-add-line {
         width: 100%;
@@ -237,18 +241,22 @@ export default {
         color: inherit;
         background-color: transparent;
         cursor: pointer;
-        font-size: 25px;
+        font-size: 20px;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
     .display-model {
         font-size: 18px;
         color: black;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
-    .table-name {
-        font-size: 22px;
-    }
-    .table-condition {
-        font-size: 22px;
-        border: 0.5px solid;
 
+    select {
+        height: 40px;
+        border: 1px solid;
+        font-size: 1em;
+        font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
     }
+
+
+
 </style>

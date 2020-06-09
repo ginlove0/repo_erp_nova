@@ -51,18 +51,27 @@ class WhTransfer extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(),
 
             BelongsTo::make('Wh Transfer Location', 'whtransferlocation'),
+
+            Text::make('Pack', 'transfer_pack')
+                ->creationRules('required', 'string'),
 
             Text::make('Tracking Number', 'trackingNumber'),
 
             Text::make('Courier Name', 'trackingCourier'),
 
+            Date::make('Expect ship in', 'expect_ship_in')
+            ->hideFromIndex()
+            ->hideFromDetail(),
 
             Date::make('Expect ship in', 'expect_ship_in', function ($value) {
-                return $value -> format('d/m/Y');
-            }),
+                if($value){
+                    return $value -> format('d/m/Y');
+                }
+                return null;
+            })->hideWhenCreating()
+            ->hideWhenUpdating(),
 
             Indicator::make('Status', 'status')
             ->labels([
@@ -78,11 +87,15 @@ class WhTransfer extends Resource
                 'TRANSFERRING' => 'yellow',
                 'RECEIVED' => 'green',
                 'CANCELED' => 'red'
-            ]),
+            ])
+            ->sortable(),
 
 
             Date::make('Created Date', 'created_at', function ($value) {
-                return $value -> format('d/m/Y');
+                if($value){
+                    return $value -> format('d/m/Y');
+                }
+                return null;
             })
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),
