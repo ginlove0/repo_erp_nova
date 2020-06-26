@@ -1472,7 +1472,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n", ""]);
+exports.push([module.i, "\n.table td {\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 16px;\n}\n", ""]);
 
 // exports
 

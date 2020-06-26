@@ -54,6 +54,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/model-quick-view-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/relation-dependance-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/search_multiple_us_item" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/show-detail-by-hover" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/stock-location" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/update-item-in-stock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ipsupply/warehouse-transfer-field" />

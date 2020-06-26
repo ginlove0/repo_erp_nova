@@ -22,3 +22,5 @@ Route::get('/ipsupply/findSaleOrderModels/{saleOrderId}',  "SaleOrderController@
 Route::get('/ipsupply/findBySN/{sn}', "ItemController@findBySN");
 
 Route::get('/ipsupply/checkLegitSn/{sn}', "ItemController@findBySNwithOther");
+
+Route::get('/ipsupply/findItemDetail/{modelId}/{conditionId}/{whLocationId}', 'ItemController@findItemDetail');

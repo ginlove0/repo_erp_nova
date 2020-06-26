@@ -640,7 +640,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n#input-serialNumber {\n    height: 200px;\n    display: inline;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n#input-note {\n    height: 70px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\nlabel {\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 20px;\n    font-weight: bold;\n}\n.submit-btn {\n    height: 50px;\n    font-size: 17px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.table-detail {\n    margin-left: auto;\n    margin-right: auto;\n    width: 100%;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.class-select {\n    background: #fff;\n    cursor: pointer;\n    border: 1px solid;\n    border-radius: 3px;\n    color: #333;\n    display: block;\n    padding: 6px;\n    min-width: 350px;\n    max-width: 350px;\n    max-height: 35px;\n    min-height: 35px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n.input-location {\n    background: #fff;\n    cursor: pointer;\n    border: 1px solid;\n    border-radius: 3px;\n    color: #333;\n    display: block;\n    padding: 6px;\n    min-width: 350px;\n    max-width: 350px;\n    max-height: 35px;\n    min-height: 35px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n#input-serialNumber {\n    height: 200px;\n    display: inline;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n#input-note {\n    height: 70px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\nlabel {\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 20px;\n    font-weight: bold;\n}\n.submit-btn {\n    height: 50px;\n    font-size: 17px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.table-detail {\n    margin-left: auto;\n    margin-right: auto;\n    width: 100%;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n}\n.class-select {\n    background: #fff;\n    cursor: pointer;\n    border: 1px solid;\n    border-radius: 3px;\n    color: #333;\n    display: block;\n    padding: 6px;\n    min-width: 350px;\n    max-width: 350px;\n    max-height: 35px;\n    min-height: 35px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n.input-location {\n    background: #fff;\n    cursor: pointer;\n    border: 1px solid;\n    border-radius: 3px;\n    color: #333;\n    display: block;\n    padding: 6px;\n    min-width: 350px;\n    max-width: 350px;\n    max-height: 35px;\n    min-height: 35px;\n    font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;\n    font-size: 18px;\n}\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -869,11 +869,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.success = [];
 
             if (this.modelFromModal) {
-                this.items[0].modelId = this.modelFromModal.toUpperCase();
+                this.items[0].modelId = this.modelFromModal;
             }
 
             if (this.supplierFromModal) {
-                this.items[0].supplierId = this.supplierFromModal.toUpperCase();
+                this.items[0].supplierId = this.supplierFromModal;
             }
 
             if (!this.items[0].modelId) {
@@ -890,29 +890,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             // console.log(this.items[0], 'hellooooooooooo');
-            var replaced_space_sn = this.items.serialNumber.replace(/\n/gi, " ");
-            var replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
-            var arr_sn = replaced_comma_sn.split(' ');
-            this.arrayItem = _.uniq(arr_sn);
-            this.countArray = [];
+            if (this.errors.length === 0) {
+                var replaced_space_sn = this.items.serialNumber.replace(/\n/gi, " ");
+                var replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
+                var arr_sn = replaced_comma_sn.split(' ');
+                this.arrayItem = _.uniq(arr_sn);
+                this.countArray = [];
 
-            this.arrayItem.map(function (newItem) {
+                this.arrayItem.map(function (newItem) {
 
-                if (newItem.length > 0) {
-                    if (newItem.length === 12 && newItem.charAt(0) === 'S') {
-                        newItem = newItem.slice(0, 0) + newItem.slice(1);
+                    if (newItem.length > 0) {
+                        if (newItem.length === 12 && newItem.charAt(0) === 'S') {
+                            newItem = newItem.slice(0, 0) + newItem.slice(1);
+                        }
+                        _this.items[0].serialNumber = newItem.trim().toUpperCase();
+
+                        _this.countArray.push(newItem.trim());
+
+                        console.log(JSON.stringify(_this.items[0]));
+                        axios.get('/nova-vendor/warehouse-transfer-tool/addItemToStock/' + JSON.stringify(_this.items[0])).then(function (res) {
+                            _this.success.push('Added ' + _this.countArray.length + ' items in stock');
+                            _this.items = [{ serialNumber: '', aliasModel: '', modelId: '', supplierId: '', conditionId: 3000, note: '', whlocationId: '', location: '' }];
+                        }).catch(function (err) {
+                            console.log(err.message);
+                        });
                     }
-                    _this.items[0].serialNumber = newItem.trim().toUpperCase();
-
-                    _this.countArray.push(newItem.trim());
-                    axios.get('/nova-vendor/warehouse-transfer-tool/addItemToStock/' + JSON.stringify(_this.items[0])).then(function (res) {
-                        _this.success.push('Added ' + _this.countArray.length + ' items in stock');
-                        _this.items = [{ serialNumber: '', aliasModel: '', modelId: '', supplierId: '', conditionId: 3000, note: '', whlocationId: '', location: '' }];
-                    }).catch(function (err) {
-                        console.log(err.message);
-                    });
-                }
-            });
+                });
+            }
         },
         getAllSupplier: function getAllSupplier() {
             var _this2 = this;
@@ -929,14 +933,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //selected model
         validateSelectionSupplier: function validateSelectionSupplier(selection) {
             console.log(selection, 'selection');
-            this.items[0].supplierId = selection.name;
+            this.items[0].supplierId = selection.id;
             console.log(selection.name + ' has been selected');
         },
         getDropdownValuesInSupplier: function getDropdownValuesInSupplier(keyword) {
 
             console.log('You could refresh options by querying the API with ' + keyword);
             this.supplierToModal = keyword;
-            this.supplierFromModal = keyword;
         },
         getAllModel: function getAllModel() {
             var _this3 = this;
@@ -951,14 +954,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //selected model
         validateSelectionModel: function validateSelectionModel(selection) {
-            this.items[0].modelId = selection.name;
+            this.items[0].modelId = selection.id;
             console.log(selection.name + ' has been selected');
         },
         getDropdownValuesInModel: function getDropdownValuesInModel(keyword) {
 
             console.log('You could refresh options by querying the API with ' + keyword);
             this.fromModal = keyword;
-            this.modelFromModal = keyword;
         },
         showModal: function showModal() {
             this.isModalVisible = true;
@@ -1218,14 +1220,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('close');
         },
         onSubmit: function onSubmit() {
+            var _this = this;
+
             this.newModels[0].name = this.inputName.toUpperCase();
             if (this.newModels[0].name != null) {
+                console.log(this.newModels[0], 'newmodel');
                 axios.get('/nova-vendor/warehouse-transfer-tool/addNewModel/' + JSON.stringify(this.newModels[0])).then(function (res) {
+                    console.log(res, 'resssssss');
                     Nova.$emit('close');
                     Nova.$emit('refetch-model-list');
+                    _this.$emit('modelAdded', res.data.id);
                     alert('Create model success');
                 }).catch(function (err) {
-                    console.log(err);
+                    console.log('Khong pass dc data qua route o trong OnSubmit ModelModal');
                 });
             } else {
                 alert('Please fill up model field!!!');
@@ -1237,10 +1244,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //get add model in DB
         getAllManufactor: function getAllManufactor() {
-            var _this = this;
+            var _this2 = this;
 
             axios.get('/nova-vendor/warehouse-transfer-tool/findManufactorInManuallyAdd/Manufactor').then(function (res) {
-                _this.manufactors = res.data;
+                _this2.manufactors = res.data;
             }).catch(function (err) {
                 console.log(err.message);
             });
@@ -1249,10 +1256,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //get all condition in DB
         getAllCategory: function getAllCategory() {
-            var _this2 = this;
+            var _this3 = this;
 
             axios.get('/nova-vendor/warehouse-transfer-tool/findCategoryInManuallyAdd/Category').then(function (res) {
-                _this2.categories = res.data;
+                _this3.categories = res.data;
             }).catch(function (err) {
                 console.log(err.message);
             });
@@ -1281,9 +1288,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         getDropdownValues: function getDropdownValues(keyword) {
             console.log('You could refresh options by querying the API with ' + keyword);
-        },
-        emitToParent: function emitToParent(event) {
-            this.$emit('modelAdded', this.inputName.toUpperCase());
         }
     },
 
@@ -1451,7 +1455,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         filteredOptions: function filteredOptions() {
             var filtered = [];
-            var regOption = new RegExp(this.searchFilter, 'ig');
+            var regOption = new RegExp(this.searchFilter.trim(), 'ig');
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
@@ -1697,7 +1701,6 @@ var render = function() {
                         },
                         domProps: { value: _vm.inputName.toUpperCase() },
                         on: {
-                          keyup: _vm.emitToParent,
                           input: function($event) {
                             if ($event.target.composing) {
                               return
@@ -2077,11 +2080,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('close');
         },
         onSubmit: function onSubmit() {
+            var _this = this;
+
             this.newSuppliers[0].name = this.inputName.toUpperCase();
             if (this.newSuppliers[0].name != null) {
                 axios.get('/nova-vendor/warehouse-transfer-tool/addNewSupplier/' + JSON.stringify(this.newSuppliers[0])).then(function (res) {
                     Nova.$emit('close');
                     Nova.$emit('refetch-supplier-list');
+                    _this.$emit('supplierAdded', res.data.id);
                     alert('Create supplier success');
                 }).catch(function (err) {
                     console.log(err);
@@ -2091,9 +2097,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.newModels = [{ name: null, contactType: 'Individual', pricingLevel: '5' }];
             Nova.$emit('refetch-supplier-list');
-        },
-        emitToParent: function emitToParent() {
-            this.$emit('supplierAdded', this.inputName.toUpperCase());
         }
     },
 
@@ -2154,7 +2157,6 @@ var render = function() {
                         },
                         domProps: { value: _vm.inputName.toUpperCase() },
                         on: {
-                          keyup: _vm.emitToParent,
                           input: function($event) {
                             if ($event.target.composing) {
                               return

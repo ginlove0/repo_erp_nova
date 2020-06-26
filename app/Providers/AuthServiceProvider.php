@@ -5,11 +5,13 @@ namespace App\Providers;
 
 use App\Models\Item;
 use App\Models\Model;
+use App\Models\OnlyUsItem;
 use App\Models\OnlyUsModel;
 use App\Models\SaleOrder;
 use App\Models\SaleOrderItem;
 use App\Models\Sender;
 use App\Policies\ItemPolicy;
+use App\Policies\ItemUSPolicy;
 use App\Policies\ModelPolicy;
 use App\Policies\ModelUSPolicy;
 use App\Policies\SaleOrderItemPolicy;
@@ -31,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         SaleOrder::class => SaleOrderPolicy::class,
         SaleOrderItem::class => SaleOrderItemPolicy::class,
         Sender::class => SenderPolicy::class,
-//        OnlyUsModel::class => ModelUSPolicy::class
+        OnlyUsItem::class => ItemUSPolicy::class
 
 
 

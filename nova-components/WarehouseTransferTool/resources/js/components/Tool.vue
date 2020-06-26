@@ -179,12 +179,12 @@
 
                 if(this.modelFromModal)
                 {
-                    this.items[0].modelId = this.modelFromModal.toUpperCase();
+                    this.items[0].modelId = this.modelFromModal;
                 }
 
                 if(this.supplierFromModal)
                 {
-                    this.items[0].supplierId = this.supplierFromModal.toUpperCase();
+                    this.items[0].supplierId = this.supplierFromModal;
                 }
 
                 if(!this.items[0].modelId)
@@ -205,33 +205,39 @@
                 }
 
                 // console.log(this.items[0], 'hellooooooooooo');
-                const replaced_space_sn = this.items.serialNumber.replace(/\n/gi, " ");
-                const replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
-                const arr_sn = replaced_comma_sn.split(' ');
-                this.arrayItem = _.uniq(arr_sn);
-                this.countArray = [];
+                if(this.errors.length === 0)
+                {
+                    const replaced_space_sn = this.items.serialNumber.replace(/\n/gi, " ");
+                    const replaced_comma_sn = replaced_space_sn.replace(/,/g, " ");
+                    const arr_sn = replaced_comma_sn.split(' ');
+                    this.arrayItem = _.uniq(arr_sn);
+                    this.countArray = [];
 
-                this.arrayItem.map((newItem) => {
+                    this.arrayItem.map((newItem) => {
 
-                    if(newItem.length > 0){
-                        if(newItem.length === 12 && newItem.charAt(0) === 'S'){
-                            newItem = newItem.slice(0,0) + newItem.slice(1);
+                        if(newItem.length > 0){
+                            if(newItem.length === 12 && newItem.charAt(0) === 'S'){
+                                newItem = newItem.slice(0,0) + newItem.slice(1);
+                            }
+                            this.items[0].serialNumber = newItem.trim().toUpperCase();
+
+                            this.countArray.push(newItem.trim());
+
+                            console.log(JSON.stringify(this.items[0]));
+                            axios.get('/nova-vendor/warehouse-transfer-tool/addItemToStock/'+ JSON.stringify(this.items[0]))
+                                .then((res) => {
+                                    this.success.push('Added ' + this.countArray.length + ' items in stock');
+                                    this.items = [{serialNumber: '', aliasModel: '', modelId: '', supplierId: '', conditionId: 3000, note: '', whlocationId: '', location: ''}]
+
+                                })
+                                .catch((err) => {
+                                    console.log(err.message)
+                                })
                         }
-                        this.items[0].serialNumber = newItem.trim().toUpperCase();
 
-                        this.countArray.push(newItem.trim());
-                        axios.get('/nova-vendor/warehouse-transfer-tool/addItemToStock/'+ JSON.stringify(this.items[0]))
-                            .then((res) => {
-                                this.success.push('Added ' + this.countArray.length + ' items in stock');
-                                this.items = [{serialNumber: '', aliasModel: '', modelId: '', supplierId: '', conditionId: 3000, note: '', whlocationId: '', location: ''}]
+                    })
+                }
 
-                            })
-                            .catch((err) => {
-                                console.log(err.message)
-                            })
-                    }
-
-                })
 
 
 
@@ -251,7 +257,7 @@
             //selected model
             validateSelectionSupplier(selection) {
                 console.log(selection, 'selection');
-                this.items[0].supplierId = selection.name;
+                this.items[0].supplierId = selection.id;
                 console.log(selection.name+' has been selected');
             },
 
@@ -259,7 +265,6 @@
 
                 console.log('You could refresh options by querying the API with '+ keyword);
                 this.supplierToModal = keyword;
-                this.supplierFromModal = keyword;
 
             },
 
@@ -276,7 +281,7 @@
 
             //selected model
             validateSelectionModel(selection) {
-                this.items[0].modelId = selection.name;
+                this.items[0].modelId = selection.id;
                 console.log(selection.name+' has been selected');
             },
 
@@ -284,7 +289,6 @@
 
                 console.log('You could refresh options by querying the API with '+ keyword);
                 this.fromModal = keyword;
-                this.modelFromModal = keyword;
 
             },
 

@@ -50,7 +50,8 @@
         "ipsupply/magic-managerment-tool": "*",
         "ipsupply/display-model-with-link": "*",
         "ipsupply/model-quick-view": "*",
-        "ipsupply/model-quick-view-field": "*"
+        "ipsupply/model-quick-view-field": "*",
+        "ipsupply/show-detail-by-hover": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.0",
@@ -213,6 +214,10 @@
         {
             "type": "path",
             "url": "./nova-components/ModelQuickViewField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ShowDetailByHover"
         }
     ]
 }

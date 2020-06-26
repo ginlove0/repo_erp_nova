@@ -30,17 +30,15 @@ class ItemController extends Controller
         $user = Auth::user();
         $addBy = $user -> email;
 
-        $model = Model::where('name', $object-> modelId)->first();
-        Log::info($model, ['hello']);
         $supplier = Supplier::where('name', $object -> supplierId) -> first();
 
         Item::updateOrCreate([
             'serialNumber' => $object -> serialNumber],
             [
-            'modelId' => $model -> id,
+            'modelId' => $object-> modelId,
             'conditionId' => $object -> conditionId,
             'whlocationId' => $object -> whlocationId,
-            'supplierId' => $supplier -> id,
+            'supplierId' => $object -> supplierId,
             'note' => $object -> note,
             'stockStatus' => true,
                 'location' => $object -> location,

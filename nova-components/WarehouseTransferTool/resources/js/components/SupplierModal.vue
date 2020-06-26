@@ -13,7 +13,7 @@
                     <tr class="table-modal-row">
                         <label>Name:</label>
                         <td>
-                            <input readonly required class="input-group" v-model="inputName.toUpperCase()" type="text" placeholder="Input model name" v-on:keyup="emitToParent"/>
+                            <input readonly required class="input-group" v-model="inputName.toUpperCase()" type="text" placeholder="Input model name"/>
                         </td>
                     </tr>
 
@@ -101,6 +101,7 @@
                         .then((res) => {
                             Nova.$emit('close');
                             Nova.$emit('refetch-supplier-list');
+                            this.$emit('supplierAdded', res.data.id)
                             alert('Create supplier success')
                         })
                         .catch((err) => {
@@ -112,11 +113,6 @@
                 this.newModels = [{name: null, contactType: 'Individual', pricingLevel: '5'}];
                 Nova.$emit('refetch-supplier-list');
             },
-
-
-            emitToParent() {
-                this.$emit('supplierAdded', this.inputName.toUpperCase())
-            }
 
 
         },

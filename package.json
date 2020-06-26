@@ -79,7 +79,9 @@
         "build-model-quick-view": "cd nova-components/ModelQuickView && npm run dev",
         "build-model-quick-view-prod": "cd nova-components/ModelQuickView && npm run prod",
         "build-model-quick-view-field": "cd nova-components/ModelQuickViewField && npm run dev",
-        "build-model-quick-view-field-prod": "cd nova-components/ModelQuickViewField && npm run prod"
+        "build-model-quick-view-field-prod": "cd nova-components/ModelQuickViewField && npm run prod",
+        "build-show-detail-by-hover": "cd nova-components/ShowDetailByHover && npm run dev",
+        "build-show-detail-by-hover-prod": "cd nova-components/ShowDetailByHover && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

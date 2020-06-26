@@ -99,6 +99,6 @@ export default {
 <style>
     .table td {
         font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
-        font-size: 18px;
+        font-size: 16px;
     }
 </style>

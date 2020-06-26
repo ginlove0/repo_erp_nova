@@ -20,15 +20,19 @@ class ModelController extends Controller
 
     public function addModelInManuallyAdd($modelDetail)
     {
-        $object = json_decode($modelDetail);
-        Log::info($modelDetail, ['object']);
-       Model::create([
-            'name' => $object -> name,
-            'manufactorId' => $object -> manufactorId,
-            'categoryId' => $object -> categoryId,
-            'shortDescription' => $object -> shortDescription,
-            'longDescription' => $object -> longDescription
-        ]);
+        if($modelDetail){
+            $object = json_decode($modelDetail);
+            Log::info($modelDetail, ['object']);
+            Model::create([
+                'name' => $object -> name,
+                'manufactorId' => $object -> manufactorId,
+                'categoryId' => $object -> categoryId,
+                'shortDescription' => $object -> shortDescription,
+                'longDescription' => $object -> longDescription
+            ]);
+
+            return $this ->findModelByName($object -> name);
+        }
     }
 
     public function findModelByName($modelName)

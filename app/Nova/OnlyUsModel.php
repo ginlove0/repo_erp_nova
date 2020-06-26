@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Filters\ModelHaveItemFilter;
+use App\Nova\Filters\ModelUSHaveItemFilter;
 use App\Services\Model\ModelService;
 use Illuminate\Http\Request;
 use Ipsupply\ItemQtyBaseCondition\ItemQtyBaseCondition;
@@ -23,7 +24,7 @@ class OnlyUsModel extends Resource
      * @var string
      */
 
-    public static $displayInNavigation = false;
+//    public static $displayInNavigation = false;
 
     const USEA = "USEA";
 
@@ -42,7 +43,11 @@ class OnlyUsModel extends Resource
     public static $model = 'App\Models\OnlyUsModel';
 
 
-    public static $perPageOptions = [10, 25, 50];
+    public static $perPageOptions = [50, 100, 200];
+
+    public static function label(){
+        return 'US Model';
+    }
 
 
 
@@ -71,10 +76,17 @@ class OnlyUsModel extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make("Name")->sortable()
-                ->displayUsing(function ($value) {
-                    return str_limit($value, '20', '...');
-                }),
+            Text::make("Name")
+                ->hideFromIndex(),
+
+            Text::make("Name", "name", function($value){
+                $model = \App\Models\Model::where('name', $value)->first();
+                $modelName = str_limit($value, '20', '...');
+                return "<a class=\"no-underline font-bold dim text-primary\" href='http://admin.ipsupply.net/nova/resources/models/$model->id'>$modelName</a>";
+            })
+                ->asHtml()
+                ->onlyOnIndex()
+                ->sortable(),
 
             Select::make('Has Serial', 'hasSerial')
                 ->options([
@@ -112,38 +124,38 @@ class OnlyUsModel extends Resource
 
             ItemQtyBaseCondition::make("US:NIB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("NIB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:NOB", "id", function ($data) use ($request) {
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:USEA", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:USEB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
 
             ItemQtyBaseCondition::make("US:USEC", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEC", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:PART", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("PART", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
@@ -158,7 +170,7 @@ class OnlyUsModel extends Resource
     public function filters(Request $request)
     {
         return[
-            new ModelHaveItemFilter,
+            new ModelUSHaveItemFilter,
         ];
     }
 

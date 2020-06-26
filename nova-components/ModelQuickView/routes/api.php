@@ -21,3 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/findDetail', \Ipsupply\ModelQuickView\Http\Controllers\ModelQuickViewController::class.'@getDetail');
 
 Route::get('/findDetailInADay', \Ipsupply\ModelQuickView\Http\Controllers\ModelQuickViewController::class.'@getDetailInADay');
+
+Route::get('/findDetailIn2Day', \Ipsupply\ModelQuickView\Http\Controllers\ModelQuickViewController::class.'@getDetailIn2Day');
+
+Route::get('/findOutStockItem', \Ipsupply\ModelQuickView\Http\Controllers\ModelQuickViewController::class.'@getOutStockInADay');

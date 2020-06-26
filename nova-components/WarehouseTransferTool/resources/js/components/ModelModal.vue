@@ -13,7 +13,7 @@
                     <tr class="table-modal-row">
                         <label>Name:</label>
                         <td>
-                            <input readonly required class="input-group" v-model="inputName.toUpperCase()" type="text" placeholder="Input model name" v-on:keyup="emitToParent"/>
+                            <input readonly required class="input-group" v-model="inputName.toUpperCase()" type="text" placeholder="Input model name"/>
                         </td>
                     </tr>
 
@@ -116,14 +116,17 @@
                 this.newModels[0].name = this.inputName.toUpperCase();
                 if(this.newModels[0].name != null)
                 {
+                    console.log(this.newModels[0], 'newmodel');
                     axios.get('/nova-vendor/warehouse-transfer-tool/addNewModel/' + JSON.stringify(this.newModels[0]))
                         .then((res) => {
+                            console.log(res, 'resssssss')
                             Nova.$emit('close');
                             Nova.$emit('refetch-model-list');
+                            this.$emit('modelAdded', res.data.id);
                             alert('Create model success')
                         })
                         .catch((err) => {
-                            console.log(err)
+                            console.log('Khong pass dc data qua route o trong OnSubmit ModelModal')
                         })
                 }else{
                     alert('Please fill up model field!!!')
@@ -184,10 +187,6 @@
                 console.log('You could refresh options by querying the API with '+keyword);
             },
 
-
-            emitToParent(event) {
-                this.$emit('modelAdded', this.inputName.toUpperCase())
-            }
 
 
         },

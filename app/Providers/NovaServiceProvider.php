@@ -94,7 +94,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 //            (new MagicManagermentTool) -> canSee(function ($request) {
 //                return $request->user()->user_type === 'admin';
 //            }),
-            new ModelQuickView,
+            (new ModelQuickView)->canSee(function ($request) {
+                return $request->user()->user_type === 'admin';
+            }),
             (new StockLocation)->canSee(function ($request) {
                 return $request->user()->user_type === 'admin';
             }),

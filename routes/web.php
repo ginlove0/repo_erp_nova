@@ -11,11 +11,11 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
+//\Illuminate\Support\Facades\Route::get('/dashboards/main', function () {
+//    return view('dashbroad');
 //});
 
-Route::get('nova/invoice/{id}', 'InvoiceController@show');
+//Route::get('nova/invoice/{id}', 'InvoiceController@show');
 
 
 

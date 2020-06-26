@@ -30,10 +30,14 @@ Route:: get('/findCategoryInManuallyAdd/Category', \Ipsupply\WarehouseTransferTo
 
 Route::get('/findManufactorInManuallyAdd/Manufactor', \Ipsupply\WarehouseTransferTool\Http\Controllers\ManyfactorController::class.'@show');
 
-Route::get('/addNewModel/{modelDetail}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@addModelInManuallyAdd');
+Route::get('/addNewModel/{modelDetail}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@addModelInManuallyAdd')
+    ->where('modelDetail', '(.*)');
 
 Route::get('/findModelByName/{modelName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\ModelController::class.'@findModelByName');
 
 Route::get('/addNewSupplier/{supplierDetail}', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@addSupplierInManuallyAdd');
+
+Route::get('/findSupplierByNameInAddManu/{supplerName}', \Ipsupply\WarehouseTransferTool\Http\Controllers\SupplierController::class.'@findSupplierByName')
+    ->where('supplerName', '(.*)');
 
 

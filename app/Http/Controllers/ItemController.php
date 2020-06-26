@@ -27,4 +27,15 @@ class ItemController extends Controller
         return $this->itemService->findBySNwithOther($sn);
     }
 
+    public function findItemDetail($modelId, $conditionId, $whlocationId)
+    {
+        $item = Item::where([
+            ['modelId', $modelId],
+            ['conditionId', $conditionId],
+            ['whlocationId', $whlocationId],
+            ['stockStatus', true]
+            ])->with('models', 'suppliers', 'conditions', 'whlocations')->get();
+        return $item;
+    }
+
 }

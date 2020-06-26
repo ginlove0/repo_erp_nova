@@ -146,6 +146,7 @@
       <path value="$PROJECT_DIR$/vendor/ipsupply/display-model-with-link" />
       <path value="$PROJECT_DIR$/vendor/ipsupply/model-quick-view" />
       <path value="$PROJECT_DIR$/vendor/ipsupply/model-quick-view-field" />
+      <path value="$PROJECT_DIR$/vendor/ipsupply/show-detail-by-hover" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

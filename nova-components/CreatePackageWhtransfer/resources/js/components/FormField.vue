@@ -28,6 +28,9 @@
             </header>
             <table>
                 <tbody>
+                    <tr v-if="displayMes">
+                        {{displayMes[0]}}
+                    </tr>
                     <tr v-for="model in displayModel">
                         <td> {{model}}
                             <input type="hidden" id="testing-code" :value="displayModel">
@@ -54,7 +57,8 @@ export default {
     data() {
         return {
             arrayItem: [],
-            displayModel: []
+            displayModel: [],
+            displayMes: ''
         }
     },
 
@@ -94,11 +98,14 @@ export default {
                             if(res.data.length === 0)
                             {
                                 self.displayModel.push(serialNumber)
+                            }else{
+                                self.displayMes.push('Nothing not instock!')
                             }
                         })
                 }
             })
             this.displayModel = [];
+            this.displayMes = [];
         },
 
         copyTestingCode () {
@@ -109,7 +116,7 @@ export default {
             try {
                 var successful = document.execCommand('copy');
                 var msg = successful ? 'successful' : 'unsuccessful';
-                alert('Testing code was copied ' + msg);
+                alert('Serial number was copied ' + msg);
             } catch (err) {
                 alert('Oops, unable to copy');
             }

@@ -46,7 +46,7 @@ class ModelService implements ModelServiceInterface
 
 
         $data = DB::select("
-            select sum(quantity) as QTY
+            select sum(quantity) as QTY, item.modelId as ModelId, item.conditionId as ConditionId, item.whlocationId as WhLocationId
             from item
             where item.conditionId = (select id from `condition` where name = ? limit 1)
             and item.modelId = (select id from `model` WHERE id = ? limit 1)
@@ -90,7 +90,7 @@ class ModelService implements ModelServiceInterface
             group by created_at
         ");
 
-        
+
 
         return $data;
 

@@ -841,6 +841,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -852,7 +855,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             arrayItem: [],
-            displayModel: []
+            displayModel: [],
+            displayMes: ''
         };
     },
 
@@ -894,11 +898,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     axios.get('/api/ipsupply/checkLegitSn/' + serialNumber).then(function (res) {
                         if (res.data.length === 0) {
                             self.displayModel.push(serialNumber);
+                        } else {
+                            self.displayMes.push('Nothing not instock!');
                         }
                     });
                 }
             });
             this.displayModel = [];
+            this.displayMes = [];
         },
         copyTestingCode: function copyTestingCode() {
             var testingCodeToCopy = document.querySelector('#testing-code');
@@ -908,7 +915,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             try {
                 var successful = document.execCommand('copy');
                 var msg = successful ? 'successful' : 'unsuccessful';
-                alert('Testing code was copied ' + msg);
+                alert('Serial number was copied ' + msg);
             } catch (err) {
                 alert('Oops, unable to copy');
             }
@@ -28405,18 +28412,30 @@ var render = function() {
       _c("table", [
         _c(
           "tbody",
-          _vm._l(_vm.displayModel, function(model) {
-            return _c("tr", [
-              _c("td", [
-                _vm._v(" " + _vm._s(model) + "\n                        "),
-                _c("input", {
-                  attrs: { type: "hidden", id: "testing-code" },
-                  domProps: { value: _vm.displayModel }
-                })
+          [
+            _vm.displayMes
+              ? _c("tr", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.displayMes[0]) +
+                      "\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.displayModel, function(model) {
+              return _c("tr", [
+                _c("td", [
+                  _vm._v(" " + _vm._s(model) + "\n                        "),
+                  _c("input", {
+                    attrs: { type: "hidden", id: "testing-code" },
+                    domProps: { value: _vm.displayModel }
+                  })
+                ])
               ])
-            ])
-          }),
-          0
+            })
+          ],
+          2
         )
       ])
     ])

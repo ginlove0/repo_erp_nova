@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\MakeTestStatusDone;
+use App\Nova\Actions\OutStockItem;
 use App\Nova\Filters\CreatedDateFilter;
 use App\Nova\Filters\ItemConditionFilter;
 use App\Nova\Filters\ItemLocation;
@@ -9,6 +11,7 @@ use App\Nova\Filters\ItemStockType;
 use App\Nova\Filters\PaginationHasManyItemField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Ipsupply\ShowDetailByHover\ShowDetailByHover;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
@@ -51,10 +54,10 @@ class Item extends Resource
     public static $perPageViaRelationship = 50;
 
 
-    public static function softDeletes()
-    {
-        return false;
-    }
+//    public static function softDeletes()
+//    {
+//        return false;
+//    }
 
     public static $perPageOptions = [50, 100, 200, 1000];
 
@@ -79,14 +82,12 @@ class Item extends Resource
         return [
 
             BelongsTo::make("Model", 'models')
+                ->sortable()
                 ->searchable(),
 
 
 
-            Text::make("Alias Model", "aliasModel")
-                ->displayUsing(function ($value) {
-                    return str_limit($value, '20', '...');
-                })
+            ShowDetailByHover::make("Alias Model", "aliasModel")
                 -> hideFromDetail()
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
@@ -100,7 +101,7 @@ class Item extends Resource
                 ->hideWhenCreating(),
 
             Text::make("SN", function($value){
-                return "<a class=\"no-underline font-bold dim text-primary\" href='http://127.0.0.1:8000/resources/items/$value->id'>$value->serialNumber</a>";
+                return "<a class=\"no-underline font-bold dim text-primary\" href='http://admin.ipsupply.net/nova/resources/items/$value->id'>$value->serialNumber</a>";
             })
                 ->asHtml()
             ->hideWhenCreating()
@@ -123,7 +124,7 @@ class Item extends Resource
 
             Date::make('Created At', 'created_at', function($value){
                 if($value){
-                    return $value -> format('d/m/Y');
+                    return $value -> format('d/m/y');
                 }
                 return null;
             })
@@ -133,7 +134,7 @@ class Item extends Resource
 
             Date::make('Updated At', 'updated_at', function($value){
                 if($value){
-                    return $value -> format('d/m/Y');
+                    return $value -> format('d/m/y');
                 }
                 return null;
             })
@@ -162,9 +163,8 @@ class Item extends Resource
                 ->hideWhenCreating()
                 ->hideFromIndex(),
 
-            Text::make('Note', 'note')->displayUsing(function ($value) {
-                return str_limit($value, '15', '...');
-            }) -> onlyOnIndex(),
+            ShowDetailByHover::make('Note', 'note')
+                ->onlyOnIndex(),
 
             Textarea::make('Test report', 'test_report')
                 ->hideFromIndex()
@@ -236,7 +236,6 @@ class Item extends Resource
     public function actions(Request $request)
     {
         return [
-
         ];
     }
 

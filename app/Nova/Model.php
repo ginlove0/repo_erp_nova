@@ -72,7 +72,7 @@ class Model extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
+//            ID::make()->sortable(),
 
 
 //            Text::make("Name", function($data){
@@ -88,19 +88,16 @@ class Model extends Resource
 //            })
 //                ->rules('unique:model'),
             Text::make("Name")
-            ->hideFromIndex()
-            ->hideFromDetail(),
+                ->hideFromIndex(),
 
-            Text::make("Name", function($value){
-                return "<a class=\"no-underline font-bold dim text-primary\" href='http://admin.ipsupply.net/nova/resources/models/$value->id'>$value->name</a>";
+            Text::make("Name", "name", function($value){
+                $model = \App\Models\Model::where('name', $value)->first();
+                $modelName = str_limit($value, '20', '...');
+                return "<a class=\"no-underline font-bold dim text-primary\" href='http://admin.ipsupply.net/nova/resources/models/$model->id'>$modelName</a>";
             })
                 ->asHtml()
-                ->sortable()
-                ->hideWhenCreating()
-                ->hideWhenUpdating()
-                ->displayUsing(function ($value) {
-                    return str_limit($value, '20', '...');
-                }),
+                ->onlyOnIndex()
+                ->sortable(),
 
             Text::make("BB", "name", function($value){
                 return "<a class=\"no-underline font-bold dim text-primary\" target=\"_blank\" href='https://members.brokerbin.com/?loc=partkey&parts=$value'>BB</a>";
@@ -154,39 +151,39 @@ class Model extends Resource
                 $qty = $this->modelService->getQtyItemByCond("NIB", $data, 1);
 //                if($qty[0]->QTY <= 0)
 //                    return $qty[0]->QTY = null;
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("AU:NOB", "id", function ($data) use ($request) {
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 1);
 
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("AU:USEA", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 1);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("AU:USEB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEB", $data, 1);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
 
             ItemQtyBaseCondition::make("AU:USEC", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEC", $data, 1);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("AU:PART", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("PART", $data, 1);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
@@ -205,38 +202,38 @@ class Model extends Resource
 
             ItemQtyBaseCondition::make("US:NIB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("NIB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:NOB", "id", function ($data) use ($request) {
                 $qty = $this->modelService->getQtyItemByCond("NOB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:USEA", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond(self::USEA, $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:USEB", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEB", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
 
             ItemQtyBaseCondition::make("US:USEC", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("USEC", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 
             ItemQtyBaseCondition::make("US:PART", "id", function ($data) {
                 $qty = $this->modelService->getQtyItemByCond("PART", $data, 2);
-                return $qty[0]->QTY;
+                return $qty[0];
             })->onlyOnIndex()
                 ->sortable(),
 

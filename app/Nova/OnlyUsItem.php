@@ -7,6 +7,7 @@ use App\Nova\Filters\ItemConditionFilter;
 use App\Nova\Filters\ItemLocation;
 use App\Nova\Filters\ItemStockType;
 use Illuminate\Http\Request;
+use Ipsupply\ShowDetailByHover\ShowDetailByHover;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
@@ -63,14 +64,18 @@ class OnlyUsItem extends Resource
     {
         return [
             BelongsTo::make("Model", 'models', 'App\Nova\OnlyUsModel')
+                ->sortable()
                 ->searchable(),
 
 
 
+            ShowDetailByHover::make("Alias Model", "aliasModel")
+                -> hideFromDetail()
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+
             Text::make("Alias Model", "aliasModel")
-                ->displayUsing(function ($value) {
-                    return str_limit($value, '15', '...');
-                }),
+                ->hideFromIndex(),
 
             Text::make("SN", "serialNumber")
 
@@ -93,7 +98,7 @@ class OnlyUsItem extends Resource
 
             Date::make('Created At', 'created_at', function($value){
                 if($value){
-                    return $value -> format('d/m/Y');
+                    return $value -> format('d/m/y');
                 }
                 return null;
             })
@@ -103,7 +108,7 @@ class OnlyUsItem extends Resource
 
             Date::make('Updated At', 'updated_at', function($value){
                 if($value){
-                    return $value -> format('d/m/Y');
+                    return $value -> format('d/m/y');
                 }
                 return null;
             })
@@ -124,9 +129,8 @@ class OnlyUsItem extends Resource
             BelongsTo::make("WHLocation", 'whlocations')
                 ->sortable(),
 
-            Text::make('Note', 'note')->displayUsing(function ($value) {
-                return str_limit($value, '15', '...');
-            }) -> onlyOnIndex(),
+            ShowDetailByHover::make('Note', 'note')
+                ->onlyOnIndex(),
 
             Textarea::make('Test report', 'test_report')
                 ->hideFromIndex()
