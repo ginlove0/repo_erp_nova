@@ -36,7 +36,7 @@
         "ipsupply/warehouse-transfer-tool": "*",
         "ipsupply/wh_transfer_item_packed_resource_tool": "*",
         "laravel/cashier": "^10.6",
-        "laravel/framework": "^5.8",
+        "laravel/framework": "^6.20",
         "laravel/nova": "*",
         "laravel/tinker": "^1.0",
         "laraveldaily/laravel-invoices": "^1.3",
